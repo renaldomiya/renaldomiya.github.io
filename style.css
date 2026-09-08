@@ -9,6 +9,7 @@
   --color-accent:       #1d4ed8;
   --color-accent-dark:  #1e40af;
   --color-accent-light: #dbeafe;
+  --color-accent-mid:   #93c5fd;
   --color-border:       #e2e8f0;
   --color-nav-bg:       #0f172a;
   --color-nav-text:     #f1f5f9;
@@ -750,7 +751,7 @@ p { max-width: 65ch; }
 }
 
 /* ============================================================
-   EXPERIENCE PAGE — TIMELINE
+   EXPERIENCE PAGE — HORIZONTAL TIMELINE
    ============================================================ */
 .exp-intro {
   color: var(--color-text-muted);
@@ -759,202 +760,311 @@ p { max-width: 65ch; }
   margin-bottom: var(--space-xl);
 }
 
-.timeline {
-  position: relative;
-  padding-block: var(--space-sm);
+.htimeline {
+  --htl-item-w: 440px;   /* width of one placement column */
+  --htl-axis-h: 60px;    /* height of the band the date marker sits in */
+  --htl-stem: 16px;      /* card-to-marker connector */
 }
 
-/* Central spine */
-.timeline::before {
+/* ---- Scrolling track ---------------------------------------------------- */
+.htl-track {
+  position: relative;    /* makes item offsetLeft track-relative for the script */
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--htl-item-w);
+  /* company row | axis | role row — all three sized by the tallest card,
+     so every marker lands on one straight line */
+  grid-template-rows: auto var(--htl-axis-h) auto;
+  /* padding lets the first and last placements reach the middle;
+     the block padding keeps card shadows and the active lift from clipping */
+  padding-inline: max(0px, calc((100% - var(--htl-item-w)) / 2));
+  padding-block: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+}
+
+.htl-track::-webkit-scrollbar { display: none; }
+
+.htl-track:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+}
+
+/* ---- One placement ------------------------------------------------------ */
+.htl-item {
+  position: relative;
+  display: grid;
+  grid-row: 1 / -1;
+  grid-template-rows: subgrid;   /* share the track's three rows */
+}
+
+.htl-half { padding-inline: 14px; }
+
+.htl-top    { grid-row: 1; align-self: end; }
+.htl-bottom { grid-row: 3; align-self: start; }
+
+/* ---- The axis and its date marker --------------------------------------- */
+.htl-axis {
+  grid-row: 2;
+  position: relative;
+}
+
+.htl-axis::before {
   content: '';
   position: absolute;
-  top: 0;
-  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 3px;
+  margin-top: -1.5px;
+  background: var(--color-accent-mid);
+}
+
+/* Everything past the active placement reads as "not there yet" */
+.htl-item.is-active ~ .htl-item .htl-axis::before { background: var(--color-border); }
+
+.htl-node {
+  position: absolute;
   left: 50%;
-  transform: translateX(-50%);
-  width: 3px;
-  border-radius: 2px;
-  background: linear-gradient(
-    to bottom,
-    var(--color-border) 0%,
-    var(--color-accent-light) 12%,
-    var(--color-accent-light) 88%,
-    var(--color-border) 100%
-  );
-}
-
-.timeline-item {
-  display: grid;
-  grid-template-columns: 1fr 220px 1fr;
-  align-items: start;
-  margin-bottom: var(--space-xl);
-}
-
-.timeline-item:last-child { margin-bottom: 0; }
-
-/* Date marker sitting on the spine */
-.timeline-date {
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: center;
-  position: relative;
-  z-index: 2;
-  margin-top: 1.5rem;
-  min-width: 152px;
-  text-align: center;
-  padding: 0.4rem 0.8rem;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.35rem 0.8rem;
   border-radius: 999px;
-  background: var(--color-accent);
-  color: #ffffff;
-  font-size: 0.8rem;
-  font-weight: 600;
+  border: 2px solid var(--color-accent-mid);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.78rem;
+  font-weight: 700;
   white-space: nowrap;
-  box-shadow: var(--shadow-sm);
+  transition: background 0.25s ease, border-color 0.25s ease,
+              color 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Card alternates sides */
-.timeline-card {
-  grid-column: 1;
-  grid-row: 1;
+.htl-item.is-active .htl-node {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+  box-shadow: 0 0 0 6px var(--color-accent-light);
+}
+
+/* ---- Cards -------------------------------------------------------------- */
+.htl-card {
   position: relative;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  padding: var(--space-lg);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  padding: var(--space-md);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
-.timeline-item:nth-child(even) .timeline-card { grid-column: 3; }
-
-.timeline-card:hover {
+.htl-item.is-active .htl-card {
   border-color: var(--color-accent);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 
-/* Connector from the card to the spine */
-.timeline-card::before {
+.htl-item.is-active .htl-card-role { transform: translateY(2px); }
+
+/* Stems joining each card to the date marker */
+.htl-card::after {
   content: '';
   position: absolute;
-  top: 1.95rem;
-  width: 30px;
-  height: 2px;
-  background: var(--color-border);
+  left: 50%;
+  width: 2px;
+  height: var(--htl-stem);
+  background: var(--color-accent-mid);
 }
 
-.timeline-item:nth-child(odd) .timeline-card::before  { right: -30px; }
-.timeline-item:nth-child(even) .timeline-card::before { left: -30px; }
+.htl-card-company::after { bottom: calc(-1 * var(--htl-stem)); }
+.htl-card-role::after    { top:    calc(-1 * var(--htl-stem)); }
 
-/* Card contents */
-.tl-role {
-  font-size: 1.1rem;
+/* Company card — above the line */
+.htl-photo {
+  margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md);
+  aspect-ratio: 16 / 6;
+  overflow: hidden;
+  border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
+  background: var(--color-bg);
+}
+
+.htl-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+
+.htl-company-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.htl-icon {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+}
+
+.htl-company {
+  display: block;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--color-text);
-  margin-bottom: 2px;
+  line-height: 1.35;
 }
 
-.tl-org {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-accent);
-  margin-bottom: 6px;
-}
-
-.tl-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem 0.6rem;
-  color: var(--color-text-muted);
-  font-size: 0.8rem;
-  margin-bottom: var(--space-md);
-}
-
-.tl-meta-item {
+.htl-loc {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
 }
 
-.tl-badge {
+.htl-about {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  max-width: none;
+}
+
+/* Role card — below the line */
+.htl-role {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+
+.htl-badge {
   display: inline-block;
+  margin-left: 0.5rem;
   padding: 2px 8px;
   border-radius: 999px;
   background: var(--color-accent-light);
   color: var(--color-accent-dark);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
+  vertical-align: 2px;
 }
 
-/* One-line explainer: what the company is and does */
-.tl-about {
-  border-left: 3px solid var(--color-accent-light);
-  padding-left: 0.75rem;
-  margin-bottom: var(--space-md);
+.htl-did {
   color: var(--color-text-muted);
-  font-size: 0.86rem;
-  font-style: italic;
-  line-height: 1.65;
-}
-
-.tl-summary {
-  color: var(--color-text-muted);
-  font-size: 0.925rem;
-  line-height: 1.75;
+  font-size: 0.9rem;
+  line-height: 1.7;
   max-width: none;
 }
 
-.tl-photo {
+.htl-note {
   margin-top: var(--space-md);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  aspect-ratio: 16 / 9;
-  background: #ffffff;
+  padding-top: var(--space-md);
+  border-top: 1px dashed var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+  line-height: 1.7;
+  max-width: none;
 }
 
-.tl-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
+/* ---- Controls ----------------------------------------------------------- */
+.htl-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
 }
 
-/* Single-column timeline on smaller screens */
-@media (max-width: 860px) {
-  .timeline::before {
-    left: 7px;
-    transform: none;
-  }
+.htl-arrow {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-  .timeline-item {
-    grid-template-columns: 1fr;
-    padding-left: 34px;
-    margin-bottom: var(--space-lg);
-  }
+.htl-arrow:hover:not(:disabled) {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-sm);
+}
 
-  .timeline-date,
-  .timeline-card,
-  .timeline-item:nth-child(even) .timeline-card {
-    grid-column: 1;
-    grid-row: auto;
-  }
+.htl-arrow:disabled { opacity: 0.35; cursor: default; }
 
-  .timeline-date {
-    justify-self: start;
-    margin-top: 0;
-    margin-bottom: var(--space-sm);
-    min-width: 0;
-  }
+.htl-slider {
+  flex: 1 1 auto;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-border);
+  cursor: pointer;
+}
 
-  .timeline-card::before,
-  .timeline-item:nth-child(odd) .timeline-card::before,
-  .timeline-item:nth-child(even) .timeline-card::before {
-    display: none;
-  }
+.htl-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.htl-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.htl-slider:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+
+.htl-hint {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+}
+
+/* ---- Responsive --------------------------------------------------------- */
+@media (max-width: 900px) {
+  .htimeline { --htl-item-w: 360px; }
+}
+
+@media (max-width: 560px) {
+  .htimeline { --htl-item-w: 90%; }
+  .htl-photo { display: none; }
+  .htl-node  { font-size: 0.74rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .htl-card, .htl-node { transition: none; }
+  .htl-item.is-active .htl-card,
+  .htl-item.is-active .htl-card-role { transform: none; }
 }
 
 /* ============================================================
