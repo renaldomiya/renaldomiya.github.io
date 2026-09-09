@@ -37,134 +37,16 @@
     <!-- PAGE TITLE -->
     <div class="container" style="padding-top: var(--space-xl); padding-bottom: 0;">
       <h1>Experience</h1>
-      <p class="text-muted mt-sm">A timeline of my co-op placements &mdash; the company above the line, what I did below it.</p>
+      <p class="text-muted mt-sm">My co-op placements, newest first. Open one to see what the company does and what I worked on.</p>
     </div>
 
-    <!-- EXPERIENCE TIMELINE -->
+    <!-- EXPERIENCE TIMELINE (built from experience-data.js) -->
     <section class="section">
       <div class="container">
-
-        <div class="htimeline">
-
-          <div class="htl-track" id="tlTrack" tabindex="0" role="group" aria-label="Work experience timeline, scrolls horizontally">
-
-          <article class="htl-item" aria-label="Amphenol Canada Corp.">
-
-            <!-- Above the line: the company -->
-            <div class="htl-half htl-top">
-              <div class="htl-card htl-card-company">
-                <div class="htl-company-head">
-                  <span class="htl-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2v6M15 2v6M6 8h12v3a6 6 0 01-6 6 6 6 0 01-6-6V8zM12 17v5"/></svg></span>
-                  <span>
-                    <span class="htl-company">Amphenol Canada Corp.</span>
-                    <span class="htl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-8-7.3-8-12a8 8 0 0116 0c0 4.7-8 12-8 12z"/><circle cx="12" cy="9" r="3"/></svg> Markham, ON</span>
-                  </span>
-                </div>
-                <p class="htl-about">One of the world&rsquo;s largest interconnect manufacturers. Its Canadian division builds high-reliability connectors and motor jacks for aerospace, defence, and commercial systems.</p>
-              </div>
-            </div>
-
-            <!-- On the line: the date -->
-            <div class="htl-axis">
-              <p class="htl-node">Sept &ndash; Dec 2026</p>
-            </div>
-
-            <!-- Below the line: the role -->
-            <div class="htl-half htl-bottom">
-              <div class="htl-card htl-card-role">
-                <p class="htl-role">Engineering Design Student<span class="htl-badge">Current</span></p>
-                <p class="htl-did">Modelling and drafting connector components in SolidWorks &mdash; manufacturing drawings, new product design through design review, and engineering change notices on released parts.</p>
-                <p class="htl-note">My first time designing parts that ship by the million &mdash; a tenth of a millimetre decides whether a connector mates.</p>
-              </div>
-            </div>
-
-          </article>
-
-          <article class="htl-item" aria-label="TRIUMF">
-
-            <!-- Above the line: the company -->
-            <div class="htl-half htl-top">
-              <div class="htl-card htl-card-company">
-              <div class="htl-photo">
-                <img src="images/exp-triumf.png" alt="TRIUMF ARIEL Facility" loading="lazy" />
-              </div>
-                <div class="htl-company-head">
-                  <span class="htl-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.4"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/></svg></span>
-                  <span>
-                    <span class="htl-company">TRIUMF</span>
-                    <span class="htl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-8-7.3-8-12a8 8 0 0116 0c0 4.7-8 12-8 12z"/><circle cx="12" cy="9" r="3"/></svg> Vancouver, BC</span>
-                  </span>
-                </div>
-                <p class="htl-about">Canada&rsquo;s national particle accelerator laboratory. Its ARIEL facility produces rare isotopes for physics research and medical isotope development.</p>
-              </div>
-            </div>
-
-            <!-- On the line: the date -->
-            <div class="htl-axis">
-              <p class="htl-node">Jan &ndash; Apr 2026</p>
-            </div>
-
-            <!-- Below the line: the role -->
-            <div class="htl-half htl-bottom">
-              <div class="htl-card htl-card-role">
-                <p class="htl-role">ARIEL Engineering Assistant</p>
-                <p class="htl-did">Designed a wall-mounted steel frame for a radioactive gas manifold, sized through iterative ANSYS FEA &mdash; 25% less deflection &mdash; with GD&amp;T drawings and BOMs managed in SolidWorks PDM.</p>
-                <p class="htl-note">One small part of a huge project. The lesson wasn&rsquo;t the FEA &mdash; it was keeping my design in sync with everyone else&rsquo;s, and asking the technicians how they&rsquo;d build it.</p>
-              </div>
-            </div>
-
-          </article>
-
-          <article class="htl-item" aria-label="BC Hydro &mdash; Site C">
-
-            <!-- Above the line: the company -->
-            <div class="htl-half htl-top">
-              <div class="htl-card htl-card-company">
-              <div class="htl-photo">
-                <img src="images/exp-bchydro.png" alt="BC Hydro Site C" loading="lazy" />
-              </div>
-                <div class="htl-company-head">
-                  <span class="htl-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4.5 13.2A1 1 0 005.3 15H11l-1 7 8.5-11.2a1 1 0 00-.8-1.8H12z"/></svg></span>
-                  <span>
-                    <span class="htl-company">BC Hydro &mdash; Site C</span>
-                    <span class="htl-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-8-7.3-8-12a8 8 0 0116 0c0 4.7-8 12-8 12z"/><circle cx="12" cy="9" r="3"/></svg> Fort St. John, BC</span>
-                  </span>
-                </div>
-                <p class="htl-about">British Columbia&rsquo;s provincial electric utility. Site C is its hydroelectric dam on the Peace River, one of the province&rsquo;s largest capital projects.</p>
-              </div>
-            </div>
-
-            <!-- On the line: the date -->
-            <div class="htl-axis">
-              <p class="htl-node">May &ndash; Aug 2024</p>
-            </div>
-
-            <!-- Below the line: the role -->
-            <div class="htl-half htl-bottom">
-              <div class="htl-card htl-card-role">
-                <p class="htl-role">Mechanical Engineering Co-op</p>
-                <p class="htl-did">Redlined P&amp;IDs and layouts for constructability, verified installations in the field, and turned RFIs and field change forms into revisions across mechanical, electrical, and civil teams.</p>
-                <p class="htl-note">Living on camp beside the build, I started reading drawings the way the trades do. A design isn&rsquo;t good until it can be built cleanly.</p>
-              </div>
-            </div>
-
-          </article>
-
-          </div>
-
-          <div class="htl-controls">
-            <button class="htl-arrow" id="tlPrev" type="button" aria-label="Previous placement">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <input class="htl-slider" id="tlSlider" type="range" min="0" max="1000" value="0" aria-label="Scroll through the timeline" />
-            <button class="htl-arrow" id="tlNext" type="button" aria-label="Next placement">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-          </div>
-
-          <p class="htl-hint">Drag the slider, use the arrows, or scroll sideways to move through the timeline.</p>
-
-        </div>
+        <div class="vtimeline" id="experienceTimeline"></div>
+        <noscript>
+          <p class="text-muted">The timeline needs JavaScript. The same placements are written out on the <a href="resume.html">resume page</a>.</p>
+        </noscript>
       </div>
     </section>
 
@@ -193,80 +75,10 @@
     </div>
   </footer>
 
+  <script src="experience-data.js"></script>
+  <script src="experience.js"></script>
+
   <script>
-    /* ---- Horizontal timeline: slider, arrows, active card ---- */
-    (function () {
-      const track  = document.getElementById('tlTrack');
-      const slider = document.getElementById('tlSlider');
-      const prev   = document.getElementById('tlPrev');
-      const next   = document.getElementById('tlNext');
-      if (!track || !slider) return;
-
-      const items = Array.from(track.querySelectorAll('.htl-item'));
-      const SMOOTH = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      let dragging = false;
-      let queued   = false;
-
-      const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
-
-      function paintSlider(pct) {
-        slider.style.background =
-          'linear-gradient(to right, var(--color-accent) ' + pct + '%, var(--color-border) ' + pct + '%)';
-      }
-
-      /* Index of the item closest to the middle of the viewport */
-      function activeIndex() {
-        const mid = track.scrollLeft + track.clientWidth / 2;
-        let best = 0, bestDist = Infinity;
-        items.forEach((item, i) => {
-          const dist = Math.abs(item.offsetLeft + item.offsetWidth / 2 - mid);
-          if (dist < bestDist) { bestDist = dist; best = i; }
-        });
-        return best;
-      }
-
-      function sync() {
-        const max = maxScroll();
-        const pct = max ? (track.scrollLeft / max) * 100 : 0;
-        if (!dragging) slider.value = Math.round(pct * 10);
-        paintSlider(pct);
-
-        const active = activeIndex();
-        items.forEach((item, i) => item.classList.toggle('is-active', i === active));
-
-        prev.disabled = track.scrollLeft <= 2;
-        next.disabled = track.scrollLeft >= max - 2;
-        slider.disabled = max === 0;
-      }
-
-      function scrollToItem(i) {
-        const item = items[Math.max(0, Math.min(items.length - 1, i))];
-        if (!item) return;
-        const left = item.offsetLeft + item.offsetWidth / 2 - track.clientWidth / 2;
-        track.scrollTo({ left: left, behavior: SMOOTH ? 'smooth' : 'auto' });
-      }
-
-      track.addEventListener('scroll', () => {
-        if (queued) return;
-        queued = true;
-        requestAnimationFrame(() => { queued = false; sync(); });
-      }, { passive: true });
-
-      slider.addEventListener('input', () => {
-        dragging = true;
-        track.scrollLeft = (slider.value / 1000) * maxScroll();
-      });
-      ['change', 'pointerup', 'blur'].forEach(evt =>
-        slider.addEventListener(evt, () => { dragging = false; sync(); })
-      );
-
-      prev.addEventListener('click', () => scrollToItem(activeIndex() - 1));
-      next.addEventListener('click', () => scrollToItem(activeIndex() + 1));
-
-      window.addEventListener('resize', sync);
-      sync();
-    })();
-
     const toggle = document.getElementById('navToggle');
     const links  = document.getElementById('navLinks');
     toggle.addEventListener('click', () => {
