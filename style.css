@@ -274,15 +274,16 @@ p { max-width: 65ch; }
   border-bottom: 1px solid var(--color-border);
 }
 
-/* Photo left, text right */
+/* Photo and text sit as one centred group */
 .hero-inner {
-  display: grid;
-  grid-template-columns: 230px minmax(0, 1fr);
-  gap: var(--space-lg);
+  display: flex;
+  justify-content: center;
   align-items: center;
+  gap: 40px;
 }
 
-.hero-content { max-width: 620px; }
+/* The group is centred; the text inside stays left-aligned */
+.hero-content { max-width: 560px; }
 
 .hero-eyebrow {
   display: inline-flex;
@@ -318,7 +319,8 @@ p { max-width: 65ch; }
 
 .hero-photo {
   display: block;
-  width: 230px;
+  width: 280px;
+  flex-shrink: 0;
   aspect-ratio: 3 / 4;
   border-radius: 20px;
   object-fit: cover;
@@ -327,17 +329,19 @@ p { max-width: 65ch; }
 }
 
 @media (max-width: 767px) {
+  /* Photo above the text, the stack centred */
   .hero-inner {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
     gap: var(--space-md);
   }
 
-  /* Photo on top, text below, everything left-aligned */
-  .hero-photo {
-    width: min(60vw, 280px);
-  }
+  .hero-photo { width: min(60vw, 300px); }
 
-  .hero-content { max-width: none; }
+  .hero-content {
+    width: 100%;
+    max-width: 420px;
+  }
 }
 
 /* ============================================================
