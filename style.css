@@ -130,16 +130,6 @@ p { max-width: 65ch; }
   color: #fff;
 }
 
-.btn-outline {
-  background: transparent;
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-}
-
-.btn-outline:hover {
-  background: var(--color-accent-light);
-}
-
 /* ============================================================
    HEADER & NAVIGATION
    ============================================================ */
@@ -280,18 +270,19 @@ p { max-width: 65ch; }
    ============================================================ */
 .hero {
   background: var(--color-surface);
-  padding-block: var(--space-xl);
+  padding-block: var(--space-lg);
   border-bottom: 1px solid var(--color-border);
 }
 
+/* Photo left, text right */
 .hero-inner {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--space-xl);
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: var(--space-lg);
   align-items: center;
 }
 
-.hero-content { max-width: 580px; }
+.hero-content { max-width: 620px; }
 
 .hero-eyebrow {
   display: inline-flex;
@@ -305,89 +296,83 @@ p { max-width: 65ch; }
   background: var(--color-accent-light);
   border-radius: 100px;
   padding: 0.3rem 0.9rem;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
 }
 
-.hero-headline {
-  margin-bottom: var(--space-md);
-}
+.hero-headline { margin-bottom: var(--space-sm); }
 
 .hero-intro {
   color: var(--color-text-muted);
   font-size: 1.05rem;
-  margin-bottom: var(--space-lg);
-  max-width: 55ch;
+  margin-bottom: var(--space-md);
+  max-width: 58ch;
 }
 
 .hero-seeking {
-  display: inline-block;
-  margin-bottom: var(--space-lg);
-  padding: 0.55rem 0.9rem;
-  border-left: 3px solid var(--color-accent);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  background: var(--color-accent-light);
-  color: var(--color-text);
+  color: var(--color-text-muted);
   font-size: 0.95rem;
 }
 
-.hero-cta { display: flex; gap: var(--space-md); flex-wrap: wrap; }
-
 /* Headshot */
-.hero-photo-wrap {
-  flex-shrink: 0;
-}
+.hero-photo-wrap { flex-shrink: 0; }
 
 .hero-photo {
   display: block;
-  width: 390px;
-  height: 390px;
+  width: 230px;
+  aspect-ratio: 3 / 4;
   border-radius: 20px;
   object-fit: cover;
   object-position: center top;
   box-shadow: 0 20px 48px rgba(0,0,0,.15), 0 4px 12px rgba(0,0,0,.08);
 }
 
-
-@media (max-width: 720px) {
+@media (max-width: 767px) {
   .hero-inner {
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: var(--space-md);
   }
 
-  .hero-photo-wrap {
-    order: -1;
-    display: flex;
-    justify-content: center;
-  }
-
+  /* Photo on top, text below, everything left-aligned */
   .hero-photo {
-    width: 270px;
-    height: 270px;
+    width: min(60vw, 280px);
   }
 
-  .hero { padding-block: var(--space-xl); }
+  .hero-content { max-width: none; }
 }
 
 /* ============================================================
-   HOME — CONTACT BAND
+   HOME — PROJECTS CTA ROW
+   Sits directly under the grid and shares its edges.
    ============================================================ */
-.contact-band {
+.projects-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
   background: var(--color-surface);
-  border-top: 1px solid var(--color-border);
-  padding-block: var(--space-xl);
-  text-align: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
-.contact-band__line {
-  font-size: 1.15rem;
+/* Overrides the global p max-width, which would otherwise size this line */
+.projects-cta__line {
+  max-width: none;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--color-text);
-  margin-bottom: var(--space-md);
 }
 
-/* ============================================================
-   HOME — PREVIEW CARDS
-   ============================================================ */
+@media (max-width: 640px) {
+  .projects-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-md);
+  }
+}
 
 /* ============================================================
    UTILITIES
@@ -398,10 +383,6 @@ p { max-width: 65ch; }
 .mt-sm { margin-top: var(--space-sm); }
 .mt-md { margin-top: var(--space-md); }
 .mt-lg { margin-top: var(--space-lg); }
-
-/* ============================================================
-   PROJECT TILE GRID
-   ============================================================ */
 
 /* ============================================================
    BACK LINK
