@@ -130,6 +130,16 @@ p { max-width: 65ch; }
   color: #fff;
 }
 
+.btn-outline {
+  background: transparent;
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.btn-outline:hover {
+  background: var(--color-accent-light);
+}
+
 /* ============================================================
    HEADER & NAVIGATION
    ============================================================ */
@@ -266,33 +276,22 @@ p { max-width: 65ch; }
 }
 
 /* ============================================================
-   HOME — INTRO
+   HOME — HERO
    ============================================================ */
 .hero {
   background: var(--color-surface);
-  padding-block: var(--space-lg);
+  padding-block: var(--space-xl);
   border-bottom: 1px solid var(--color-border);
 }
 
-/* Avatar sits beside the name; the rest of the intro runs full width */
-.intro-head {
-  display: flex;
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-xl);
   align-items: center;
-  gap: var(--space-md);
-  margin-bottom: var(--space-md);
 }
 
-.intro-avatar {
-  width: 120px;
-  height: 120px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center top;
-  border: 3px solid var(--color-accent-light);
-  box-shadow: var(--shadow-md);
-  display: block;
-}
+.hero-content { max-width: 580px; }
 
 .hero-eyebrow {
   display: inline-flex;
@@ -306,36 +305,67 @@ p { max-width: 65ch; }
   background: var(--color-accent-light);
   border-radius: 100px;
   padding: 0.3rem 0.9rem;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
 
-.hero-headline { margin-bottom: 0; }
+.hero-headline {
+  margin-bottom: var(--space-md);
+}
 
 .hero-intro {
   color: var(--color-text-muted);
   font-size: 1.05rem;
-  margin-bottom: var(--space-md);
-  max-width: 62ch;
+  margin-bottom: var(--space-lg);
+  max-width: 55ch;
 }
 
 .hero-seeking {
   display: inline-block;
+  margin-bottom: var(--space-lg);
   padding: 0.55rem 0.9rem;
   border-left: 3px solid var(--color-accent);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   background: var(--color-accent-light);
   color: var(--color-text);
   font-size: 0.95rem;
-}@media (max-width: 560px) {
-  .intro-head { gap: var(--space-sm); }
-  .intro-avatar { width: 88px; height: 88px; }
+}
 
-  /* Keeps the eyebrow beside the avatar to two lines instead of four */
-  .hero-eyebrow {
-    font-size: 0.65rem;
-    letter-spacing: 0.06em;
-    padding: 0.25rem 0.6rem;
+.hero-cta { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+
+/* Headshot */
+.hero-photo-wrap {
+  flex-shrink: 0;
+}
+
+.hero-photo {
+  display: block;
+  width: 390px;
+  height: 390px;
+  border-radius: 20px;
+  object-fit: cover;
+  object-position: center top;
+  box-shadow: 0 20px 48px rgba(0,0,0,.15), 0 4px 12px rgba(0,0,0,.08);
+}
+
+
+@media (max-width: 720px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
   }
+
+  .hero-photo-wrap {
+    order: -1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-photo {
+    width: 270px;
+    height: 270px;
+  }
+
+  .hero { padding-block: var(--space-xl); }
 }
 
 /* ============================================================
@@ -953,6 +983,12 @@ p { max-width: 65ch; }
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: var(--space-md);
   margin-bottom: var(--space-xl);
+}
+
+/* A strip inside a section sits closer to the prose that follows it */
+.block-text .results-strip {
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
 
 .result-stat {
