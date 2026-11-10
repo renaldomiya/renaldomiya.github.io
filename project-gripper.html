@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A two-finger, servo-actuated rack-and-pinion gripper with closed-loop grip force control, designed in SolidWorks for FDM printing." />
+  <title>Force-Feedback Robotic Gripper — Renaldo Miya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a class="nav-logo" href="index.html">Renaldo Miya</a>
+      <nav aria-label="Main">
+        <ul class="nav-links" role="list">
+          <li><a href="projects.html" class="active" aria-current="page">Projects</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container project-detail">
+
+      <!-- HEADER -->
+      <div class="project-detail__header">
+        <a href="projects.html" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back to Projects
+        </a>
+        <h1>Force-Feedback Robotic Gripper</h1>
+        <p class="text-muted">Personal project &middot; Fall 2026 &ndash; present</p>
+        <p class="status-badge">In progress: prototype printing, November 2026</p>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="project-block text-only">
+        <div class="block-text">
+          <span class="block-label">Overview</span>
+          <h3>Project Overview</h3>
+          <p>A two-finger, servo-actuated rack-and-pinion gripper with closed-loop grip force control, designed
+            in SolidWorks for FDM printing. The frame prints in PLA, and the finger pads print in flexible TPU so
+            the contact surface gives slightly against whatever is being held.</p>
+          <p>The point of the build is the force loop: rather than driving the servo to a fixed position, the
+            gripper measures how hard it is squeezing and closes only until it reaches a target force &mdash; so the
+            same gripper can handle a fragile object and a rigid one without being re-tuned for each.</p>
+        </div>
+      </div>
+
+      <!-- REQUIREMENTS -->
+      <div class="project-block text-only">
+        <div class="block-text">
+          <span class="block-label">Requirements</span>
+          <h3>Design Targets</h3>
+          <p>Targets are not fixed yet &mdash; they will be set from measurements on the first printed prototype.</p>
+          <ul class="spec-list" role="list">
+            <!-- TODO: fill in the target grip force range (e.g. "0.5 - 20 N") and delete the TBD span -->
+            <li><span class="spec-name">Grip force range</span><span class="spec-value is-tbd">TBD</span></li>
+            <!-- TODO: fill in the jaw stroke, fully open to fully closed -->
+            <li><span class="spec-name">Jaw stroke</span><span class="spec-value is-tbd">TBD</span></li>
+            <!-- TODO: fill in the object size range the jaws are designed to span -->
+            <li><span class="spec-name">Object size range</span><span class="spec-value is-tbd">TBD</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MECHANICAL DESIGN -->
+      <div class="project-block text-only">
+        <div class="block-text">
+          <span class="block-label">Mechanical Design</span>
+          <h3>Rack-and-Pinion Layout</h3>
+          <p>A single servo turns a central pinion that drives two opposed racks, so both fingers move together
+            and stay parallel through the full stroke. Driving both jaws from one pinion keeps the part count
+            down and means there is only one drivetrain to characterise.</p>
+          <p>Gear module and tooth profile were calculated to minimise backlash through the mesh. Backlash
+            matters more here than in a position-only gripper: lost motion between the servo and the fingers
+            shows up directly as error in the force loop, because the controller commands servo position while
+            the thing being regulated is contact force at the pads.</p>
+          <p>The parts are designed around FDM constraints &mdash; the frame prints in PLA, and the finger pads print
+            separately in TPU so the compliant contact surface can be swapped without reprinting the structure.</p>
+
+          <!-- TODO: add the stills from images/gripper/ here, with a caption for each. Template:
+          <figure>
+            <img src="images/gripper/FILENAME.jpg" alt="DESCRIPTIVE ALT TEXT" loading="lazy" />
+            <figcaption>CAPTION</figcaption>
+          </figure>
+          Then delete the .media-pending paragraph below. -->
+          <p class="media-pending">CAD views and print photos are being added.</p>
+        </div>
+      </div>
+
+      <!-- MOTION -->
+      <div class="project-block text-only">
+        <div class="block-text">
+          <span class="block-label">Motion</span>
+          <h3>Gripper in Motion</h3>
+          <p>Short clips of the jaws actuating, to show stroke and timing rather than a static pose.</p>
+
+          <!-- TODO: add the clips from images/gripper/ here. Template (keep the attributes as written:
+               muted + loop + playsinline makes it autoplay-safe inline, and controls keeps it usable):
+          <figure class="video-figure">
+            <video muted loop playsinline controls preload="metadata" poster="images/gripper/POSTER.jpg" width="1280" height="720">
+              <source src="images/gripper/CLIP.mp4" type="video/mp4" />
+              <p>Your browser cannot play this clip. <a href="images/gripper/CLIP.mp4">Download the MP4</a>.</p>
+            </video>
+            <figcaption>CAPTION</figcaption>
+          </figure>
+          Then delete the .media-pending paragraph below. -->
+          <p class="media-pending">Clips of the jaws actuating are being added.</p>
+        </div>
+      </div>
+
+      <!-- CONTROLS -->
+      <div class="project-block text-only is-wide">
+        <div class="block-text">
+          <span class="block-label">Controls</span>
+          <h3>Closed-Loop Grip Force &mdash; In Development</h3>
+          <p>FSR 402 force-sensing resistors sit behind the finger pads and are read by an Arduino Uno over its
+            analog inputs. A proportional controller written in C++ compares the measured force against the
+            target and adjusts servo position to close the gap, holding the commanded grip force instead of a
+            commanded jaw position.</p>
+          <p>This part is still in development: the loop is written and the hardware is specified, but the gains
+            and force thresholds have not been calibrated against a printed prototype yet.</p>
+
+          <div class="loop-diagram">
+            <svg viewBox="0 0 720 200" role="img" aria-labelledby="loopTitle loopDesc">
+              <title id="loopTitle">Closed-loop grip force control</title>
+              <desc id="loopDesc">A target grip force is compared against the force measured by the FSR 402
+                sensors. The difference drives a proportional controller on an Arduino Uno, which commands the
+                servo, which drives the rack-and-pinion fingers onto the object. The measured force is fed back
+                to the comparison.</desc>
+
+              <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="var(--color-accent)"/>
+                </marker>
+              </defs>
+
+              <g fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="1.5">
+                <rect x="6"   y="26"  width="116" height="52" rx="6"/>
+                <rect x="186" y="26"  width="146" height="52" rx="6"/>
+                <rect x="366" y="26"  width="92"  height="52" rx="6"/>
+                <rect x="492" y="26"  width="136" height="52" rx="6"/>
+                <rect x="330" y="130" width="176" height="46" rx="6"/>
+                <circle cx="152" cy="52" r="16"/>
+              </g>
+
+              <g font-size="11" font-weight="600" fill="var(--color-text)" text-anchor="middle">
+                <text x="64" y="47">Target grip</text>
+                <text x="64" y="62">force</text>
+                <text x="259" y="47">Proportional controller</text>
+                <text x="259" y="62">Arduino Uno (C++)</text>
+                <text x="412" y="57">Servo</text>
+                <text x="560" y="47">Rack-and-pinion</text>
+                <text x="560" y="62">fingers + TPU pads</text>
+                <text x="418" y="158">FSR 402 force sensors</text>
+                <text x="152" y="57" font-size="13">&#931;</text>
+              </g>
+
+              <g stroke="var(--color-accent)" stroke-width="1.75" fill="none" marker-end="url(#arrow)">
+                <path d="M122,52 L130,52"/>
+                <path d="M168,52 L180,52"/>
+                <path d="M332,52 L360,52"/>
+                <path d="M458,52 L486,52"/>
+                <path d="M628,52 L694,52"/>
+                <path d="M560,78 L560,153 L512,153"/>
+                <path d="M330,153 L152,153 L152,74"/>
+              </g>
+
+              <g font-size="10" fill="var(--color-text-muted)" text-anchor="middle">
+                <text x="661" y="42">grip force on object</text>
+                <text x="240" y="144">measured force</text>
+              </g>
+              <g font-size="11" font-weight="700" fill="var(--color-text-muted)">
+                <text x="130" y="38">+</text>
+                <text x="131" y="80">&#8722;</text>
+              </g>
+            </svg>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TEST PLAN -->
+      <div class="project-block text-only is-wide">
+        <div class="block-text">
+          <span class="block-label">Test Plan</span>
+          <h3>Planned Bench Tests</h3>
+          <div class="table-scroll">
+            <table class="data-table">
+              <caption>Targets are set before testing begins; no test has been run yet.</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Test</th>
+                  <th scope="col">Target</th>
+                  <th scope="col">Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td>Grip force held against the commanded setpoint</td>
+                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; target force accuracy, e.g. &plusmn;X N --></td>
+                    <td class="is-pending">Pending</td>
+                  </tr>
+                  <tr>
+                    <td>Jaw stroke, fully open to fully closed</td>
+                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; stroke in mm --></td>
+                    <td class="is-pending">Pending</td>
+                  </tr>
+                  <tr>
+                    <td>Object size range gripped without reconfiguring</td>
+                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; min and max object width in mm --></td>
+                    <td class="is-pending">Pending</td>
+                  </tr>
+                  <tr>
+                    <td>Fragile object grasp &mdash; crush check</td>
+                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; object list and pass criterion --></td>
+                    <td class="is-pending">Pending</td>
+                  </tr>
+                  <tr>
+                    <td>Rigid object grasp &mdash; slip check</td>
+                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; object list, load, and pass criterion --></td>
+                    <td class="is-pending">Pending</td>
+                  </tr>
+                  <tr>
+                    <td>Backlash at the rack-and-pinion interface</td>
+                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; acceptable lost motion in mm or degrees --></td>
+                    <td class="is-pending">Pending</td>
+                  </tr>
+                  <tr>
+                    <td>FSR 402 repeatability and drift across a session</td>
+                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; acceptable drift --></td>
+                    <td class="is-pending">Pending</td>
+                  </tr>
+                  <tr>
+                    <td>Cycle endurance of the printed PLA frame</td>
+                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; cycles before inspection --></td>
+                    <td class="is-pending">Pending</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEXT STEPS -->
+      <div class="project-block text-only">
+        <div class="block-text">
+          <span class="block-label">Next Steps</span>
+          <h3>What Comes Next</h3>
+          <ul class="plain-list">
+            <li>Assemble the printed prototype.</li>
+            <li>Calibrate the force thresholds against the FSR 402 readings.</li>
+            <li>Run grasp trials on fragile and rigid objects.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TOOLS -->
+      <div class="project-block text-only">
+        <div class="block-text">
+          <span class="block-label">Tools &amp; Skills</span>
+          <h3>Technical Stack</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">Arduino Uno (C++)</span>
+            <span class="skill-tag">FSR 402</span>
+            <span class="skill-tag">Closed-Loop Control</span>
+            <span class="skill-tag">FDM Printing</span>
+            <span class="skill-tag">PLA / TPU</span>
+            <span class="skill-tag">Gear Design</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODO: Build photos &mdash; uncomment this block once the assembly photos are in images/gripper/
+      <div class="project-block text-only">
+        <div class="block-text">
+          <span class="block-label">Build</span>
+          <h3>Build Photos</h3>
+          <figure>
+            <img src="images/gripper/FILENAME.jpg" alt="DESCRIPTIVE ALT TEXT" loading="lazy" />
+            <figcaption>CAPTION</figcaption>
+          </figure>
+        </div>
+      </div>
+      -->
+
+      <div class="detail-bottom-nav">
+        <a href="projects.html" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back to Projects
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; 2026 Renaldo Miya</p>
+      <div class="footer-links">
+        <a href="mailto:renaldo.miya@uwaterloo.ca">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
+          renaldo.miya@uwaterloo.ca
+        </a>
+        <span class="footer-divider" aria-hidden="true">&middot;</span>
+        <a href="tel:+12365916492">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          +1 236-591-6492
+        </a>
+        <span class="footer-divider" aria-hidden="true">&middot;</span>
+        <a href="https://www.linkedin.com/in/renaldo-miya/" target="_blank" rel="noopener noreferrer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <span class="footer-divider" aria-hidden="true">&middot;</span>
+        <a href="https://github.com/renaldomiya" target="_blank" rel="noopener noreferrer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
