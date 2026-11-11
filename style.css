@@ -1189,6 +1189,158 @@ p { max-width: 65ch; }
 .loop-diagram svg { width: 100%; height: auto; min-width: 460px; display: block; }
 
 /* ============================================================
+   GRIPPER PAGE LAYOUT
+   Page-scoped: .project-block is left alone so the manifold and
+   PDU pages keep their alternating layout.
+   ============================================================ */
+.gr-page .project-detail__header { margin-bottom: var(--space-lg); }
+
+.gr-row {
+  padding-block: 2.5rem;            /* about two thirds of the old block padding */
+}
+
+.gr-row:first-of-type { padding-top: 0; }
+
+/* One thin divider between rows */
+.gr-row + .gr-row { border-top: 1px solid var(--color-border); }
+
+.gr-row--5545,
+.gr-row--half,
+.gr-row--4060 {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.gr-row--5545 { grid-template-columns: 55fr 45fr; }
+.gr-row--half { grid-template-columns: 1fr 1fr; }
+.gr-row--4060 { grid-template-columns: 40fr 60fr; align-items: center; }
+
+/* Paragraphs fill their column instead of stopping at the global 65ch */
+.gr-col p,
+.gr-card p,
+.gr-row > p { max-width: none; }
+
+.gr-col h3,
+.gr-card h3,
+.gr-row > h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+.gr-col > p + p,
+.gr-card > p + p { margin-top: var(--space-md); }
+
+/* In a narrow card the label sits above its value, so every row reads the
+   same way instead of some wrapping and some not */
+.gr-card .spec-list { gap: 0.45rem; }
+
+.gr-card .spec-list li {
+  flex-direction: column;
+  gap: 1px;
+  padding-bottom: 0.45rem;
+}
+
+.gr-card .spec-name { min-width: 0; }
+
+/* Design targets card */
+.gr-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-lg);
+}
+
+/* Media column */
+.gr-media {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.gr-media .media-pending { margin-top: 0; }
+
+.gr-clip { display: block; }
+
+.gr-caption {
+  margin-top: 0.4rem;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+/* Four calculation steps across one row, all the same height */
+.gr-calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-md);
+  align-items: stretch;
+}
+
+.gr-calc-grid li { height: 100%; }
+
+/* Trade-off table beside its note */
+.gr-calc-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.gr-calc-split .table-scroll { margin-top: 0; }
+
+/* Three short columns, so it fits its half-width column instead of
+   hiding the force column behind a scrollbar */
+.gr-calc-split .data-table { min-width: 0; }
+
+.gr-callout {
+  margin: 0;
+  padding: var(--space-md);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--color-accent-light);
+  color: var(--color-text);
+  font-style: normal;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* Block diagram, centred in its column and scaled to it */
+.gr-diagram-col { align-self: center; }
+
+.gr-diagram-col .loop-diagram { margin-top: 0; overflow: visible; }
+
+.gr-diagram-col .loop-diagram svg { min-width: 0; }
+
+/* Tighter table rows on this page */
+.gr-page .data-table th,
+.gr-page .data-table td { padding: 0.43rem 0.85rem; }
+
+@media (max-width: 999px) {
+  .gr-calc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gr-row--5545,
+  .gr-row--half,
+  .gr-row--4060 { gap: var(--space-lg); }
+}
+
+@media (max-width: 767px) {
+  /* Every row stacks in source order */
+  .gr-row--5545,
+  .gr-row--half,
+  .gr-row--4060,
+  .gr-calc-split,
+  .gr-calc-grid { grid-template-columns: minmax(0, 1fr); }
+
+  .gr-row { padding-block: var(--space-lg); }
+
+  .gr-card { padding: var(--space-md); }
+
+  /* The diagram keeps its legible size and scrolls inside its own box */
+  .gr-diagram-col .loop-diagram { overflow-x: auto; }
+  .gr-diagram-col .loop-diagram svg { min-width: 460px; }
+}
+
+/* ============================================================
    EXPERIENCE LIST (about page)
    ============================================================ */
 .exp-list {

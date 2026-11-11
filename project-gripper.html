@@ -28,7 +28,7 @@
   </header>
 
   <main>
-    <div class="container project-detail">
+    <div class="container project-detail gr-page">
 
       <!-- HEADER -->
       <div class="project-detail__header">
@@ -41,9 +41,9 @@
         <p class="status-badge">In progress: prototype printing, November 2026</p>
       </div>
 
-      <!-- OVERVIEW -->
-      <div class="project-block text-only">
-        <div class="block-text">
+      <!-- 1. OVERVIEW + DESIGN TARGETS -->
+      <section class="gr-row gr-row--5545">
+        <div class="gr-col">
           <span class="block-label">Overview</span>
           <h3>Project Overview</h3>
           <p>A two-finger, servo-actuated rack-and-pinion gripper with closed-loop grip force control, designed
@@ -53,11 +53,7 @@
             gripper measures how hard it is squeezing and closes only until it reaches a target force &mdash; so the
             same gripper can handle a fragile object and a rigid one without being re-tuned for each.</p>
         </div>
-      </div>
-
-      <!-- REQUIREMENTS -->
-      <div class="project-block text-only">
-        <div class="block-text">
+        <div class="gr-card">
           <span class="block-label">Requirements</span>
           <h3>Design Targets</h3>
           <p>Targets are calculated from the servo datasheet and the gripper's geometry, and will be verified on
@@ -73,11 +69,11 @@
             <li><span class="spec-name">Example objects</span><span class="spec-value">egg, ping pong ball, small rocks, household items</span></li>
           </ul>
         </div>
-      </div>
+      </section>
 
-      <!-- MECHANICAL DESIGN -->
-      <div class="project-block text-only">
-        <div class="block-text">
+      <!-- 2. MECHANICAL DESIGN + MEDIA -->
+      <section class="gr-row gr-row--half">
+        <div class="gr-col">
           <span class="block-label">Mechanical Design</span>
           <h3>Rack-and-Pinion Layout</h3>
           <p>A single servo turns a central pinion that drives two opposed racks, so both fingers move together
@@ -93,7 +89,8 @@
             the thing being regulated is contact force at the pads.</p>
           <p>The parts are designed around FDM constraints &mdash; the frame prints in PLA, and the finger pads print
             separately in TPU so the compliant contact surface can be swapped without reprinting the structure.</p>
-
+        </div>
+        <div class="gr-col gr-media">
           <!-- TODO: add the stills from images/gripper/ here, with a caption for each. Template:
           <figure>
             <img src="images/gripper/FILENAME.jpg" alt="DESCRIPTIVE ALT TEXT" loading="lazy" />
@@ -101,36 +98,51 @@
           </figure>
           Then delete the .media-pending paragraph below. -->
           <p class="media-pending">CAD views and print photos are being added.</p>
+
+          <figure class="gr-clip">
+            <!-- TODO: add the clips from images/gripper/ here. Template (keep the attributes as written:
+                 muted + loop + playsinline makes it autoplay-safe inline, and controls keeps it usable):
+            <figure class="video-figure">
+              <video muted loop playsinline controls preload="metadata" poster="images/gripper/POSTER.jpg" width="1280" height="720">
+                <source src="images/gripper/CLIP.mp4" type="video/mp4" />
+                <p>Your browser cannot play this clip. <a href="images/gripper/CLIP.mp4">Download the MP4</a>.</p>
+              </video>
+              <figcaption>CAPTION</figcaption>
+            </figure>
+            Then delete the .media-pending paragraph below. -->
+            <p class="media-pending">Clips of the jaws actuating are being added.</p>
+            <figcaption class="gr-caption">Gripper in motion: clips being added</figcaption>
+          </figure>
         </div>
-      </div>
+      </section>
 
-      <!-- DESIGN CALCULATIONS -->
-      <div class="project-block text-only is-wide">
-        <div class="block-text">
-          <span class="block-label">Analysis</span>
-          <h3>Design Calculations</h3>
-          <p>Every number below is calculated from the servo datasheet and the gripper&rsquo;s geometry. None of
-            it has been measured on hardware yet.</p>
+      <!-- 3. DESIGN CALCULATIONS -->
+      <section class="gr-row">
+        <span class="block-label">Analysis</span>
+        <h3>Design Calculations</h3>
+        <p>Every number below is calculated from the servo datasheet and the gripper&rsquo;s geometry. None of
+          it has been measured on hardware yet.</p>
 
-          <ol class="calc-list">
-            <li>
-              <p class="calc-step__name">Grip force</p>
-              <p class="calc-step__body">At 5 V the MG90S stall torque is about 1.87 kg&middot;cm (0.183 N&middot;m), interpolated between its 4.8 V and 6 V ratings. One 25 mm pinion drives both racks, so force per jaw = 0.183 / (2 &times; 0.025) = 3.7 N ideal, about 2.2 to 2.6 N after 60 to 70% drivetrain efficiency.</p>
-            </li>
-            <li>
-              <p class="calc-step__name">Stroke</p>
-              <p class="calc-step__body">An 80 mm gap needs 0.080 / (2 &times; 0.025) = 1.6 rad, about 92&deg; of the servo&rsquo;s 180&deg;.</p>
-            </li>
-            <li>
-              <p class="calc-step__name">Payload</p>
-              <p class="calc-step__body">A friction grip needs 2&mu;F &ge; m&middot;g&middot;SF. At F = 2 N, &mu; = 0.5, SF = 2, that gives m &asymp; 100 g. An egg (about 60 g) needs 1.2 N.</p>
-            </li>
-            <li>
-              <p class="calc-step__name">Resolution</p>
-              <p class="calc-step__body">1&deg; of servo rotation changes the gap by 0.87 mm, so the controller uses writeMicroseconds() for finer steps, and the TPU pads spread each step into a smaller force change.</p>
-            </li>
-          </ol>
+        <ol class="calc-list gr-calc-grid">
+          <li>
+            <p class="calc-step__name">Grip force</p>
+            <p class="calc-step__body">At 5 V the MG90S stall torque is about 1.87 kg&middot;cm (0.183 N&middot;m), interpolated between its 4.8 V and 6 V ratings. One 25 mm pinion drives both racks, so force per jaw = 0.183 / (2 &times; 0.025) = 3.7 N ideal, about 2.2 to 2.6 N after 60 to 70% drivetrain efficiency.</p>
+          </li>
+          <li>
+            <p class="calc-step__name">Stroke</p>
+            <p class="calc-step__body">An 80 mm gap needs 0.080 / (2 &times; 0.025) = 1.6 rad, about 92&deg; of the servo&rsquo;s 180&deg;.</p>
+          </li>
+          <li>
+            <p class="calc-step__name">Payload</p>
+            <p class="calc-step__body">A friction grip needs 2&mu;F &ge; m&middot;g&middot;SF. At F = 2 N, &mu; = 0.5, SF = 2, that gives m &asymp; 100 g. An egg (about 60 g) needs 1.2 N.</p>
+          </li>
+          <li>
+            <p class="calc-step__name">Resolution</p>
+            <p class="calc-step__body">1&deg; of servo rotation changes the gap by 0.87 mm, so the controller uses writeMicroseconds() for finer steps, and the TPU pads spread each step into a smaller force change.</p>
+          </li>
+        </ol>
 
+        <div class="gr-calc-split">
           <div class="table-scroll">
             <table class="data-table">
               <caption>Pinion radius trade-off</caption>
@@ -160,36 +172,14 @@
               </tbody>
             </table>
           </div>
-          <p class="calc-note">A 25 mm pinion uses half the servo&rsquo;s range for the full stroke; a smaller
+          <p class="calc-note gr-callout">A 25 mm pinion uses half the servo&rsquo;s range for the full stroke; a smaller
             pinion is the main lever for more grip force in a second version.</p>
-
         </div>
-      </div>
+      </section>
 
-      <!-- MOTION -->
-      <div class="project-block text-only">
-        <div class="block-text">
-          <span class="block-label">Motion</span>
-          <h3>Gripper in Motion</h3>
-          <p>Short clips of the jaws actuating, to show stroke and timing rather than a static pose.</p>
-
-          <!-- TODO: add the clips from images/gripper/ here. Template (keep the attributes as written:
-               muted + loop + playsinline makes it autoplay-safe inline, and controls keeps it usable):
-          <figure class="video-figure">
-            <video muted loop playsinline controls preload="metadata" poster="images/gripper/POSTER.jpg" width="1280" height="720">
-              <source src="images/gripper/CLIP.mp4" type="video/mp4" />
-              <p>Your browser cannot play this clip. <a href="images/gripper/CLIP.mp4">Download the MP4</a>.</p>
-            </video>
-            <figcaption>CAPTION</figcaption>
-          </figure>
-          Then delete the .media-pending paragraph below. -->
-          <p class="media-pending">Clips of the jaws actuating are being added.</p>
-        </div>
-      </div>
-
-      <!-- CONTROLS -->
-      <div class="project-block text-only is-wide">
-        <div class="block-text">
+      <!-- 4. CONTROLS -->
+      <section class="gr-row gr-row--4060">
+        <div class="gr-col">
           <span class="block-label">Controls</span>
           <h3>Closed-Loop Grip Force &mdash; In Development</h3>
           <p>FSR 402 force-sensing resistors sit behind the finger pads and are read by an Arduino Uno over its
@@ -204,7 +194,8 @@
             has one FSR 402 seated in a pocket in the PLA claw, with the TPU contact pad resting on top. Because
             an FSR only measures force through its 14.7 mm active area, the pad is designed to carry the grip
             load through the sensor, and each finger is calibrated fully assembled against known weights.</p>
-
+        </div>
+        <div class="gr-diagram-col">
           <div class="loop-diagram">
             <svg viewBox="0 0 720 200" role="img" aria-labelledby="loopTitle loopDesc">
               <title id="loopTitle">Closed-loop grip force control</title>
@@ -261,80 +252,77 @@
               </g>
             </svg>
           </div>
-
         </div>
-      </div>
+      </section>
 
-      <!-- TEST PLAN -->
-      <div class="project-block text-only is-wide">
-        <div class="block-text">
-          <span class="block-label">Test Plan</span>
-          <h3>Planned Bench Tests</h3>
-          <div class="table-scroll">
-            <table class="data-table">
-              <caption>Targets are calculated from the design; no test has been run yet.</caption>
-              <thead>
+      <!-- 5. TEST PLAN -->
+      <section class="gr-row">
+        <span class="block-label">Test Plan</span>
+        <h3>Planned Bench Tests</h3>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>Targets are calculated from the design; no test has been run yet.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Test</th>
+                <th scope="col">Target</th>
+                <th scope="col">Result</th>
+              </tr>
+            </thead>
+            <tbody>
                 <tr>
-                  <th scope="col">Test</th>
-                  <th scope="col">Target</th>
-                  <th scope="col">Result</th>
+                  <td>Grip force held against the commanded setpoint</td>
+                  <td>Within &plusmn;0.3 N at 0.5, 1 and 2 N</td>
+                  <td class="is-pending">Pending</td>
                 </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                    <td>Grip force held against the commanded setpoint</td>
-                    <td>Within &plusmn;0.3 N at 0.5, 1 and 2 N</td>
-                    <td class="is-pending">Pending</td>
-                  </tr>
-                  <tr>
-                    <td>Jaw stroke, fully open to fully closed</td>
-                    <td>0 to 80 mm gap, measured with calipers</td>
-                    <td class="is-pending">Pending</td>
-                  </tr>
-                  <tr>
-                    <td>Object size range gripped without reconfiguring</td>
-                    <td>10 to 75 mm wide without reconfiguring</td>
-                    <td class="is-pending">Pending</td>
-                  </tr>
-                  <tr>
-                    <td>Fragile object grasp &mdash; crush check</td>
-                    <td>Ping pong ball, 10 lifts at 0.5 N, no visible dent</td>
-                    <td class="is-pending">Pending</td>
-                  </tr>
-                  <tr>
-                    <td>Rigid object grasp &mdash; slip check</td>
-                    <td>100 g rock, 10 lifts held 10 s at 2 N, no slip</td>
-                    <td class="is-pending">Pending</td>
-                  </tr>
-                  <tr>
-                    <td>Egg grasp</td>
-                    <td>10 lifts held 10 s at 1.5 N or less, no slip</td>
-                    <td class="is-pending">Pending</td>
-                  </tr>
-                  <tr>
-                    <td>Backlash at the rack-and-pinion interface</td>
-                    <td>Less than 1 mm of free play at the fingertip</td>
-                    <td class="is-pending">Pending</td>
-                  </tr>
-                  <tr>
-                    <td>FSR 402 repeatability and drift across a session</td>
-                    <td>Within &plusmn;10% on a known weight over 30 min</td>
-                    <td class="is-pending">Pending</td>
-                  </tr>
-                  <tr>
-                    <td>Cycle endurance of the printed PLA frame</td>
-                    <td>500 open-close cycles, no cracks or lost stroke</td>
-                    <td class="is-pending">Pending</td>
-                  </tr>
-              </tbody>
-            </table>
-          </div>
+                <tr>
+                  <td>Jaw stroke, fully open to fully closed</td>
+                  <td>0 to 80 mm gap, measured with calipers</td>
+                  <td class="is-pending">Pending</td>
+                </tr>
+                <tr>
+                  <td>Object size range gripped without reconfiguring</td>
+                  <td>10 to 75 mm wide without reconfiguring</td>
+                  <td class="is-pending">Pending</td>
+                </tr>
+                <tr>
+                  <td>Fragile object grasp &mdash; crush check</td>
+                  <td>Ping pong ball, 10 lifts at 0.5 N, no visible dent</td>
+                  <td class="is-pending">Pending</td>
+                </tr>
+                <tr>
+                  <td>Rigid object grasp &mdash; slip check</td>
+                  <td>100 g rock, 10 lifts held 10 s at 2 N, no slip</td>
+                  <td class="is-pending">Pending</td>
+                </tr>
+                <tr>
+                  <td>Egg grasp</td>
+                  <td>10 lifts held 10 s at 1.5 N or less, no slip</td>
+                  <td class="is-pending">Pending</td>
+                </tr>
+                <tr>
+                  <td>Backlash at the rack-and-pinion interface</td>
+                  <td>Less than 1 mm of free play at the fingertip</td>
+                  <td class="is-pending">Pending</td>
+                </tr>
+                <tr>
+                  <td>FSR 402 repeatability and drift across a session</td>
+                  <td>Within &plusmn;10% on a known weight over 30 min</td>
+                  <td class="is-pending">Pending</td>
+                </tr>
+                <tr>
+                  <td>Cycle endurance of the printed PLA frame</td>
+                  <td>500 open-close cycles, no cracks or lost stroke</td>
+                  <td class="is-pending">Pending</td>
+                </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
+      </section>
 
-      <!-- NEXT STEPS -->
-      <div class="project-block text-only">
-        <div class="block-text">
+      <!-- 6. NEXT STEPS + TECHNICAL STACK -->
+      <section class="gr-row gr-row--half">
+        <div class="gr-col">
           <span class="block-label">Next Steps</span>
           <h3>What Comes Next</h3>
           <ul class="plain-list">
@@ -343,11 +331,7 @@
             <li>Run grasp trials on fragile and rigid objects.</li>
           </ul>
         </div>
-      </div>
-
-      <!-- TOOLS -->
-      <div class="project-block text-only">
-        <div class="block-text">
+        <div class="gr-col">
           <span class="block-label">Tools &amp; Skills</span>
           <h3>Technical Stack</h3>
           <div class="skill-tags">
@@ -363,7 +347,7 @@
             <span class="skill-tag">5 V Supply</span>
           </div>
         </div>
-      </div>
+      </section>
 
       <!-- TODO: Build photos &mdash; uncomment this block once the assembly photos are in images/gripper/
       <div class="project-block text-only">
