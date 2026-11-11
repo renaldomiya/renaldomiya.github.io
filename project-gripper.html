@@ -60,14 +60,17 @@
         <div class="block-text">
           <span class="block-label">Requirements</span>
           <h3>Design Targets</h3>
-          <p>Targets are not fixed yet &mdash; they will be set from measurements on the first printed prototype.</p>
+          <p>Targets are calculated from the servo datasheet and the gripper's geometry, and will be verified on
+            the printed prototype.</p>
           <ul class="spec-list" role="list">
-            <!-- TODO: fill in the target grip force range (e.g. "0.5 - 20 N") and delete the TBD span -->
-            <li><span class="spec-name">Grip force range</span><span class="spec-value is-tbd">TBD</span></li>
-            <!-- TODO: fill in the jaw stroke, fully open to fully closed -->
-            <li><span class="spec-name">Jaw stroke</span><span class="spec-value is-tbd">TBD</span></li>
-            <!-- TODO: fill in the object size range the jaws are designed to span -->
-            <li><span class="spec-name">Object size range</span><span class="spec-value is-tbd">TBD</span></li>
+            <li><span class="spec-name">Max jaw opening</span><span class="spec-value">80 mm (about 75 mm usable object width)</span></li>
+            <li><span class="spec-name">Object size range</span><span class="spec-value">10 to 75 mm</span></li>
+            <li><span class="spec-name">Finger height</span><span class="spec-value">60 mm</span></li>
+            <li><span class="spec-name">Design grip force</span><span class="spec-value">2 N (3.7 N ideal at servo stall, 5 V supply)</span></li>
+            <li><span class="spec-name">Payload</span><span class="spec-value">about 100 g (friction 0.5, safety factor 2)</span></li>
+            <li><span class="spec-name">Full-stroke time</span><span class="spec-value">about 0.15 s with no load</span></li>
+            <li><span class="spec-name">Actuator</span><span class="spec-value">MG90S metal-gear servo, about 92&deg; of rotation for full stroke</span></li>
+            <li><span class="spec-name">Example objects</span><span class="spec-value">egg, ping pong ball, small rocks, household items</span></li>
           </ul>
         </div>
       </div>
@@ -80,6 +83,10 @@
           <p>A single servo turns a central pinion that drives two opposed racks, so both fingers move together
             and stay parallel through the full stroke. Driving both jaws from one pinion keeps the part count
             down and means there is only one drivetrain to characterise.</p>
+
+          <p>Each jaw slides on two 5 mm steel guide rods spaced 34 mm apart. Two rods stop the jaw rotating
+            about the rod axis, and at under 4 N of grip force the steel rods are effectively rigid, so any
+            compliance sits in the printed PLA bushings and fingers.</p>
           <p>Gear module and tooth profile were calculated to minimise backlash through the mesh. Backlash
             matters more here than in a position-only gripper: lost motion between the servo and the fingers
             shows up directly as error in the force loop, because the controller commands servo position while
@@ -94,6 +101,68 @@
           </figure>
           Then delete the .media-pending paragraph below. -->
           <p class="media-pending">CAD views and print photos are being added.</p>
+        </div>
+      </div>
+
+      <!-- DESIGN CALCULATIONS -->
+      <div class="project-block text-only is-wide">
+        <div class="block-text">
+          <span class="block-label">Analysis</span>
+          <h3>Design Calculations</h3>
+          <p>Every number below is calculated from the servo datasheet and the gripper&rsquo;s geometry. None of
+            it has been measured on hardware yet.</p>
+
+          <ol class="calc-list">
+            <li>
+              <p class="calc-step__name">Grip force</p>
+              <p class="calc-step__body">At 5 V the MG90S stall torque is about 1.87 kg&middot;cm (0.183 N&middot;m), interpolated between its 4.8 V and 6 V ratings. One 25 mm pinion drives both racks, so force per jaw = 0.183 / (2 &times; 0.025) = 3.7 N ideal, about 2.2 to 2.6 N after 60 to 70% drivetrain efficiency.</p>
+            </li>
+            <li>
+              <p class="calc-step__name">Stroke</p>
+              <p class="calc-step__body">An 80 mm gap needs 0.080 / (2 &times; 0.025) = 1.6 rad, about 92&deg; of the servo&rsquo;s 180&deg;.</p>
+            </li>
+            <li>
+              <p class="calc-step__name">Payload</p>
+              <p class="calc-step__body">A friction grip needs 2&mu;F &ge; m&middot;g&middot;SF. At F = 2 N, &mu; = 0.5, SF = 2, that gives m &asymp; 100 g. An egg (about 60 g) needs 1.2 N.</p>
+            </li>
+            <li>
+              <p class="calc-step__name">Resolution</p>
+              <p class="calc-step__body">1&deg; of servo rotation changes the gap by 0.87 mm, so the controller uses writeMicroseconds() for finer steps, and the TPU pads spread each step into a smaller force change.</p>
+            </li>
+          </ol>
+
+          <div class="table-scroll">
+            <table class="data-table">
+              <caption>Pinion radius trade-off</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Radius</th>
+                  <th scope="col">Rotation for 80 mm</th>
+                  <th scope="col">Ideal force</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td>15 mm</td>
+                    <td>153&deg;</td>
+                    <td>5.9 N</td>
+                  </tr>
+                  <tr>
+                    <td>20 mm</td>
+                    <td>115&deg;</td>
+                    <td>4.4 N</td>
+                  </tr>
+                  <tr>
+                    <td>25 mm (chosen)</td>
+                    <td>92&deg;</td>
+                    <td>3.5 N</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="calc-note">A 25 mm pinion uses half the servo&rsquo;s range for the full stroke; a smaller
+            pinion is the main lever for more grip force in a second version.</p>
+
         </div>
       </div>
 
@@ -125,16 +194,22 @@
           <h3>Closed-Loop Grip Force &mdash; In Development</h3>
           <p>FSR 402 force-sensing resistors sit behind the finger pads and are read by an Arduino Uno over its
             analog inputs. A proportional controller written in C++ compares the measured force against the
-            target and adjusts servo position to close the gap, holding the commanded grip force instead of a
-            commanded jaw position.</p>
+            target and adjusts the MG90S servo&rsquo;s position to close the gap, holding the commanded grip force
+            instead of a commanded jaw position.</p>
           <p>This part is still in development: the loop is written and the hardware is specified, but the gains
             and force thresholds have not been calibrated against a printed prototype yet.</p>
+
+          <p><strong>Power and sensing.</strong> The servo runs from a dedicated 5 V, 3 A supply with a common
+            ground to the Arduino, so current spikes near stall can&rsquo;t brown out the controller. Each finger
+            has one FSR 402 seated in a pocket in the PLA claw, with the TPU contact pad resting on top. Because
+            an FSR only measures force through its 14.7 mm active area, the pad is designed to carry the grip
+            load through the sensor, and each finger is calibrated fully assembled against known weights.</p>
 
           <div class="loop-diagram">
             <svg viewBox="0 0 720 200" role="img" aria-labelledby="loopTitle loopDesc">
               <title id="loopTitle">Closed-loop grip force control</title>
               <desc id="loopDesc">A target grip force is compared against the force measured by the FSR 402
-                sensors. The difference drives a proportional controller on an Arduino Uno, which commands the
+                sensors, one per finger. The difference drives a proportional controller on an Arduino Uno, which commands the
                 servo, which drives the rack-and-pinion fingers onto the object. The measured force is fed back
                 to the comparison.</desc>
 
@@ -161,7 +236,8 @@
                 <text x="412" y="57">Servo</text>
                 <text x="560" y="47">Rack-and-pinion</text>
                 <text x="560" y="62">fingers + TPU pads</text>
-                <text x="418" y="158">FSR 402 force sensors</text>
+                <text x="418" y="150">FSR 402 force sensors</text>
+                <text x="418" y="165">(one per finger)</text>
                 <text x="152" y="57" font-size="13">&#931;</text>
               </g>
 
@@ -196,7 +272,7 @@
           <h3>Planned Bench Tests</h3>
           <div class="table-scroll">
             <table class="data-table">
-              <caption>Targets are set before testing begins; no test has been run yet.</caption>
+              <caption>Targets are calculated from the design; no test has been run yet.</caption>
               <thead>
                 <tr>
                   <th scope="col">Test</th>
@@ -207,42 +283,47 @@
               <tbody>
                   <tr>
                     <td>Grip force held against the commanded setpoint</td>
-                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; target force accuracy, e.g. &plusmn;X N --></td>
+                    <td>Within &plusmn;0.3 N at 0.5, 1 and 2 N</td>
                     <td class="is-pending">Pending</td>
                   </tr>
                   <tr>
                     <td>Jaw stroke, fully open to fully closed</td>
-                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; stroke in mm --></td>
+                    <td>0 to 80 mm gap, measured with calipers</td>
                     <td class="is-pending">Pending</td>
                   </tr>
                   <tr>
                     <td>Object size range gripped without reconfiguring</td>
-                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; min and max object width in mm --></td>
+                    <td>10 to 75 mm wide without reconfiguring</td>
                     <td class="is-pending">Pending</td>
                   </tr>
                   <tr>
                     <td>Fragile object grasp &mdash; crush check</td>
-                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; object list and pass criterion --></td>
+                    <td>Ping pong ball, 10 lifts at 0.5 N, no visible dent</td>
                     <td class="is-pending">Pending</td>
                   </tr>
                   <tr>
                     <td>Rigid object grasp &mdash; slip check</td>
-                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; object list, load, and pass criterion --></td>
+                    <td>100 g rock, 10 lifts held 10 s at 2 N, no slip</td>
+                    <td class="is-pending">Pending</td>
+                  </tr>
+                  <tr>
+                    <td>Egg grasp</td>
+                    <td>10 lifts held 10 s at 1.5 N or less, no slip</td>
                     <td class="is-pending">Pending</td>
                   </tr>
                   <tr>
                     <td>Backlash at the rack-and-pinion interface</td>
-                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; acceptable lost motion in mm or degrees --></td>
+                    <td>Less than 1 mm of free play at the fingertip</td>
                     <td class="is-pending">Pending</td>
                   </tr>
                   <tr>
                     <td>FSR 402 repeatability and drift across a session</td>
-                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; acceptable drift --></td>
+                    <td>Within &plusmn;10% on a known weight over 30 min</td>
                     <td class="is-pending">Pending</td>
                   </tr>
                   <tr>
                     <td>Cycle endurance of the printed PLA frame</td>
-                    <td><span class="spec-value is-tbd">TBD</span><!-- TODO: set the target &mdash; cycles before inspection --></td>
+                    <td>500 open-close cycles, no cracks or lost stroke</td>
                     <td class="is-pending">Pending</td>
                   </tr>
               </tbody>
@@ -272,11 +353,14 @@
           <div class="skill-tags">
             <span class="skill-tag">SolidWorks</span>
             <span class="skill-tag">Arduino Uno (C++)</span>
+            <span class="skill-tag">MG90S</span>
             <span class="skill-tag">FSR 402</span>
             <span class="skill-tag">Closed-Loop Control</span>
             <span class="skill-tag">FDM Printing</span>
             <span class="skill-tag">PLA / TPU</span>
             <span class="skill-tag">Gear Design</span>
+            <span class="skill-tag">Steel Guide Rods</span>
+            <span class="skill-tag">5 V Supply</span>
           </div>
         </div>
       </div>

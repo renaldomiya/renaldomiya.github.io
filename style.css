@@ -1082,6 +1082,66 @@ p { max-width: 65ch; }
   font-style: italic;
 }
 
+/* Worked calculation steps */
+.calc-list {
+  list-style: none;
+  counter-reset: calcstep;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.calc-list li {
+  counter-increment: calcstep;
+  position: relative;
+  padding: var(--space-md);
+  padding-left: calc(var(--space-md) + 2.25rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.calc-list li::before {
+  content: counter(calcstep);
+  position: absolute;
+  left: var(--space-md);
+  top: var(--space-md);
+  width: 1.6rem;
+  height: 1.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.calc-step__name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.calc-step__body {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  max-width: 72ch;
+}
+
+.calc-note {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+  max-width: 72ch;
+}
+
 /* Inline video, used once clips are added to images/gripper/ */
 .video-figure {
   margin-top: var(--space-md);
