@@ -1097,7 +1097,10 @@ p { max-width: 65ch; }
   counter-increment: calcstep;
   position: relative;
   padding: var(--space-md);
+  /* The badge sits in the left padding, so the right padding matches it
+     (gutter + badge + gap) and the frame ends up centred on the text. */
   padding-left: calc(var(--space-md) + 2.25rem);
+  padding-right: calc(var(--space-md) + 2.25rem);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -1204,7 +1207,6 @@ p { max-width: 65ch; }
 /* One thin divider between rows */
 .gr-row + .gr-row { border-top: 1px solid var(--color-border); }
 
-.gr-row--5545,
 .gr-row--half,
 .gr-row--4060 {
   display: grid;
@@ -1212,44 +1214,64 @@ p { max-width: 65ch; }
   align-items: start;
 }
 
-.gr-row--5545 { grid-template-columns: 55fr 45fr; }
 .gr-row--half { grid-template-columns: 1fr 1fr; }
 .gr-row--4060 { grid-template-columns: 40fr 60fr; align-items: center; }
 
 /* Paragraphs fill their column instead of stopping at the global 65ch */
 .gr-col p,
-.gr-card p,
 .gr-row > p { max-width: none; }
 
 .gr-col h3,
-.gr-card h3,
 .gr-row > h3 {
   font-size: 1.25rem;
   margin-bottom: var(--space-sm);
 }
 
-.gr-col > p + p,
-.gr-card > p + p { margin-top: var(--space-md); }
+.gr-col > p + p { margin-top: var(--space-md); }
 
-/* In a narrow card the label sits above its value, so every row reads the
-   same way instead of some wrapping and some not */
-.gr-card .spec-list { gap: 0.45rem; }
-
-.gr-card .spec-list li {
-  flex-direction: column;
-  gap: 1px;
-  padding-bottom: 0.45rem;
+/* Two paragraphs side by side under a shared heading */
+.gr-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-top: var(--space-sm);
 }
 
-.gr-card .spec-name { min-width: 0; }
+.gr-two-col p { max-width: none; }
 
-/* Design targets card */
-.gr-card {
+/* Design targets as a grid of tiles */
+.gr-spec-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  align-items: stretch;
+}
+
+.gr-spec {
+  height: 100%;
+  padding: var(--space-md);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  padding: var(--space-lg);
+}
+
+.gr-spec__name {
+  max-width: none;
+  margin-bottom: 0.2rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.gr-spec__value {
+  max-width: none;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
 }
 
 /* Media column */
@@ -1317,15 +1339,20 @@ p { max-width: 65ch; }
 .gr-page .data-table td { padding: 0.43rem 0.85rem; }
 
 @media (max-width: 999px) {
-  .gr-calc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .gr-row--5545,
+  .gr-calc-grid,
+  .gr-spec-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
   .gr-row--half,
   .gr-row--4060 { gap: var(--space-lg); }
 }
 
+@media (max-width: 479px) {
+  .gr-spec-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
 @media (max-width: 767px) {
   /* Every row stacks in source order */
-  .gr-row--5545,
+  .gr-two-col,
   .gr-row--half,
   .gr-row--4060,
   .gr-calc-split,
@@ -1333,7 +1360,6 @@ p { max-width: 65ch; }
 
   .gr-row { padding-block: var(--space-lg); }
 
-  .gr-card { padding: var(--space-md); }
 
   /* The diagram keeps its legible size and scrolls inside its own box */
   .gr-diagram-col .loop-diagram { overflow-x: auto; }

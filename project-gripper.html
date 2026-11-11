@@ -41,11 +41,11 @@
         <p class="status-badge">In progress: prototype printing, November 2026</p>
       </div>
 
-      <!-- 1. OVERVIEW + DESIGN TARGETS -->
-      <section class="gr-row gr-row--5545">
-        <div class="gr-col">
-          <span class="block-label">Overview</span>
-          <h3>Project Overview</h3>
+      <!-- 1. OVERVIEW -->
+      <section class="gr-row">
+        <span class="block-label">Overview</span>
+        <h3>Project Overview</h3>
+        <div class="gr-two-col">
           <p>A two-finger, servo-actuated rack-and-pinion gripper with closed-loop grip force control, designed
             in SolidWorks for FDM printing. The frame prints in PLA, and the finger pads print in flexible TPU so
             the contact surface gives slightly against whatever is being held.</p>
@@ -53,25 +53,51 @@
             gripper measures how hard it is squeezing and closes only until it reaches a target force &mdash; so the
             same gripper can handle a fragile object and a rigid one without being re-tuned for each.</p>
         </div>
-        <div class="gr-card">
-          <span class="block-label">Requirements</span>
-          <h3>Design Targets</h3>
-          <p>Targets are calculated from the servo datasheet and the gripper's geometry, and will be verified on
-            the printed prototype.</p>
-          <ul class="spec-list" role="list">
-            <li><span class="spec-name">Max jaw opening</span><span class="spec-value">80 mm (about 75 mm usable object width)</span></li>
-            <li><span class="spec-name">Object size range</span><span class="spec-value">10 to 75 mm</span></li>
-            <li><span class="spec-name">Finger height</span><span class="spec-value">60 mm</span></li>
-            <li><span class="spec-name">Design grip force</span><span class="spec-value">2 N (3.7 N ideal at servo stall, 5 V supply)</span></li>
-            <li><span class="spec-name">Payload</span><span class="spec-value">about 100 g (friction 0.5, safety factor 2)</span></li>
-            <li><span class="spec-name">Full-stroke time</span><span class="spec-value">about 0.15 s with no load</span></li>
-            <li><span class="spec-name">Actuator</span><span class="spec-value">MG90S metal-gear servo, about 92&deg; of rotation for full stroke</span></li>
-            <li><span class="spec-name">Example objects</span><span class="spec-value">egg, ping pong ball, small rocks, household items</span></li>
-          </ul>
-        </div>
       </section>
 
-      <!-- 2. MECHANICAL DESIGN + MEDIA -->
+      <!-- 2. DESIGN TARGETS -->
+      <section class="gr-row">
+        <span class="block-label">Requirements</span>
+        <h3>Design Targets</h3>
+        <p>Targets are calculated from the servo datasheet and the gripper's geometry, and will be verified on
+            the printed prototype.</p>
+        <ul class="gr-spec-grid" role="list">
+            <li class="gr-spec">
+              <p class="gr-spec__name">Max jaw opening</p>
+              <p class="gr-spec__value">80 mm (about 75 mm usable object width)</p>
+            </li>
+            <li class="gr-spec">
+              <p class="gr-spec__name">Object size range</p>
+              <p class="gr-spec__value">10 to 75 mm</p>
+            </li>
+            <li class="gr-spec">
+              <p class="gr-spec__name">Finger height</p>
+              <p class="gr-spec__value">60 mm</p>
+            </li>
+            <li class="gr-spec">
+              <p class="gr-spec__name">Design grip force</p>
+              <p class="gr-spec__value">2 N (3.7 N ideal at servo stall, 5 V supply)</p>
+            </li>
+            <li class="gr-spec">
+              <p class="gr-spec__name">Payload</p>
+              <p class="gr-spec__value">about 100 g (friction 0.5, safety factor 2)</p>
+            </li>
+            <li class="gr-spec">
+              <p class="gr-spec__name">Full-stroke time</p>
+              <p class="gr-spec__value">about 0.15 s with no load</p>
+            </li>
+            <li class="gr-spec">
+              <p class="gr-spec__name">Actuator</p>
+              <p class="gr-spec__value">MG90S metal-gear servo, about 92&deg; of rotation for full stroke</p>
+            </li>
+            <li class="gr-spec">
+              <p class="gr-spec__name">Example objects</p>
+              <p class="gr-spec__value">egg, ping pong ball, small rocks, household items</p>
+            </li>
+        </ul>
+      </section>
+
+      <!-- 3. MECHANICAL DESIGN + MEDIA -->
       <section class="gr-row gr-row--half">
         <div class="gr-col">
           <span class="block-label">Mechanical Design</span>
@@ -116,7 +142,7 @@
         </div>
       </section>
 
-      <!-- 3. DESIGN CALCULATIONS -->
+      <!-- 4. DESIGN CALCULATIONS -->
       <section class="gr-row">
         <span class="block-label">Analysis</span>
         <h3>Design Calculations</h3>
@@ -177,7 +203,7 @@
         </div>
       </section>
 
-      <!-- 4. CONTROLS -->
+      <!-- 5. CONTROLS -->
       <section class="gr-row gr-row--4060">
         <div class="gr-col">
           <span class="block-label">Controls</span>
@@ -255,7 +281,7 @@
         </div>
       </section>
 
-      <!-- 5. TEST PLAN -->
+      <!-- 6. TEST PLAN -->
       <section class="gr-row">
         <span class="block-label">Test Plan</span>
         <h3>Planned Bench Tests</h3>
@@ -320,7 +346,7 @@
         </div>
       </section>
 
-      <!-- 6. NEXT STEPS + TECHNICAL STACK -->
+      <!-- 7. NEXT STEPS + TECHNICAL STACK -->
       <section class="gr-row gr-row--half">
         <div class="gr-col">
           <span class="block-label">Next Steps</span>
