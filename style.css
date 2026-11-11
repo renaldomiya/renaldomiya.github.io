@@ -1082,6 +1082,69 @@ p { max-width: 65ch; }
   font-style: italic;
 }
 
+/* Worked calculation steps */
+.calc-list {
+  list-style: none;
+  counter-reset: calcstep;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.calc-list li {
+  counter-increment: calcstep;
+  position: relative;
+  padding: var(--space-md);
+  /* The badge sits in the left padding, so the right padding matches it
+     (gutter + badge + gap) and the frame ends up centred on the text. */
+  padding-left: calc(var(--space-md) + 2.25rem);
+  padding-right: calc(var(--space-md) + 2.25rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.calc-list li::before {
+  content: counter(calcstep);
+  position: absolute;
+  left: var(--space-md);
+  top: var(--space-md);
+  width: 1.6rem;
+  height: 1.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.calc-step__name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.calc-step__body {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  max-width: 72ch;
+}
+
+.calc-note {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+  max-width: 72ch;
+}
+
 /* Inline video, used once clips are added to images/gripper/ */
 .video-figure {
   margin-top: var(--space-md);
@@ -1127,6 +1190,181 @@ p { max-width: 65ch; }
 }
 
 .loop-diagram svg { width: 100%; height: auto; min-width: 460px; display: block; }
+
+/* ============================================================
+   GRIPPER PAGE LAYOUT
+   Page-scoped: .project-block is left alone so the manifold and
+   PDU pages keep their alternating layout.
+   ============================================================ */
+.gr-page .project-detail__header { margin-bottom: var(--space-lg); }
+
+.gr-row {
+  padding-block: 2.5rem;            /* about two thirds of the old block padding */
+}
+
+.gr-row:first-of-type { padding-top: 0; }
+
+/* One thin divider between rows */
+.gr-row + .gr-row { border-top: 1px solid var(--color-border); }
+
+.gr-row--half,
+.gr-row--4060 {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.gr-row--half { grid-template-columns: 1fr 1fr; }
+.gr-row--4060 { grid-template-columns: 40fr 60fr; align-items: center; }
+
+/* Paragraphs fill their column instead of stopping at the global 65ch */
+.gr-col p,
+.gr-row > p { max-width: none; }
+
+.gr-col h3,
+.gr-row > h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+.gr-col > p + p { margin-top: var(--space-md); }
+
+/* Two paragraphs side by side under a shared heading */
+.gr-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-top: var(--space-sm);
+}
+
+.gr-two-col p { max-width: none; }
+
+/* Design targets as a grid of tiles */
+.gr-spec-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  align-items: stretch;
+}
+
+.gr-spec {
+  height: 100%;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.gr-spec__name {
+  max-width: none;
+  margin-bottom: 0.2rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.gr-spec__value {
+  max-width: none;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Media column */
+.gr-media {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.gr-media .media-pending { margin-top: 0; }
+
+.gr-clip { display: block; }
+
+.gr-caption {
+  margin-top: 0.4rem;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+/* Four calculation steps across one row, all the same height */
+.gr-calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-md);
+  align-items: stretch;
+}
+
+.gr-calc-grid li { height: 100%; }
+
+/* Trade-off table beside its note */
+.gr-calc-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.gr-calc-split .table-scroll { margin-top: 0; }
+
+/* Three short columns, so it fits its half-width column instead of
+   hiding the force column behind a scrollbar */
+.gr-calc-split .data-table { min-width: 0; }
+
+.gr-callout {
+  margin: 0;
+  padding: var(--space-md);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--color-accent-light);
+  color: var(--color-text);
+  font-style: normal;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* Block diagram, centred in its column and scaled to it */
+.gr-diagram-col { align-self: center; }
+
+.gr-diagram-col .loop-diagram { margin-top: 0; overflow: visible; }
+
+.gr-diagram-col .loop-diagram svg { min-width: 0; }
+
+/* Tighter table rows on this page */
+.gr-page .data-table th,
+.gr-page .data-table td { padding: 0.43rem 0.85rem; }
+
+@media (max-width: 999px) {
+  .gr-calc-grid,
+  .gr-spec-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .gr-row--half,
+  .gr-row--4060 { gap: var(--space-lg); }
+}
+
+@media (max-width: 479px) {
+  .gr-spec-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 767px) {
+  /* Every row stacks in source order */
+  .gr-two-col,
+  .gr-row--half,
+  .gr-row--4060,
+  .gr-calc-split,
+  .gr-calc-grid { grid-template-columns: minmax(0, 1fr); }
+
+  .gr-row { padding-block: var(--space-lg); }
+
+
+  /* The diagram keeps its legible size and scrolls inside its own box */
+  .gr-diagram-col .loop-diagram { overflow-x: auto; }
+  .gr-diagram-col .loop-diagram svg { min-width: 460px; }
+}
 
 /* ============================================================
    EXPERIENCE LIST (about page)
