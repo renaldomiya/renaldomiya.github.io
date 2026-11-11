@@ -574,13 +574,10 @@ p { max-width: 65ch; }
 
 /* ============================================================
    ABOUT PAGE
-   Every section shares one centred column, so text, lists, and
-   images line up on the same left and right edges.
+   Full container width, like the projects page. Each section is a
+   text column beside a photo, with no card around either.
    ============================================================ */
-.about-col {
-  max-width: 760px;
-  margin-inline: auto;
-}
+.about-col { max-width: none; }
 
 .about-block { padding-block: var(--space-lg); }
 .about-block:first-child { padding-top: 0; }
@@ -588,22 +585,39 @@ p { max-width: 65ch; }
 /* A single thin divider between sections */
 .about-block + .about-block { border-top: 1px solid var(--color-border); }
 
-.about-intro {
-  display: grid;
-  grid-template-columns: 1fr 220px;
-  gap: var(--space-lg);
-  align-items: start;
+.about-block h1 { margin-bottom: var(--space-md); }
+
+.about-block h2 {
+  font-size: 1.35rem;
+  margin-bottom: var(--space-md);
 }
 
-.about-intro-text h1 { margin-bottom: var(--space-md); }
+/* Text beside a photo. The photo centres on the text it sits next to,
+   which is why the heading stays outside this grid. */
+.about-split {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: center;
+}
 
-.about-intro-text p {
+.about-split--intro { grid-template-columns: minmax(0, 1fr) 260px; }
+.about-split--feature { grid-template-columns: 380px minmax(0, 1fr); }
+
+/* Fills its column, so there is no dead gap before the photo */
+.about-intro-text p,
+.about-feature-text p {
+  max-width: none;
   color: var(--color-text-muted);
   line-height: 1.8;
   font-size: 1.02rem;
 }
 
 .about-intro-text p + p { margin-top: var(--space-md); }
+
+.about-feature-text h3 {
+  font-size: 1.1rem;
+  margin-bottom: var(--space-sm);
+}
 
 .about-photo {
   display: block;
@@ -616,50 +630,9 @@ p { max-width: 65ch; }
   background: #ffffff;
 }
 
-.about-block h2 {
-  font-size: 1.35rem;
-  margin-bottom: var(--space-sm);
-}
-
-/* One activity, so it gets a single wide card: photo panel beside the text */
-.about-feature {
-  display: grid;
-  grid-template-columns: 320px minmax(0, 1fr);
-  align-items: stretch;
-  margin-top: var(--space-md);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-}
-
-.about-feature__img {
-  width: 100%;
-  height: 100%;
-  min-height: 240px;
-  object-fit: cover;
+.about-photo--wide {
+  aspect-ratio: 4 / 3;
   object-position: center;
-  display: block;
-}
-
-.about-feature__body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: var(--space-lg);
-}
-
-.about-feature__body h3 {
-  font-size: 1.05rem;
-  margin-bottom: var(--space-sm);
-}
-
-.about-feature__body p {
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
-  line-height: 1.75;
-  max-width: none;
 }
 
 .about-closing {
@@ -668,22 +641,24 @@ p { max-width: 65ch; }
   border-top: 1px solid var(--color-border);
   color: var(--color-text-muted);
   font-size: 0.95rem;
-}@media (max-width: 680px) {
-  .about-intro { grid-template-columns: 1fr; }
+}
 
-  /* Photo above the text on mobile */
-  .about-intro .about-photo {
+@media (max-width: 860px) {
+  .about-split { gap: var(--space-lg); }
+  .about-split--intro { grid-template-columns: minmax(0, 1fr) 220px; }
+  .about-split--feature { grid-template-columns: 300px minmax(0, 1fr); }
+}
+
+@media (max-width: 680px) {
+  /* Photo above its text on mobile */
+  .about-split--intro,
+  .about-split--feature { grid-template-columns: minmax(0, 1fr); }
+
+  .about-split--intro .about-photo {
     order: -1;
     width: 180px;
     aspect-ratio: 1;
-    margin-inline: auto;
   }
-
-  .about-feature { grid-template-columns: minmax(0, 1fr); }
-
-  .about-feature__img { aspect-ratio: 4 / 3; height: auto; }
-
-  .about-feature__body { padding: var(--space-md); }
 }
 
 /* ============================================================
@@ -1301,57 +1276,6 @@ p { max-width: 65ch; }
   /* The diagram keeps its legible size and scrolls inside its own box */
   .gr-diagram-col .loop-diagram { overflow-x: auto; }
   .gr-diagram-col .loop-diagram svg { min-width: 460px; }
-}
-
-/* ============================================================
-   EXPERIENCE LIST (about page)
-   ============================================================ */
-.exp-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  margin-top: var(--space-md);
-}
-
-.exp-list > li {
-  padding: var(--space-md) 0;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.exp-list > li:last-child { border-bottom: 0; }
-
-.exp-row {
-  display: flex;
-  max-width: none;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.25rem 0.75rem;
-}
-
-.exp-role {
-  font-weight: 700;
-  color: var(--color-text);
-  font-size: 0.975rem;
-}
-
-.exp-org { color: var(--color-accent); font-weight: 600; font-size: 0.95rem; }
-
-.exp-dates {
-  margin-left: auto;
-  color: var(--color-text-muted);
-  font-size: 0.85rem;
-  white-space: nowrap;
-}
-
-.exp-line {
-  margin-top: 0.3rem;
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-  line-height: 1.65;
-}
-
-.exp-link { font-size: 0.85rem; font-weight: 600; white-space: nowrap; }@media (max-width: 560px) {
-  .exp-dates { margin-left: 0; width: 100%; }
 }
 
 /* ============================================================
