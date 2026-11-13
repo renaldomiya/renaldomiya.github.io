@@ -912,31 +912,35 @@ p { max-width: 65ch; }
 .cs-page { padding-block: 2.5rem; }
 
 /* Headline row: text beside the hero image on wide screens.
-   Three rows: title above, lead paragraph, meta and tags below. The two
-   outer rows are 1fr, so they always match in height and the lead sits at
-   the exact vertical middle; the hero spans all three and centres on it. */
+   The back link spans both columns; the hero starts on the title's row,
+   and its top margin (the title's top margin plus the gap between the top
+   of the title's line box and the top of its capitals, 0.211em in Inter)
+   lines the image's top edge up with the top of the title text. The last
+   row is 1fr, so when the image is taller than the text the extra height
+   goes there instead of spreading the title and paragraph apart. */
 .cs-intro {
+  --cs-h1-size: clamp(1.6rem, 3.5vw, 2.25rem);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
-  grid-template-rows: 1fr auto 1fr;
+  grid-template-rows: auto auto auto auto 1fr;
   column-gap: var(--space-lg);
 }
 
-.cs-intro__top    { grid-column: 1; grid-row: 1; align-self: end; }
-.cs-lead          { grid-column: 1; grid-row: 2; }
-.cs-intro__bottom { grid-column: 1; grid-row: 3; align-self: start; }
+.cs-intro__top              { display: contents; }
+.cs-intro__top .back-link   { grid-column: 1 / -1; grid-row: 1; justify-self: start; }
+.cs-intro__top h1           { grid-column: 1; grid-row: 2; }
+.cs-lead                    { grid-column: 1; grid-row: 3; }
+.cs-intro__bottom           { grid-column: 1; grid-row: 4; }
 
-/* margin-top equals the one-line caption height, so the image itself,
-   not image plus caption, is what centres on the lead paragraph */
 .cs-intro .cs-fig--hero {
   grid-column: 2;
-  grid-row: 1 / 4;
-  align-self: center;
-  margin-top: 2.2rem;
+  grid-row: 2 / 6;
+  align-self: start;
+  margin-top: calc(var(--space-md) + 0.211 * var(--cs-h1-size));
 }
 
 .cs-intro h1 {
-  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-size: var(--cs-h1-size);
   margin-block: var(--space-md) 0.75rem;
 }
 
@@ -1248,7 +1252,7 @@ a.cs-fig__media:focus-visible { outline: 3px solid var(--color-accent); outline-
 
   /* Phone/tablet headline order: title, result, hero image, then meta */
   .cs-intro { display: flex; flex-direction: column; }
-  .cs-intro__top { order: 1; }
+  .cs-intro__top { order: 1; display: block; }
   .cs-lead { order: 2; }
   .cs-intro .cs-fig--hero { order: 3; margin-block: 1.25rem 0.25rem; }
   .cs-intro__bottom { order: 4; }
