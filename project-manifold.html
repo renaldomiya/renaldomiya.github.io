@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A wall-mounted stainless-steel support frame for a radioactive-gas pumping manifold at TRIUMF. Clamp placement iterated in ANSYS cut peak deflection 83% and peak stress 54%." />
+  <meta name="description" content="A wall-mounted aluminum support frame for a radioactive-gas pumping manifold at TRIUMF. Clamp placement iterated in ANSYS cut peak deflection 83% and peak stress 54%, with 25% fewer parts." />
   <title>Pumping Manifold Support Structure — Renaldo Miya</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,11 +28,6 @@
     </div>
   </header>
 
-  <!--
-    OPEN ITEMS: every [TODO: ...] chip on this page renders in amber on purpose,
-    so the page cannot ship with a gap hidden. Answer each one, then replace
-    the chip with the real text (or delete the sentence).
-  -->
 
   <main>
     <div class="container project-detail mf-page">
@@ -45,8 +40,8 @@
             Back to Projects
           </a>
           <h1>Pumping Manifold Support Structure</h1>
-          <p class="mf-lead">I designed the wall-mounted stainless-steel frame that holds a radioactive-gas pumping manifold at TRIUMF, Canada&rsquo;s particle accelerator centre. By using FEA to decide where the clamps go, I cut the manifold&rsquo;s peak deflection by 83% and its peak stress by 54%, with 25% fewer parts.</p>
-          <p class="mf-meta">TRIUMF &middot; ARIEL facility &middot; <span class="mf-todo">[TODO: need co-op term and job title from Renaldo]</span></p>
+          <p class="mf-lead">I designed the wall-mounted aluminum frame that holds a radioactive-gas pumping manifold at TRIUMF, Canada&rsquo;s national particle accelerator laboratory. By using FEA to decide where the clamps go, I cut the manifold&rsquo;s peak deflection by 83% and its peak stress by 54%, with 25% fewer parts than my first design.</p>
+          <p class="mf-meta">Mechanical Engineering Assistant &middot; TRIUMF, Vancouver &middot; Jan&ndash;Apr 2026</p>
           <div class="skill-tags">
             <span class="skill-tag">SolidWorks</span>
             <span class="skill-tag">ANSYS Static Structural</span>
@@ -77,11 +72,11 @@
         </div>
         <div class="result-stat">
           <p class="result-stat__value">107 &rarr; 49.6&nbsp;MPa</p>
-          <p class="result-stat__label">Peak stress in the tubing, &minus;54%. Allowable: <span class="mf-todo">[TODO: need allowable stress from Renaldo]</span></p>
+          <p class="result-stat__label">Peak stress in the manifold tubing, &minus;54%</p>
         </div>
         <div class="result-stat">
           <p class="result-stat__value">&minus;25% parts</p>
-          <p class="result-stat__label">Less time installing in a radiation area. Compared with: <span class="mf-todo">[TODO: need baseline part count from Renaldo]</span></p>
+          <p class="result-stat__label">From first to final design, for less time installing in a radiation area</p>
         </div>
       </div>
 
@@ -93,7 +88,7 @@
             <p>ARIEL is TRIUMF&rsquo;s new rare-isotope facility. Its pumping manifold collects radioactive exhaust gas and routes it into <dfn>decay storage tanks</dfn>: sealed tanks that hold the gas until its short-lived radioactivity has died away. The manifold is a dense network of tubing and vacuum valves, and it needs a structure that holds it on a concrete wall without sagging or overstressing the tube joints.</p>
             <h3 class="mf-h3">Constraints</h3>
             <ul class="spec-list" role="list">
-              <li><span class="spec-name">Stiff and strong</span><span class="spec-value">Limit sag and stress in the tubing under its own weight and the valve weights. Targets: <span class="mf-todo">[TODO: need deflection and stress limits from Renaldo]</span></span></li>
+              <li><span class="spec-name">Stiff and strong</span><span class="spec-value">Limit sag and stress in the tubing under its own weight and the valve weights. I set the limits from published material properties and spec documents.</span></li>
               <li><span class="spec-name">Radiation area</span><span class="spec-value">It is installed in the ARIEL target hall. A technician&rsquo;s radiation dose grows with every minute spent there, so fewer parts and fasteners mean a faster, lower-dose install. (This is what &ldquo;design for radiation&rdquo; means here.)</span></li>
               <li><span class="spec-name">Wall-mounted</span><span class="spec-value">The frame anchors to a concrete wall.</span></li>
               <li><span class="spec-name">Easy to build</span><span class="spec-value">Standard stock, simple bolted assembly, minimal part count.</span></li>
@@ -128,11 +123,11 @@
             </ul>
           </div>
           <div>
-            <h3 class="mf-h3">What others did</h3>
+            <h3 class="mf-h3">Who I worked with</h3>
             <ul class="mf-bullets">
-              <li>Manifold layout: <span class="mf-todo">[TODO: need who designed the manifold itself from Renaldo]</span></li>
-              <li>Design review and analysis check: <span class="mf-todo">[TODO: need who reviewed the FEA and drawings from Renaldo]</span></li>
-              <li>Fabrication and installation: <span class="mf-todo">[TODO: need who built it, and whether it is installed, from Renaldo]</span></li>
+              <li>A senior engineer designed the manifold itself and reviewed my work.</li>
+              <li>Engineers experienced with ANSYS helped me check the FEA model and results.</li>
+              <li>Technicians fabricated and installed the manifold and frame; I worked alongside them.</li>
             </ul>
           </div>
         </div>
@@ -144,7 +139,7 @@
         <ol class="calc-list mf-steps" role="list">
           <li>
             <p class="calc-step__name">Build a model that runs fast</p>
-            <p class="calc-step__body">Simplified the manifold CAD to plain solid tube bodies. Applied gravity to the tubing and each valve&rsquo;s weight as a force: 78.4&nbsp;N on the KF25 angle valves, 27.44&nbsp;N on the KF50 angle valves and 16.66&nbsp;N on the KF40 3-way valve (KF sizes are standard vacuum fittings).</p>
+            <p class="calc-step__body">Simplified the manifold CAD to plain solid tube bodies. Applied gravity to the tubing, and the combined weight of each valve type as a force: 78.4&nbsp;N for all the KF25 angle valves, 27.44&nbsp;N for all the KF50 angle valves and 16.66&nbsp;N for the KF40 3-way valve (KF sizes are standard vacuum fittings).</p>
           </li>
           <li>
             <p class="calc-step__name">Model every clamp as a fixed support</p>
@@ -155,12 +150,12 @@
             <p class="calc-step__body">Supports on the two upper side pipes and the four bottom legs only. The result shows where the manifold wants to move: 6.5&nbsp;mm at the top riser and 107&nbsp;MPa at a tube junction on the main header.</p>
           </li>
           <li>
-            <p class="calc-step__name">Add support only where the baseline was worst</p>
-            <p class="calc-step__body">The final run adds clamps on the top riser and on the central header, and nothing else changes. Every clamp stiffens the manifold but is one more part to install in a radiation area, so the aim was the fewest clamps that met the targets, not the stiffest possible layout. <span class="mf-todo">[TODO: need what other layouts you tried, and how many runs, from Renaldo]</span></p>
+            <p class="calc-step__name">Chase the peak, one clamp at a time</p>
+            <p class="calc-step__body">Each iteration went after the current max-stress point: place a clamp to relieve it, re-run, repeat. The final layout adds clamps on the top riser and the central header. Every clamp stiffens the manifold but is one more part to install in a radiation area, so the aim was the fewest clamps that met the targets, not the stiffest possible layout.</p>
           </li>
           <li>
-            <p class="calc-step__name">Build the frame around the clamps</p>
-            <p class="calc-step__body">Placed slotted steel channel (Unistrut: standard channel that bolts together with off-the-shelf fittings, no welding) exactly at the final clamp positions, then iterated member sizes with FEA. <span class="mf-todo">[TODO: need the frame&rsquo;s own FEA result (deflection at the clamps) from Renaldo]</span></p>
+            <p class="calc-step__name">Build the frame around the clamps, then check it</p>
+            <p class="calc-step__body">An anodized 6063 aluminum frame, with steel Unistrut posts (standard slotted channel that bolts together with off-the-shelf fittings) placed exactly at the final clamp positions. I then ran FEA on the frame itself and sized it so the clamp points barely move, which is the rigid-support assumption the manifold model relies on.</p>
           </li>
         </ol>
       </section>
@@ -222,7 +217,7 @@
           <ul class="mf-bullets">
             <li><strong>Colour is magnitude.</strong> Blue is lowest, red is highest. The red <em>Max</em> flag marks the peak value.</li>
             <li><strong>Units.</strong> ANSYS reports deflection in metres and stress in pascals: 0.006504&nbsp;m = 6.5&nbsp;mm, and 1.071e8&nbsp;Pa = 107&nbsp;MPa. <dfn>Von Mises stress</dfn> combines all stress components into one number you compare against the material&rsquo;s strength.</li>
-            <li><strong>Compare numbers, not colours.</strong> Each legend is scaled to its own run, so red means 6.5&nbsp;mm in the baseline but 1.13&nbsp;mm in the optimized run. <span class="mf-todo">[TODO: need both runs re-exported with one shared legend from Renaldo]</span></li>
+            <li><strong>Compare numbers, not colours.</strong> Each legend is scaled to its own run, so red means 6.5&nbsp;mm in the baseline but 1.13&nbsp;mm in the optimized run.</li>
             <li><strong>Select any plot</strong> to open it full size.</li>
           </ul>
         </aside>
@@ -322,7 +317,7 @@
           <figcaption class="mf-fig__cap">
             <span class="mf-badge mf-badge--after">Optimized</span>
             <h3 class="mf-fig__title">Stress after: 49.6&nbsp;MPa peak at a lower-left bend</h3>
-            <p class="mf-fig__note">Peak stress is less than half the baseline. Against the material&rsquo;s allowable stress, that is a safety factor of <span class="mf-todo">[TODO: need material grade, allowable stress and resulting safety factor from Renaldo]</span></p>
+            <p class="mf-fig__note">Peak stress is less than half the baseline, and the peak sits in a small region near the bottom legs instead of on the main header.</p>
           </figcaption>
         </figure>
       </section>
@@ -336,16 +331,16 @@
                  srcset="images/manifold/manifold-frame-800.webp 800w, images/manifold/manifold-frame-1242.webp 1242w"
                  sizes="(max-width: 943px) calc(100vw - 4rem), 880px"
                  width="1242" height="833" loading="lazy" decoding="async"
-                 alt="CAD render of the support frame on its own: a rectangular frame of doubled slotted channel with a centre cross-member, triangular gusset plates at the joints, flat plates at the corners, upright channel posts carrying pipe clamps, and a row of four small clamps along one long side." />
+                 alt="CAD render of the support frame on its own: a rectangular frame of aluminum extrusion with a centre cross-member, triangular gusset plates at the joints, flat plates at the corners, upright slotted steel posts carrying pipe clamps, and a row of four small clamps along one long side." />
           </div>
           <figcaption class="mf-fig__cap">
-            <h3 class="mf-fig__title">Support frame: channel posts placed at the FEA clamp locations</h3>
+            <h3 class="mf-fig__title">Support frame: strut posts placed at the FEA clamp locations</h3>
           </figcaption>
         </figure>
         <ul class="mf-bullets mf-after-fig">
-          <li>Bolted slotted channel with gusseted joints: stock parts, no welding.</li>
+          <li>Anodized 6063 aluminum frame with gusseted joints, plus steel Unistrut posts for the clamps, all bolted together from stock parts.</li>
           <li>Upright posts put each pipe clamp where the FEA called for it; a row of four clamps holds the bottom legs.</li>
-          <li>25% fewer parts than <span class="mf-todo">[TODO: need what the &minus;25% is measured against, and the two part counts, from Renaldo]</span></li>
+          <li>25% fewer parts in the final design than in my first design.</li>
           <li>Released as GD&amp;T manufacturing drawings with fewer fasteners and fewer distinct parts to order.</li>
         </ul>
       </section>
@@ -354,9 +349,9 @@
       <section class="mf-sec" aria-labelledby="mf-limits">
         <h2 id="mf-limits">Assumptions and checks</h2>
         <ul class="mf-bullets">
-          <li><strong>Rigid clamps.</strong> Fixed supports assume clamps and frame do not flex. Real ones do a little, so real deflection will be somewhat higher than the model shows.</li>
-          <li><strong>One load case.</strong> The runs cover static gravity plus valve weights. <span class="mf-todo">[TODO: need whether seismic, thermal or maintenance loads were considered, from Renaldo]</span></li>
-          <li><strong>Validation.</strong> <span class="mf-todo">[TODO: need how the FEA was checked (hand calc, mesh study, independent review) from Renaldo]</span></li>
+          <li><strong>Rigid clamps.</strong> The manifold model treats every clamp as fixed. The frame FEA showed minimal deflection at the clamp points, which supports that, but real clamps still flex a little, so real deflection will be somewhat higher than the model shows.</li>
+          <li><strong>One load case.</strong> The analysis covers static gravity plus the valve weights. No other load cases, such as seismic or thermal, were analysed.</li>
+          <li><strong>Validation.</strong> I checked the results against a hand calculation, and reviewed the model and results with engineers experienced in ANSYS.</li>
         </ul>
       </section>
 
