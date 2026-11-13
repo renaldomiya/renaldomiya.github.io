@@ -1572,6 +1572,7 @@ a.mf-fig__media:focus-visible { outline: 3px solid var(--color-accent); outline-
 .mf-bars__row + .mf-bars__row { margin-top: 0.4rem; }
 
 .mf-bars__label { color: var(--color-text-muted); }
+.mf-bars__scale { display: block; font-size: 0.75rem; font-weight: 500; color: var(--color-text-muted); }
 .mf-bars__val { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
 
 .mf-bars__track {

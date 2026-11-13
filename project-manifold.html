@@ -72,7 +72,7 @@
         </div>
         <div class="result-stat">
           <p class="result-stat__value">107 &rarr; 49.6&nbsp;MPa</p>
-          <p class="result-stat__label">Peak stress in the manifold tubing, &minus;54%</p>
+          <p class="result-stat__label">Peak stress in the manifold tubing, &minus;54%. Safety factor on yield: 1.6 &rarr; 3.4</p>
         </div>
         <div class="result-stat">
           <p class="result-stat__value">&minus;25% parts</p>
@@ -163,10 +163,10 @@
       <!-- 5. RESULTS -->
       <section class="mf-sec" aria-labelledby="mf-results">
         <h2 id="mf-results">Results: baseline vs. optimized FEA</h2>
-        <p class="mf-prose-line">Both runs use the same model and the same loads. Only the clamp locations change.</p>
+        <p class="mf-prose-line">Both runs use the same model and the same loads; only the clamp locations change. The frame barely moves, so all the deflection and stress shown here is in the manifold tubing (304L stainless, minimum yield strength 170&nbsp;MPa).</p>
 
         <div class="mf-compare">
-          <div class="mf-bars" role="img" aria-label="Same-scale comparison. Peak deflection: 6.50 millimetres baseline, 1.13 millimetres optimized. Peak stress: 107 megapascals baseline, 49.6 megapascals optimized.">
+          <div class="mf-bars" role="img" aria-label="Same-scale comparison. Peak deflection: 6.50 millimetres baseline, 1.13 millimetres optimized. Peak stress, drawn against the 170 megapascal yield strength of 304L stainless: 107 megapascals baseline, 49.6 megapascals optimized.">
             <div class="mf-bars__group">
               <p class="mf-bars__metric">Peak deflection</p>
               <div class="mf-bars__row">
@@ -181,15 +181,15 @@
               </div>
             </div>
             <div class="mf-bars__group">
-              <p class="mf-bars__metric">Peak von Mises stress</p>
+              <p class="mf-bars__metric">Peak von Mises stress <span class="mf-bars__scale">full bar = 304L yield, 170&nbsp;MPa</span></p>
               <div class="mf-bars__row">
                 <span class="mf-bars__label">Baseline</span>
-                <span class="mf-bars__track"><span class="mf-bars__fill mf-bars__fill--before" style="width:100%"></span></span>
+                <span class="mf-bars__track"><span class="mf-bars__fill mf-bars__fill--before" style="width:63%"></span></span>
                 <span class="mf-bars__val">107&nbsp;MPa</span>
               </div>
               <div class="mf-bars__row">
                 <span class="mf-bars__label">Optimized</span>
-                <span class="mf-bars__track"><span class="mf-bars__fill mf-bars__fill--after" style="width:46.3%"></span></span>
+                <span class="mf-bars__track"><span class="mf-bars__fill mf-bars__fill--after" style="width:29.2%"></span></span>
                 <span class="mf-bars__val">49.6&nbsp;MPa</span>
               </div>
             </div>
@@ -197,7 +197,7 @@
 
           <div class="table-scroll">
             <table class="data-table mf-table">
-              <caption>Peak values from the two ANSYS runs, converted from metres and pascals.</caption>
+              <caption>Peak values from the two ANSYS runs, converted from metres and pascals. Safety factor = 304L minimum yield strength (170&nbsp;MPa) &divide; peak stress.</caption>
               <thead>
                 <tr><th scope="col">Result</th><th scope="col">Baseline</th><th scope="col">Optimized</th></tr>
               </thead>
@@ -206,6 +206,7 @@
                 <tr><th scope="row">Where</th><td>Top riser</td><td>Lower-left branch</td></tr>
                 <tr><th scope="row">Peak von Mises stress</th><td>107&nbsp;MPa</td><td>49.6&nbsp;MPa <strong class="mf-delta">&minus;54%</strong></td></tr>
                 <tr><th scope="row">Where</th><td>Tube junction on the main header</td><td>Bend in the lower-left branch</td></tr>
+                <tr><th scope="row">Safety factor on yield</th><td>1.6</td><td>3.4</td></tr>
                 <tr><th scope="row">Clamps</th><td>Upper side pipes, four bottom legs</td><td>Same, plus top riser and central header</td></tr>
               </tbody>
             </table>
@@ -317,7 +318,7 @@
           <figcaption class="mf-fig__cap">
             <span class="mf-badge mf-badge--after">Optimized</span>
             <h3 class="mf-fig__title">Stress after: 49.6&nbsp;MPa peak at a lower-left bend</h3>
-            <p class="mf-fig__note">Peak stress is less than half the baseline, and the peak sits in a small region near the bottom legs instead of on the main header.</p>
+            <p class="mf-fig__note">Less than half the baseline: a safety factor of 3.4 on the 304L yield strength (170&nbsp;MPa), up from 1.6.</p>
           </figcaption>
         </figure>
       </section>
@@ -350,6 +351,7 @@
         <h2 id="mf-limits">Assumptions and checks</h2>
         <ul class="mf-bullets">
           <li><strong>Rigid clamps.</strong> The manifold model treats every clamp as fixed. The frame FEA showed minimal deflection at the clamp points, which supports that, but real clamps still flex a little, so real deflection will be somewhat higher than the model shows.</li>
+          <li><strong>Material.</strong> The tubing is 304 or 304L stainless; the safety factor uses 304L, the weaker grade (minimum yield 170&nbsp;MPa, ASTM A312), so it is conservative.</li>
           <li><strong>One load case.</strong> The analysis covers static gravity plus the valve weights. No other load cases, such as seismic or thermal, were analysed.</li>
           <li><strong>Validation.</strong> I checked the results against a hand calculation, and reviewed the model and results with engineers experienced in ANSYS.</li>
         </ul>
