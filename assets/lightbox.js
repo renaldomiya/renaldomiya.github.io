@@ -31,7 +31,7 @@
   function open(link) {
     var thumb = link.querySelector('img');
     var fig = link.closest('figure');
-    var heading = fig && fig.querySelector('.mf-fig__title, figcaption h2, figcaption h3');
+    var heading = fig && fig.querySelector('.cs-fig__title, figcaption h2, figcaption h3');
     opener = link;
     img.alt = thumb ? thumb.alt : '';
     img.src = link.getAttribute('href');

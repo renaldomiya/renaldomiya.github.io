@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A 3D-printed enclosure for the UW Formula Electric power distribution relays — 20% lighter than the first iteration, with a flush fit against fixed chassis hardware reached in 3 printed iterations." />
+  <meta name="description" content="A 3D-printed PETG enclosure for UW Formula Electric's power distribution unit: a flush fit around fixed hardware in three prints, 20% lighter than the first." />
   <title>PDU Relay Enclosure — Renaldo Miya</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="assets/lightbox.js" defer></script>
 </head>
 <body>
 
@@ -28,110 +29,159 @@
   </header>
 
   <main>
-    <div class="container project-detail">
+    <div class="container project-detail cs-page">
 
-      <!-- HEADER -->
-      <div class="project-detail__header">
-        <a href="projects.html" class="back-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          Back to Projects
-        </a>
-        <h1>PDU Relay Enclosure</h1>
-        <p class="text-muted">UW Formula Electric &middot; 2025</p>
-      </div>
-
-
-      <!-- BLOCK 1: Overview / photo-right -->
-      <div class="project-block photo-right">
-        <div class="block-text">
-          <span class="block-label">Overview</span>
-          <h3>Project Overview</h3>
-          <p>Designed a protective enclosure for the vehicle's Power Distribution Unit, packaging the car's power electronics within strict space and mass budgets. The enclosure had to seat flush against connectors and mounting points already fixed in the chassis.</p>
-        </div>
-        <div class="block-photo">
-          <figure>
-            <img src="images/pdu-cad-1.png" alt="CAD model of the PDU relay enclosure" loading="lazy" />
-            <figcaption>PDU enclosure CAD model</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <!-- BLOCK 2: Goals & Constraints / photo-left -->
-      <div class="project-block photo-left">
-        <div class="block-text">
-          <span class="block-label">Goals &amp; Constraints</span>
-          <h3>Design Requirements</h3>
-          <p>Achieve a flush, interference-free fit with pre-fixed chassis hardware; minimize enclosure weight without compromising structural integrity or protection of the electronics inside.</p>
-        </div>
-        <div class="block-photo">
-          <figure>
-            <img src="images/pdu-cad-2.png" alt="Internal geometry and mounting features inside the enclosure" loading="lazy" />
-            <figcaption>Internal geometry and mounting features</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <!-- BLOCK 3: Design Process / photo-right -->
-      <div class="project-block photo-right">
-        <div class="block-text">
-          <span class="block-label">Design Process</span>
-          <h3>Parametric Modeling &amp; Rapid Iteration</h3>
-          <p>Modeled the enclosure with parametric geometry in SolidWorks so key dimensions could be adjusted quickly between iterations. Iteratively 3D-printed physical prototypes to validate internal clearances, connector access, and mounting alignment against the real PDU and wiring harness. Reduced non-structural material through wall-thickness optimization and filleted geometry, trimming mass while keeping load paths intact. Refined internal features from physical fit tests until the PDU achieved a flush fit. Applied DFM/DFA principles throughout.</p>
-        </div>
-        <div class="block-photo">
-          <figure>
-            <img src="images/pdu-build.png" alt="The 3D-printed enclosure with the power distribution unit installed" loading="lazy" />
-            <figcaption>3D-printed enclosure with PDU installed</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <!-- BLOCK 4: Results / text-only -->
-      <div class="project-block text-only">
-        <div class="block-text">
-          <span class="block-label">Results</span>
-          <h3>Outcomes</h3>
-          <div class="results-strip">
-            <div class="result-stat">
-              <p class="result-stat__value">&minus;20%</p>
-              <p class="result-stat__label">Mass against the first iteration</p>
-            </div>
-            <div class="result-stat">
-              <p class="result-stat__value">3 prints</p>
-              <p class="result-stat__label">Printed iterations to a flush fit</p>
-            </div>
-          </div>
-          <p>Reached a flush, validated fit with the PDU and all external connectors in 3 printed iterations, and cut enclosure mass 20% from the first iteration through wall-thickness optimization and targeted material removal.</p>
-        </div>
-      </div>
-
-      <!-- OTHER TEAM WORK -->
-      <div class="project-block text-only">
-        <div class="block-text">
-          <span class="block-label">Other Team Work</span>
-          <h3>Beyond the Enclosure</h3>
-          <p>Alongside the enclosure, I built composite parts for the car by hand &mdash; moulding the undertray and
-            laying up carbon fibre plating &mdash; and machined components on the team&rsquo;s shop equipment.</p>
-        </div>
-      </div>
-
-      <!-- BLOCK 5: Tools & Skills / text-only -->
-      <div class="project-block text-only">
-        <div class="block-text">
-          <span class="block-label">Tools &amp; Skills</span>
-          <h3>Technical Stack</h3>
+      <!-- 1. HEADLINE -->
+      <div class="cs-intro">
+        <div class="cs-intro__text">
+          <a href="projects.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Projects
+          </a>
+          <h1>PDU Relay Enclosure</h1>
+          <p class="cs-lead">I designed the 3D-printed enclosure for the power distribution unit (PDU) on UW Formula Electric&rsquo;s race car: the board that fuses and switches power to the car&rsquo;s electronics. It had to fit around a board, connector and mounting points that were already fixed. Three prints got it to a flush fit, and the final version is 20% lighter than the first.</p>
+          <p class="cs-meta">UW Formula Electric &middot; Mechanical member, firmware subteam &middot; Fall 2025</p>
           <div class="skill-tags">
             <span class="skill-tag">SolidWorks</span>
-            <span class="skill-tag">Parametric Modeling</span>
-            <span class="skill-tag">3D Printing</span>
-            <span class="skill-tag">Rapid Prototyping</span>
+            <span class="skill-tag">Parametric modelling</span>
+            <span class="skill-tag">Tolerance stack-up</span>
+            <span class="skill-tag">PETG printing</span>
+            <span class="skill-tag">PrusaSlicer</span>
             <span class="skill-tag">DFM / DFA</span>
-            <span class="skill-tag">Wall-Thickness Optimization</span>
           </div>
+        </div>
+
+        <figure class="cs-fig cs-fig--hero">
+          <a class="cs-fig__media" href="images/pdu/pdu-build-2400.webp" data-lightbox>
+            <img src="images/pdu/pdu-build-1600.webp"
+                 srcset="images/pdu/pdu-build-800.webp 800w, images/pdu/pdu-build-1600.webp 1600w"
+                 sizes="(max-width: 899px) calc(100vw - 4rem), 560px"
+                 width="1600" height="1200" fetchpriority="high"
+                 alt="Photo of the white printed enclosure on a workbench with the green PDU board seated inside: rows of colour-coded blade fuses along one side, and the black main connector passing through a cut-out in the end wall. Mounting tabs with holes stick out from the corners." />
+            <span class="visually-hidden">(opens full-size image)</span>
+          </a>
+          <figcaption class="cs-fig__cap">
+            <h2 class="cs-fig__title">The printed enclosure with the real PDU board and connector installed</h2>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="results-strip cs-metrics">
+        <div class="result-stat">
+          <p class="result-stat__value">&minus;20% mass</p>
+          <p class="result-stat__label">Final version vs. the first print (about 300&nbsp;g)</p>
+        </div>
+        <div class="result-stat">
+          <p class="result-stat__value">3 prints</p>
+          <p class="result-stat__label">To a flush, interference-free fit</p>
+        </div>
+        <div class="result-stat">
+          <p class="result-stat__value">PETG</p>
+          <p class="result-stat__label">FDM-printed, sliced in PrusaSlicer</p>
         </div>
       </div>
 
-      <!-- BOTTOM NAV -->
+      <!-- 2. PROBLEM -->
+      <section class="cs-sec" aria-labelledby="cs-problem">
+        <h2 id="cs-problem">The problem</h2>
+        <div class="cs-split">
+          <div class="cs-prose">
+            <p>The PDU board needs an enclosure to protect it on the car. Everything the enclosure touches was already decided: the board&rsquo;s outline, where its main connector sits, and the mounting points on the car. My job was to design a box that fits all of them at once, without adding mass the car doesn&rsquo;t need.</p>
+            <h3 class="cs-h3">Constraints</h3>
+            <ul class="spec-list" role="list">
+              <li><span class="spec-name">Fixed interfaces</span><span class="spec-value">Board outline, connector position and mounting points could not move; the enclosure had to fit them, not the other way round.</span></li>
+              <li><span class="spec-name">Flush fit</span><span class="spec-value">The board seats fully and the connector lines up with its cut-out, with no interference.</span></li>
+              <li><span class="spec-name">Light</span><span class="spec-value">Every gram counts on a race car, so no material beyond what the structure needs.</span></li>
+              <li><span class="spec-name">Printable</span><span class="spec-value">FDM-printed in PETG, quick to reprint between fit checks.</span></li>
+            </ul>
+          </div>
+          <figure class="cs-fig cs-fig--portrait">
+            <a class="cs-fig__media" href="images/pdu/pdu-cad-section-888.webp" data-lightbox>
+              <img src="images/pdu/pdu-cad-section-888.webp"
+                   width="888" height="710" loading="lazy" decoding="async"
+                   alt="CAD section view through the enclosure, cut lengthwise to show the wall thickness, the raised rim around the opening, and the internal geometry." />
+              <span class="visually-hidden">(opens full-size image)</span>
+            </a>
+            <figcaption class="cs-fig__cap">
+              <h3 class="cs-fig__title">Section view: internal geometry and mounting features</h3>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 3. ROLE -->
+      <section class="cs-sec" aria-labelledby="cs-role">
+        <h2 id="cs-role">My role</h2>
+        <ul class="cs-bullets">
+          <li>Mechanical member on the firmware subteam, Fall 2025.</li>
+          <li>Owned the enclosure: requirements, parametric CAD in SolidWorks, slicing and printing, fit checks against the real board, and every revision.</li>
+        </ul>
+      </section>
+
+      <!-- 4. APPROACH -->
+      <section class="cs-sec" aria-labelledby="cs-approach">
+        <h2 id="cs-approach">Approach: model it, print it, fit it, fix it</h2>
+        <ol class="calc-list cs-steps" role="list">
+          <li>
+            <p class="calc-step__name">Drive the CAD from the fixed interfaces</p>
+            <p class="calc-step__body">Built the enclosure as a parametric SolidWorks model, with the board outline, connector cut-out and mounting holes as the driving dimensions. A fit problem then means changing one dimension, not remodelling the part.</p>
+          </li>
+          <li>
+            <p class="calc-step__name">Find the stack-up the CAD didn&rsquo;t show</p>
+            <p class="calc-step__body">On the first prints, the board would not seat. Small tolerances in the board, the connector and the printed walls added up past the clearances I had modelled: a tolerance stack-up. I adjusted those clearances in the parametric model until the board seated.</p>
+          </li>
+          <li>
+            <p class="calc-step__name">Check every change against the real hardware</p>
+            <p class="calc-step__body">Each print was fit-tested with the actual PDU board and connector, not just measured. The third print seated flush with no interference.</p>
+          </li>
+          <li>
+            <p class="calc-step__name">Take out what the structure doesn&rsquo;t need</p>
+            <p class="calc-step__body">Thinned the walls, removed non-structural material and filleted the corners, while keeping material where the mounting tabs carry load. The final version is 20% lighter than the first print.</p>
+          </li>
+        </ol>
+
+        <figure class="cs-fig cs-fig--wide">
+          <a class="cs-fig__media" href="images/pdu/pdu-cad-iso-1386.webp" data-lightbox>
+            <img src="images/pdu/pdu-cad-iso-1386.webp"
+                 srcset="images/pdu/pdu-cad-iso-800.webp 800w, images/pdu/pdu-cad-iso-1386.webp 1386w"
+                 sizes="(max-width: 943px) calc(100vw - 4rem), 880px"
+                 width="1386" height="970" loading="lazy" decoding="async"
+                 alt="CAD render of the empty enclosure: a long open box with a raised rim around the top opening, screw holes along the rim, curved mounting tabs at the corners and a gusseted foot on one end." />
+            <span class="visually-hidden">(opens full-size image)</span>
+          </a>
+          <figcaption class="cs-fig__cap">
+            <h3 class="cs-fig__title">Final CAD: mounting tabs at the fixed chassis points, material removed elsewhere</h3>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- 5. RESULTS -->
+      <section class="cs-sec" aria-labelledby="cs-results">
+        <h2 id="cs-results">Results: first print vs. final</h2>
+        <div class="table-scroll">
+          <table class="data-table cs-table">
+            <caption>What changed between the first print and the third.</caption>
+            <thead>
+              <tr><th scope="col">Result</th><th scope="col">First print</th><th scope="col">Final (third) print</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Fit</th><td>Board would not seat (tolerance stack-up)</td><td>Board and connector seat flush, no interference</td></tr>
+              <tr><th scope="row">Mass</th><td>About 300&nbsp;g</td><td><strong class="cs-delta">&minus;20%</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 6. LESSONS / OTHER WORK -->
+      <section class="cs-sec" aria-labelledby="cs-learned">
+        <h2 id="cs-learned">What I took from it</h2>
+        <ul class="cs-bullets">
+          <li><strong>Fits fail at the stack-up, not the nominal.</strong> Each dimension was fine on its own; the sum of small tolerances stopped the board seating. Clearances have to come from the stack-up, not the nominal sizes.</li>
+          <li><strong>Parametric models make iteration cheap.</strong> Driving the model from the interfaces meant each fix was one dimension change and a reprint.</li>
+          <li><strong>Also on the team:</strong> I hand-built composite parts, moulding the undertray and laying up carbon fibre plating, and machined components on the team&rsquo;s shop equipment.</li>
+        </ul>
+      </section>
+
       <div class="detail-bottom-nav">
         <a href="projects.html" class="back-link">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -141,6 +191,17 @@
 
     </div>
   </main>
+
+  <!-- Full-size image viewer, opened by assets/lightbox.js. Without JS the
+       image links simply open the full-size file. -->
+  <dialog class="lightbox" aria-labelledby="lightbox-title">
+    <div class="lightbox__bar">
+      <p class="lightbox__title" id="lightbox-title">Full-size image</p>
+      <button type="button" class="lightbox__btn" data-lightbox-zoom>Actual size</button>
+      <button type="button" class="lightbox__btn" data-lightbox-close>Close <span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="lightbox__stage"></div>
+  </dialog>
 
   <!-- FOOTER -->
   <footer class="site-footer">

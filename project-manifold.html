@@ -30,18 +30,18 @@
 
 
   <main>
-    <div class="container project-detail mf-page">
+    <div class="container project-detail cs-page">
 
       <!-- 1. HEADLINE: result, metrics and hero above the fold -->
-      <div class="mf-intro">
-        <div class="mf-intro__text">
+      <div class="cs-intro">
+        <div class="cs-intro__text">
           <a href="projects.html" class="back-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             Back to Projects
           </a>
           <h1>Pumping Manifold Support Structure</h1>
-          <p class="mf-lead">I designed the wall-mounted aluminum frame that holds a radioactive-gas pumping manifold at TRIUMF, Canada&rsquo;s national particle accelerator laboratory. By using FEA to decide where the clamps go, I cut the manifold&rsquo;s peak deflection by 83% and its peak stress by 54%, with 25% fewer parts than my first design.</p>
-          <p class="mf-meta">Mechanical Engineering Assistant &middot; TRIUMF, Vancouver &middot; Jan&ndash;Apr 2026</p>
+          <p class="cs-lead">I designed the wall-mounted aluminum frame that holds a radioactive-gas pumping manifold at TRIUMF, Canada&rsquo;s national particle accelerator laboratory. By using FEA to decide where the clamps go, I cut the manifold&rsquo;s peak deflection by 83% and its peak stress by 54%, with 25% fewer parts than my first design.</p>
+          <p class="cs-meta">Mechanical Engineering Assistant &middot; TRIUMF, Vancouver &middot; Jan&ndash;Apr 2026</p>
           <div class="skill-tags">
             <span class="skill-tag">SolidWorks</span>
             <span class="skill-tag">ANSYS Static Structural</span>
@@ -51,21 +51,21 @@
           </div>
         </div>
 
-        <figure class="mf-fig mf-fig--hero">
-          <div class="mf-fig__media">
+        <figure class="cs-fig cs-fig--hero">
+          <div class="cs-fig__media">
             <img src="images/manifold/manifold-assembly-1156.webp"
                  srcset="images/manifold/manifold-assembly-800.webp 800w, images/manifold/manifold-assembly-1156.webp 1156w"
                  sizes="(max-width: 899px) calc(100vw - 4rem), 560px"
                  width="1156" height="751" fetchpriority="high"
                  alt="CAD render of the finished assembly: a dense grid of grey vacuum tubing and dozens of valves held above a rectangular teal frame of slotted channel, with pipe clamps on short posts and triangular gusset plates at the corners." />
           </div>
-          <figcaption class="mf-fig__cap">
-            <h2 class="mf-fig__title">Final design: manifold clamped into its support frame</h2>
+          <figcaption class="cs-fig__cap">
+            <h2 class="cs-fig__title">Final design: manifold clamped into its support frame</h2>
           </figcaption>
         </figure>
       </div>
 
-      <div class="results-strip mf-metrics">
+      <div class="results-strip cs-metrics">
         <div class="result-stat">
           <p class="result-stat__value">6.5 &rarr; 1.13&nbsp;mm</p>
           <p class="result-stat__label">Peak manifold deflection, &minus;83%</p>
@@ -81,12 +81,12 @@
       </div>
 
       <!-- 2. PROBLEM AND CONSTRAINTS -->
-      <section class="mf-sec" aria-labelledby="mf-problem">
-        <h2 id="mf-problem">The problem</h2>
-        <div class="mf-split">
-          <div class="mf-prose">
+      <section class="cs-sec" aria-labelledby="cs-problem">
+        <h2 id="cs-problem">The problem</h2>
+        <div class="cs-split">
+          <div class="cs-prose">
             <p>ARIEL is TRIUMF&rsquo;s new rare-isotope facility. Its pumping manifold collects radioactive exhaust gas and routes it into <dfn>decay storage tanks</dfn>: sealed tanks that hold the gas until its short-lived radioactivity has died away. The manifold is a dense network of tubing and vacuum valves, and it needs a structure that holds it on a concrete wall without sagging or overstressing the tube joints.</p>
-            <h3 class="mf-h3">Constraints</h3>
+            <h3 class="cs-h3">Constraints</h3>
             <ul class="spec-list" role="list">
               <li><span class="spec-name">Stiff and strong</span><span class="spec-value">Limit sag and stress in the tubing under its own weight and the valve weights. I set the limits from published material properties and spec documents.</span></li>
               <li><span class="spec-name">Radiation area</span><span class="spec-value">It is installed in the ARIEL target hall. A technician&rsquo;s radiation dose grows with every minute spent there, so fewer parts and fasteners mean a faster, lower-dose install. (This is what &ldquo;design for radiation&rdquo; means here.)</span></li>
@@ -94,28 +94,28 @@
               <li><span class="spec-name">Easy to build</span><span class="spec-value">Standard stock, simple bolted assembly, minimal part count.</span></li>
             </ul>
           </div>
-          <figure class="mf-fig mf-fig--portrait">
-            <div class="mf-fig__media">
+          <figure class="cs-fig cs-fig--portrait">
+            <div class="cs-fig__media">
               <img src="images/manifold/manifold-unsupported-600.webp"
                    srcset="images/manifold/manifold-unsupported-600.webp 600w, images/manifold/manifold-unsupported-865.webp 865w"
                    sizes="(max-width: 899px) 70vw, 340px"
                    width="865" height="1360" loading="lazy" decoding="async"
                    alt="CAD render of the manifold on its own, standing upright: parallel horizontal tubes joined by vertical risers, with rows of grey valve bodies and black actuators hanging off both sides." />
             </div>
-            <figcaption class="mf-fig__cap">
-              <h3 class="mf-fig__title">The manifold the frame has to hold</h3>
+            <figcaption class="cs-fig__cap">
+              <h3 class="cs-fig__title">The manifold the frame has to hold</h3>
             </figcaption>
           </figure>
         </div>
       </section>
 
       <!-- 3. ROLE -->
-      <section class="mf-sec" aria-labelledby="mf-role">
-        <h2 id="mf-role">My role</h2>
-        <div class="mf-role">
+      <section class="cs-sec" aria-labelledby="cs-role">
+        <h2 id="cs-role">My role</h2>
+        <div class="cs-role">
           <div>
-            <h3 class="mf-h3">What I did</h3>
-            <ul class="mf-bullets">
+            <h3 class="cs-h3">What I did</h3>
+            <ul class="cs-bullets">
               <li>Built the simplified FEA model, loads and boundary conditions in ANSYS.</li>
               <li>Ran the baseline and iterated clamp placement until the targets were met.</li>
               <li>Designed the support frame in SolidWorks and sized its members.</li>
@@ -123,8 +123,8 @@
             </ul>
           </div>
           <div>
-            <h3 class="mf-h3">Who I worked with</h3>
-            <ul class="mf-bullets">
+            <h3 class="cs-h3">Who I worked with</h3>
+            <ul class="cs-bullets">
               <li>A senior engineer designed the manifold itself and reviewed my work.</li>
               <li>Engineers experienced with ANSYS helped me check the FEA model and results.</li>
               <li>Technicians fabricated and installed the manifold and frame; I worked alongside them.</li>
@@ -134,9 +134,9 @@
       </section>
 
       <!-- 4. APPROACH -->
-      <section class="mf-sec" aria-labelledby="mf-approach">
-        <h2 id="mf-approach">Approach: let the analysis place the clamps</h2>
-        <ol class="calc-list mf-steps" role="list">
+      <section class="cs-sec" aria-labelledby="cs-approach">
+        <h2 id="cs-approach">Approach: let the analysis place the clamps</h2>
+        <ol class="calc-list cs-steps" role="list">
           <li>
             <p class="calc-step__name">Build a model that runs fast</p>
             <p class="calc-step__body">Simplified the manifold CAD to plain solid tube bodies. Applied gravity to the tubing, and the combined weight of each valve type as a force: 78.4&nbsp;N for all the KF25 angle valves, 27.44&nbsp;N for all the KF50 angle valves and 16.66&nbsp;N for the KF40 3-way valve (KF sizes are standard vacuum fittings).</p>
@@ -161,50 +161,50 @@
       </section>
 
       <!-- 5. RESULTS -->
-      <section class="mf-sec" aria-labelledby="mf-results">
-        <h2 id="mf-results">Results: baseline vs. optimized FEA</h2>
-        <p class="mf-prose-line">Both runs use the same model and the same loads; only the clamp locations change. The frame barely moves, so all the deflection and stress shown here is in the manifold tubing (304L stainless, minimum yield strength 170&nbsp;MPa).</p>
+      <section class="cs-sec" aria-labelledby="cs-results">
+        <h2 id="cs-results">Results: baseline vs. optimized FEA</h2>
+        <p class="cs-prose-line">Both runs use the same model and the same loads; only the clamp locations change. The frame barely moves, so all the deflection and stress shown here is in the manifold tubing (304L stainless, minimum yield strength 170&nbsp;MPa).</p>
 
-        <div class="mf-compare">
-          <div class="mf-bars" role="img" aria-label="Same-scale comparison. Peak deflection: 6.50 millimetres baseline, 1.13 millimetres optimized. Peak stress, drawn against the 170 megapascal yield strength of 304L stainless: 107 megapascals baseline, 49.6 megapascals optimized.">
-            <div class="mf-bars__group">
-              <p class="mf-bars__metric">Peak deflection</p>
-              <div class="mf-bars__row">
-                <span class="mf-bars__label">Baseline</span>
-                <span class="mf-bars__track"><span class="mf-bars__fill mf-bars__fill--before" style="width:100%"></span></span>
-                <span class="mf-bars__val">6.50&nbsp;mm</span>
+        <div class="cs-compare">
+          <div class="cs-bars" role="img" aria-label="Same-scale comparison. Peak deflection: 6.50 millimetres baseline, 1.13 millimetres optimized. Peak stress, drawn against the 170 megapascal yield strength of 304L stainless: 107 megapascals baseline, 49.6 megapascals optimized.">
+            <div class="cs-bars__group">
+              <p class="cs-bars__metric">Peak deflection</p>
+              <div class="cs-bars__row">
+                <span class="cs-bars__label">Baseline</span>
+                <span class="cs-bars__track"><span class="cs-bars__fill cs-bars__fill--before" style="width:100%"></span></span>
+                <span class="cs-bars__val">6.50&nbsp;mm</span>
               </div>
-              <div class="mf-bars__row">
-                <span class="mf-bars__label">Optimized</span>
-                <span class="mf-bars__track"><span class="mf-bars__fill mf-bars__fill--after" style="width:17.3%"></span></span>
-                <span class="mf-bars__val">1.13&nbsp;mm</span>
+              <div class="cs-bars__row">
+                <span class="cs-bars__label">Optimized</span>
+                <span class="cs-bars__track"><span class="cs-bars__fill cs-bars__fill--after" style="width:17.3%"></span></span>
+                <span class="cs-bars__val">1.13&nbsp;mm</span>
               </div>
             </div>
-            <div class="mf-bars__group">
-              <p class="mf-bars__metric">Peak von Mises stress <span class="mf-bars__scale">full bar = 304L yield, 170&nbsp;MPa</span></p>
-              <div class="mf-bars__row">
-                <span class="mf-bars__label">Baseline</span>
-                <span class="mf-bars__track"><span class="mf-bars__fill mf-bars__fill--before" style="width:63%"></span></span>
-                <span class="mf-bars__val">107&nbsp;MPa</span>
+            <div class="cs-bars__group">
+              <p class="cs-bars__metric">Peak von Mises stress <span class="cs-bars__scale">full bar = 304L yield, 170&nbsp;MPa</span></p>
+              <div class="cs-bars__row">
+                <span class="cs-bars__label">Baseline</span>
+                <span class="cs-bars__track"><span class="cs-bars__fill cs-bars__fill--before" style="width:63%"></span></span>
+                <span class="cs-bars__val">107&nbsp;MPa</span>
               </div>
-              <div class="mf-bars__row">
-                <span class="mf-bars__label">Optimized</span>
-                <span class="mf-bars__track"><span class="mf-bars__fill mf-bars__fill--after" style="width:29.2%"></span></span>
-                <span class="mf-bars__val">49.6&nbsp;MPa</span>
+              <div class="cs-bars__row">
+                <span class="cs-bars__label">Optimized</span>
+                <span class="cs-bars__track"><span class="cs-bars__fill cs-bars__fill--after" style="width:29.2%"></span></span>
+                <span class="cs-bars__val">49.6&nbsp;MPa</span>
               </div>
             </div>
           </div>
 
           <div class="table-scroll">
-            <table class="data-table mf-table">
+            <table class="data-table cs-table">
               <caption>Peak values from the two ANSYS runs, converted from metres and pascals. Safety factor = 304L minimum yield strength (170&nbsp;MPa) &divide; peak stress.</caption>
               <thead>
                 <tr><th scope="col">Result</th><th scope="col">Baseline</th><th scope="col">Optimized</th></tr>
               </thead>
               <tbody>
-                <tr><th scope="row">Peak deflection</th><td>6.50&nbsp;mm</td><td>1.13&nbsp;mm <strong class="mf-delta">&minus;83%</strong></td></tr>
+                <tr><th scope="row">Peak deflection</th><td>6.50&nbsp;mm</td><td>1.13&nbsp;mm <strong class="cs-delta">&minus;83%</strong></td></tr>
                 <tr><th scope="row">Where</th><td>Top riser</td><td>Lower-left branch</td></tr>
-                <tr><th scope="row">Peak von Mises stress</th><td>107&nbsp;MPa</td><td>49.6&nbsp;MPa <strong class="mf-delta">&minus;54%</strong></td></tr>
+                <tr><th scope="row">Peak von Mises stress</th><td>107&nbsp;MPa</td><td>49.6&nbsp;MPa <strong class="cs-delta">&minus;54%</strong></td></tr>
                 <tr><th scope="row">Where</th><td>Tube junction on the main header</td><td>Bend in the lower-left branch</td></tr>
                 <tr><th scope="row">Safety factor on yield</th><td>1.6</td><td>3.4</td></tr>
                 <tr><th scope="row">Clamps</th><td>Upper side pipes, four bottom legs</td><td>Same, plus top riser and central header</td></tr>
@@ -213,9 +213,9 @@
           </div>
         </div>
 
-        <aside class="mf-key" aria-labelledby="mf-key-title">
-          <h3 id="mf-key-title" class="mf-h3">How to read the plots</h3>
-          <ul class="mf-bullets">
+        <aside class="cs-key" aria-labelledby="cs-key-title">
+          <h3 id="cs-key-title" class="cs-h3">How to read the plots</h3>
+          <ul class="cs-bullets">
             <li><strong>Colour is magnitude.</strong> Blue is lowest, red is highest. The red <em>Max</em> flag marks the peak value.</li>
             <li><strong>Units.</strong> ANSYS reports deflection in metres and stress in pascals: 0.006504&nbsp;m = 6.5&nbsp;mm, and 1.071e8&nbsp;Pa = 107&nbsp;MPa. <dfn>Von Mises stress</dfn> combines all stress components into one number you compare against the material&rsquo;s strength.</li>
             <li><strong>Compare numbers, not colours.</strong> Each legend is scaled to its own run, so red means 6.5&nbsp;mm in the baseline but 1.13&nbsp;mm in the optimized run.</li>
@@ -224,8 +224,8 @@
         </aside>
 
         <!-- Supports -->
-        <figure class="mf-fig mf-fig--fea">
-          <a class="mf-fig__media" href="images/manifold/fea-baseline-setup-full.webp" data-lightbox>
+        <figure class="cs-fig cs-fig--fea">
+          <a class="cs-fig__media" href="images/manifold/fea-baseline-setup-full.webp" data-lightbox>
             <img src="images/manifold/fea-baseline-setup-1200.webp"
                  srcset="images/manifold/fea-baseline-setup-1200.webp 1200w, images/manifold/fea-baseline-setup-full.webp 2363w"
                  sizes="(max-width: 943px) calc(100vw - 4rem), 880px"
@@ -233,15 +233,15 @@
                  alt="ANSYS setup for the baseline run. Legend: A gravity 9.8066 m/s², B KF25 angle valves 78.4 N, C KF50 angle valves 27.44 N, D KF40 3-way valve 16.66 N, E fixed support. Blue fixed-support bands sit on the two upper side pipes and the four bottom legs; the top riser has none." />
             <span class="visually-hidden">(opens full-size image)</span>
           </a>
-          <figcaption class="mf-fig__cap">
-            <span class="mf-badge">Baseline</span>
-            <h3 class="mf-fig__title">Loads and clamps, before</h3>
-            <p class="mf-fig__note">Arrows A&ndash;D are gravity and the valve weights. Blue bands (E) are the clamps: upper side pipes and the four bottom legs only.</p>
+          <figcaption class="cs-fig__cap">
+            <span class="cs-badge">Baseline</span>
+            <h3 class="cs-fig__title">Loads and clamps, before</h3>
+            <p class="cs-fig__note">Arrows A&ndash;D are gravity and the valve weights. Blue bands (E) are the clamps: upper side pipes and the four bottom legs only.</p>
           </figcaption>
         </figure>
 
-        <figure class="mf-fig mf-fig--fea">
-          <a class="mf-fig__media" href="images/manifold/fea-optimized-setup-full.webp" data-lightbox>
+        <figure class="cs-fig cs-fig--fea">
+          <a class="cs-fig__media" href="images/manifold/fea-optimized-setup-full.webp" data-lightbox>
             <img src="images/manifold/fea-optimized-setup-1200.webp"
                  srcset="images/manifold/fea-optimized-setup-1200.webp 1200w, images/manifold/fea-optimized-setup-full.webp 2314w"
                  sizes="(max-width: 943px) calc(100vw - 4rem), 880px"
@@ -249,16 +249,16 @@
                  alt="ANSYS setup for the optimized run, with the same loads A to D. Fixed-support bands now also appear on the top riser and on the central horizontal header, in addition to the upper side pipes and bottom legs." />
             <span class="visually-hidden">(opens full-size image)</span>
           </a>
-          <figcaption class="mf-fig__cap">
-            <span class="mf-badge mf-badge--after">Optimized</span>
-            <h3 class="mf-fig__title">Loads and clamps, after: two clamps added</h3>
-            <p class="mf-fig__note">Same loads. New clamps on the top riser, where the baseline moved most, and on the central header.</p>
+          <figcaption class="cs-fig__cap">
+            <span class="cs-badge cs-badge--after">Optimized</span>
+            <h3 class="cs-fig__title">Loads and clamps, after: two clamps added</h3>
+            <p class="cs-fig__note">Same loads. New clamps on the top riser, where the baseline moved most, and on the central header.</p>
           </figcaption>
         </figure>
 
         <!-- Deflection -->
-        <figure class="mf-fig mf-fig--fea">
-          <a class="mf-fig__media" href="images/manifold/fea-baseline-deformation-full.webp" data-lightbox>
+        <figure class="cs-fig cs-fig--fea">
+          <a class="cs-fig__media" href="images/manifold/fea-baseline-deformation-full.webp" data-lightbox>
             <img src="images/manifold/fea-baseline-deformation-1200.webp"
                  srcset="images/manifold/fea-baseline-deformation-1200.webp 1200w, images/manifold/fea-baseline-deformation-full.webp 1926w"
                  sizes="(max-width: 943px) calc(100vw - 4rem), 880px"
@@ -266,15 +266,15 @@
                  alt="Baseline total deformation, isometric view, legend 0 to 0.006504 m. The top riser and its elbow are red, marked Max; a long header across the middle is green to yellow; most of the lower grid is blue." />
             <span class="visually-hidden">(opens full-size image)</span>
           </a>
-          <figcaption class="mf-fig__cap">
-            <span class="mf-badge">Baseline</span>
-            <h3 class="mf-fig__title">Deflection before: 6.5&nbsp;mm peak at the top riser</h3>
-            <p class="mf-fig__note">The top riser carries the KF40 3-way valve and had no clamp near it, so it moved the most.</p>
+          <figcaption class="cs-fig__cap">
+            <span class="cs-badge">Baseline</span>
+            <h3 class="cs-fig__title">Deflection before: 6.5&nbsp;mm peak at the top riser</h3>
+            <p class="cs-fig__note">The top riser carries the KF40 3-way valve and had no clamp near it, so it moved the most.</p>
           </figcaption>
         </figure>
 
-        <figure class="mf-fig mf-fig--fea">
-          <a class="mf-fig__media" href="images/manifold/fea-optimized-deformation-full.webp" data-lightbox>
+        <figure class="cs-fig cs-fig--fea">
+          <a class="cs-fig__media" href="images/manifold/fea-optimized-deformation-full.webp" data-lightbox>
             <img src="images/manifold/fea-optimized-deformation-1200.webp"
                  srcset="images/manifold/fea-optimized-deformation-1200.webp 1200w, images/manifold/fea-optimized-deformation-full.webp 2025w"
                  sizes="(max-width: 943px) calc(100vw - 4rem), 880px"
@@ -282,16 +282,16 @@
                  alt="Optimized total deformation, same isometric view, legend 0 to 0.001127 m. The top riser is now blue, marked Min; the peak, marked Max, is on the lower-left branch, which shows yellow and orange." />
             <span class="visually-hidden">(opens full-size image)</span>
           </a>
-          <figcaption class="mf-fig__cap">
-            <span class="mf-badge mf-badge--after">Optimized</span>
-            <h3 class="mf-fig__title">Deflection after: 1.13&nbsp;mm peak, moved to the lower-left branch</h3>
-            <p class="mf-fig__note">With the riser clamped, the top barely moves. The largest remaining movement is 83% smaller.</p>
+          <figcaption class="cs-fig__cap">
+            <span class="cs-badge cs-badge--after">Optimized</span>
+            <h3 class="cs-fig__title">Deflection after: 1.13&nbsp;mm peak, moved to the lower-left branch</h3>
+            <p class="cs-fig__note">With the riser clamped, the top barely moves. The largest remaining movement is 83% smaller.</p>
           </figcaption>
         </figure>
 
         <!-- Stress -->
-        <figure class="mf-fig mf-fig--fea">
-          <a class="mf-fig__media" href="images/manifold/fea-baseline-stress-full.webp" data-lightbox>
+        <figure class="cs-fig cs-fig--fea">
+          <a class="cs-fig__media" href="images/manifold/fea-baseline-stress-full.webp" data-lightbox>
             <img src="images/manifold/fea-baseline-stress-1200.webp"
                  srcset="images/manifold/fea-baseline-stress-1200.webp 1200w, images/manifold/fea-baseline-stress-full.webp 2025w"
                  sizes="(max-width: 943px) calc(100vw - 4rem), 880px"
@@ -299,15 +299,15 @@
                  alt="Baseline von Mises stress, front view, legend 145.53 Pa to 1.071e8 Pa. Almost the whole manifold is blue; the Max flag sits where a vertical tube on the right meets the main horizontal header, with light-blue patches on the lower branches." />
             <span class="visually-hidden">(opens full-size image)</span>
           </a>
-          <figcaption class="mf-fig__cap">
-            <span class="mf-badge">Baseline</span>
-            <h3 class="mf-fig__title">Stress before: 107&nbsp;MPa peak at a junction on the main header</h3>
-            <p class="mf-fig__note">Most of the manifold is lightly stressed. The peak is local, where a vertical tube meets the header.</p>
+          <figcaption class="cs-fig__cap">
+            <span class="cs-badge">Baseline</span>
+            <h3 class="cs-fig__title">Stress before: 107&nbsp;MPa peak at a junction on the main header</h3>
+            <p class="cs-fig__note">Most of the manifold is lightly stressed. The peak is local, where a vertical tube meets the header.</p>
           </figcaption>
         </figure>
 
-        <figure class="mf-fig mf-fig--fea">
-          <a class="mf-fig__media" href="images/manifold/fea-optimized-stress-full.webp" data-lightbox>
+        <figure class="cs-fig cs-fig--fea">
+          <a class="cs-fig__media" href="images/manifold/fea-optimized-stress-full.webp" data-lightbox>
             <img src="images/manifold/fea-optimized-stress-1200.webp"
                  srcset="images/manifold/fea-optimized-stress-1200.webp 1200w, images/manifold/fea-optimized-stress-full.webp 1982w"
                  sizes="(max-width: 943px) calc(100vw - 4rem), 880px"
@@ -315,30 +315,30 @@
                  alt="Optimized von Mises stress, same front view, legend 145.53 Pa to 4.9569e7 Pa. The manifold is almost entirely blue; the Max flag sits on a bend in the lower-left branch above the bottom legs." />
             <span class="visually-hidden">(opens full-size image)</span>
           </a>
-          <figcaption class="mf-fig__cap">
-            <span class="mf-badge mf-badge--after">Optimized</span>
-            <h3 class="mf-fig__title">Stress after: 49.6&nbsp;MPa peak at a lower-left bend</h3>
-            <p class="mf-fig__note">Less than half the baseline: a safety factor of 3.4 on the 304L yield strength (170&nbsp;MPa), up from 1.6.</p>
+          <figcaption class="cs-fig__cap">
+            <span class="cs-badge cs-badge--after">Optimized</span>
+            <h3 class="cs-fig__title">Stress after: 49.6&nbsp;MPa peak at a lower-left bend</h3>
+            <p class="cs-fig__note">Less than half the baseline: a safety factor of 3.4 on the 304L yield strength (170&nbsp;MPa), up from 1.6.</p>
           </figcaption>
         </figure>
       </section>
 
       <!-- 6. THE FRAME -->
-      <section class="mf-sec" aria-labelledby="mf-frame">
-        <h2 id="mf-frame">The frame</h2>
-        <figure class="mf-fig mf-fig--wide">
-          <div class="mf-fig__media">
+      <section class="cs-sec" aria-labelledby="cs-frame">
+        <h2 id="cs-frame">The frame</h2>
+        <figure class="cs-fig cs-fig--wide">
+          <div class="cs-fig__media">
             <img src="images/manifold/manifold-frame-1242.webp"
                  srcset="images/manifold/manifold-frame-800.webp 800w, images/manifold/manifold-frame-1242.webp 1242w"
                  sizes="(max-width: 943px) calc(100vw - 4rem), 880px"
                  width="1242" height="833" loading="lazy" decoding="async"
                  alt="CAD render of the support frame on its own: a rectangular frame of aluminum extrusion with a centre cross-member, triangular gusset plates at the joints, flat plates at the corners, upright slotted steel posts carrying pipe clamps, and a row of four small clamps along one long side." />
           </div>
-          <figcaption class="mf-fig__cap">
-            <h3 class="mf-fig__title">Support frame: strut posts placed at the FEA clamp locations</h3>
+          <figcaption class="cs-fig__cap">
+            <h3 class="cs-fig__title">Support frame: strut posts placed at the FEA clamp locations</h3>
           </figcaption>
         </figure>
-        <ul class="mf-bullets mf-after-fig">
+        <ul class="cs-bullets cs-after-fig">
           <li>Anodized 6063 aluminum frame with gusseted joints, plus steel Unistrut posts for the clamps, all bolted together from stock parts.</li>
           <li>Upright posts put each pipe clamp where the FEA called for it; a row of four clamps holds the bottom legs.</li>
           <li>25% fewer parts in the final design than in my first design.</li>
@@ -347,9 +347,9 @@
       </section>
 
       <!-- 7. LIMITS -->
-      <section class="mf-sec" aria-labelledby="mf-limits">
-        <h2 id="mf-limits">Assumptions and checks</h2>
-        <ul class="mf-bullets">
+      <section class="cs-sec" aria-labelledby="cs-limits">
+        <h2 id="cs-limits">Assumptions and checks</h2>
+        <ul class="cs-bullets">
           <li><strong>Rigid clamps.</strong> The manifold model treats every clamp as fixed. The frame FEA showed minimal deflection at the clamp points, which supports that, but real clamps still flex a little, so real deflection will be somewhat higher than the model shows.</li>
           <li><strong>Material.</strong> The tubing is 304 or 304L stainless; the safety factor uses 304L, the weaker grade (minimum yield 170&nbsp;MPa, ASTM A312), so it is conservative.</li>
           <li><strong>One load case.</strong> The analysis covers static gravity plus the valve weights. No other load cases, such as seismic or thermal, were analysed.</li>
