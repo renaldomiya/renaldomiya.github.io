@@ -41,6 +41,36 @@
         <p class="status-badge">In progress: prototype printing, November 2026</p>
       </div>
 
+      <!-- HERO RENDER -->
+      <figure class="gr-figure gr-hero">
+        <img src="images/gripper/gripper-hero-1600.webp"
+             srcset="images/gripper/gripper-hero-800.webp 800w, images/gripper/gripper-hero-1600.webp 1600w"
+             sizes="(max-width: 1120px) calc(100vw - 4rem), 1056px"
+             width="1600" height="800"
+             alt="CAD render of the gripper: a light grey housing with two blue PLA jaws on steel guide rods, dark grey TPU pads facing each other, jaws part-way closed." />
+        <figcaption>CAD render of the SolidWorks assembly with the jaws part-way closed. Not a photo of the prototype.</figcaption>
+      </figure>
+
+      <!-- KEY SPECS -->
+      <div class="results-strip">
+        <div class="result-stat">
+          <p class="result-stat__value">80&nbsp;mm</p>
+          <p class="result-stat__label">Max jaw opening, pad to pad &middot; measured in CAD</p>
+        </div>
+        <div class="result-stat">
+          <p class="result-stat__value">25.4&nbsp;mm</p>
+          <p class="result-stat__label">Pinion pitch radius, 48 teeth at 24 DP &middot; measured in CAD</p>
+        </div>
+        <div class="result-stat">
+          <p class="result-stat__value">3.6&nbsp;N</p>
+          <p class="result-stat__label">Ideal grip force per jaw at 5&nbsp;V servo stall &middot; calculated</p>
+        </div>
+        <div class="result-stat">
+          <p class="result-stat__value">90&deg;</p>
+          <p class="result-stat__label">Servo rotation for the full 80&nbsp;mm stroke &middot; calculated</p>
+        </div>
+      </div>
+
       <!-- 1. OVERVIEW -->
       <section class="gr-row">
         <span class="block-label">Overview</span>
@@ -72,11 +102,11 @@
             </li>
             <li class="gr-spec">
               <p class="gr-spec__name">Finger height</p>
-              <p class="gr-spec__value">60 mm</p>
+              <p class="gr-spec__value">110 mm above the housing (100 &times; 55 mm pad face)</p>
             </li>
             <li class="gr-spec">
               <p class="gr-spec__name">Design grip force</p>
-              <p class="gr-spec__value">2 N (3.7 N ideal at servo stall, 5 V supply)</p>
+              <p class="gr-spec__value">2 N (2.2 to 2.5 N available after drivetrain losses)</p>
             </li>
             <li class="gr-spec">
               <p class="gr-spec__name">Payload</p>
@@ -88,7 +118,7 @@
             </li>
             <li class="gr-spec">
               <p class="gr-spec__name">Actuator</p>
-              <p class="gr-spec__value">MG90S metal-gear servo, about 92&deg; of rotation for full stroke</p>
+              <p class="gr-spec__value">MG90S metal-gear servo driving the pinion directly</p>
             </li>
             <li class="gr-spec">
               <p class="gr-spec__name">Example objects</p>
@@ -108,7 +138,7 @@
 
           <p>Each jaw slides on two 5 mm steel guide rods spaced 34 mm apart. Two rods stop the jaw rotating
             about the rod axis, and at under 4 N of grip force the steel rods are effectively rigid, so any
-            compliance sits in the printed PLA bushings and fingers.</p>
+            compliance sits in the printed PLA jaws, where the rods run through bores in the jaw itself.</p>
           <p>Gear module and tooth profile were calculated to minimise backlash through the mesh. Backlash
             matters more here than in a position-only gripper: lost motion between the servo and the fingers
             shows up directly as error in the force loop, because the controller commands servo position while
@@ -117,13 +147,14 @@
             separately in TPU so the compliant contact surface can be swapped without reprinting the structure.</p>
         </div>
         <div class="gr-col gr-media">
-          <!-- TODO: add the stills from images/gripper/ here, with a caption for each. Template:
-          <figure>
-            <img src="images/gripper/FILENAME.jpg" alt="DESCRIPTIVE ALT TEXT" loading="lazy" />
-            <figcaption>CAPTION</figcaption>
+          <figure class="gr-figure">
+            <img src="images/gripper/gripper-iso-1200.webp"
+                 srcset="images/gripper/gripper-iso-600.webp 600w, images/gripper/gripper-iso-1200.webp 1200w"
+                 sizes="(max-width: 767px) calc(100vw - 4rem), 500px"
+                 width="1200" height="1200" loading="lazy"
+                 alt="Isometric CAD render of the gripper fully open: the two jaws sit at the ends of the guide rods, with the pinion visible between them inside the open-topped housing." />
+            <figcaption>Isometric CAD render, jaws fully open at 80&nbsp;mm. The pinion sits between the two racks, under the jaws.</figcaption>
           </figure>
-          Then delete the .media-pending paragraph below. -->
-          <p class="media-pending">CAD views and print photos are being added.</p>
 
           <figure class="gr-clip">
             <!-- TODO: add the clips from images/gripper/ here. Template (keep the attributes as written:
@@ -142,7 +173,108 @@
         </div>
       </section>
 
-      <!-- 4. DESIGN CALCULATIONS -->
+      <!-- 4. DESIGN FROM CAD -->
+      <section class="gr-row">
+        <span class="block-label">Design from CAD</span>
+        <h3>Measured from the SolidWorks Assembly</h3>
+        <p>Every dimension in this section is measured from the STEP export of the assembly, not from printed
+          parts.</p>
+
+        <figure class="gr-figure gr-exploded">
+          <a href="images/gripper/gripper-exploded-labelled-1600.webp">
+            <img src="images/gripper/gripper-exploded-labelled-1600.webp"
+                 srcset="images/gripper/gripper-exploded-labelled-800.webp 800w, images/gripper/gripper-exploded-labelled-1600.webp 1600w"
+                 sizes="(max-width: 1120px) calc(100vw - 4rem), 1056px"
+                 width="1600" height="993" loading="lazy"
+                 alt="Exploded CAD view with labelled parts: jaws, TPU finger pads, FSR 402 force sensors, racks, steel guide rods, rod covers with M3 button-head screws, housing, 48-tooth pinion, MG90S servo and back housing." />
+          </a>
+          <figcaption>Exploded CAD render. The jaws slide off the guide rods along the rack axis, the pads and
+            sensors come off the fingers, and the pinion, servo and back housing drop out below. Select the image
+            to open it full size.</figcaption>
+        </figure>
+
+        <div class="gr-cad-tables">
+          <div class="table-scroll">
+            <table class="data-table">
+              <caption>Measured dimensions (CAD)</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Feature</th>
+                  <th scope="col">Measured</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td>Max jaw opening</td>
+                    <td>80.0 mm pad to pad; the jaws stop against the rod covers</td>
+                  </tr>
+                  <tr>
+                    <td>Jaw travel</td>
+                    <td>40 mm per jaw, equal and opposite</td>
+                  </tr>
+                  <tr>
+                    <td>Pinion</td>
+                    <td>48 teeth, 24 diametral pitch (module 1.06 mm), 14.5&deg; pressure angle</td>
+                  </tr>
+                  <tr>
+                    <td>Pinion diameters</td>
+                    <td>50.8 mm pitch (25.4 mm radius), 52.9 mm outside</td>
+                  </tr>
+                  <tr>
+                    <td>Racks</td>
+                    <td>78 mm long, 3.33 mm tooth pitch, 7.4 mm face width in mesh</td>
+                  </tr>
+                  <tr>
+                    <td>Guide rods</td>
+                    <td>&Oslash;5 &times; 150 mm, 34 mm centre to centre</td>
+                  </tr>
+                  <tr>
+                    <td>Fingers</td>
+                    <td>110 mm above the housing; 100 &times; 55 mm TPU pad face</td>
+                  </tr>
+                  <tr>
+                    <td>Sensor seat</td>
+                    <td>&Oslash;19 &times; 0.5 mm pocket behind each pad for the &Oslash;18.3 mm FSR 402 head</td>
+                  </tr>
+                  <tr>
+                    <td>Overall envelope</td>
+                    <td>199 &times; 84 &times; 200 mm</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-scroll">
+            <table class="data-table">
+              <caption>Bill of materials, from the STEP assembly</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Part</th>
+                  <th scope="col">Material</th>
+                  <th scope="col">Qty</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr><td>Housing</td><td>PLA</td><td>1</td></tr>
+                  <tr><td>Back housing (servo enclosure)</td><td>PLA</td><td>1</td></tr>
+                  <tr><td>Rod cover and open stop</td><td>PLA</td><td>2</td></tr>
+                  <tr><td>Jaw</td><td>PLA</td><td>2</td></tr>
+                  <tr><td>Rack</td><td>PLA</td><td>2</td></tr>
+                  <tr><td>Pinion, 48 T, 24 DP</td><td>PLA</td><td>1</td></tr>
+                  <tr><td>Finger pad</td><td>TPU</td><td>2</td></tr>
+                  <tr><td>Guide rod, &Oslash;5 &times; 150 mm</td><td>Steel</td><td>2</td></tr>
+                  <tr><td>FSR 402 force sensor</td><td>Purchased</td><td>2</td></tr>
+                  <tr><td>MG90S servo</td><td>Purchased</td><td>1</td></tr>
+                  <tr><td>M3 &times; 12 button-head screw</td><td>Stainless steel</td><td>6</td></tr>
+                  <tr><td>M3 &times; 10 socket-head screw and nut</td><td>Black-oxide / zinc-plated steel</td><td>4 + 4</td></tr>
+                  <tr><td>M2 &times; 8 screw, nut and washer (servo mount)</td><td>Stainless / zinc-plated steel</td><td>2 each</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. DESIGN CALCULATIONS -->
       <section class="gr-row">
         <span class="block-label">Analysis</span>
         <h3>Design Calculations</h3>
@@ -152,11 +284,11 @@
         <ol class="calc-list gr-calc-grid">
           <li>
             <p class="calc-step__name">Grip force</p>
-            <p class="calc-step__body">At 5 V the MG90S stall torque is about 1.87 kg&middot;cm (0.183 N&middot;m), interpolated between its 4.8 V and 6 V ratings. One 25 mm pinion drives both racks, so force per jaw = 0.183 / (2 &times; 0.025) = 3.7 N ideal, about 2.2 to 2.6 N after 60 to 70% drivetrain efficiency.</p>
+            <p class="calc-step__body">At 5 V the MG90S stall torque is about 1.87 kg&middot;cm (0.183 N&middot;m), interpolated between its 4.8 V and 6 V ratings. One pinion with a 25.4 mm pitch radius drives both racks, so force per jaw = 0.183 / (2 &times; 0.0254) = 3.6 N ideal, about 2.2 to 2.5 N after 60 to 70% drivetrain efficiency.</p>
           </li>
           <li>
             <p class="calc-step__name">Stroke</p>
-            <p class="calc-step__body">An 80 mm gap needs 0.080 / (2 &times; 0.025) = 1.6 rad, about 92&deg; of the servo&rsquo;s 180&deg;.</p>
+            <p class="calc-step__body">An 80 mm gap needs 0.080 / (2 &times; 0.0254) = 1.57 rad, about 90&deg; of the servo&rsquo;s 180&deg;.</p>
           </li>
           <li>
             <p class="calc-step__name">Payload</p>
@@ -164,17 +296,17 @@
           </li>
           <li>
             <p class="calc-step__name">Resolution</p>
-            <p class="calc-step__body">1&deg; of servo rotation changes the gap by 0.87 mm, so the controller uses writeMicroseconds() for finer steps, and the TPU pads spread each step into a smaller force change.</p>
+            <p class="calc-step__body">1&deg; of servo rotation changes the gap by 0.89 mm, so the controller uses writeMicroseconds() for finer steps, and the TPU pads spread each step into a smaller force change.</p>
           </li>
         </ol>
 
         <div class="gr-calc-split">
           <div class="table-scroll">
             <table class="data-table">
-              <caption>Pinion radius trade-off</caption>
+              <caption>Pinion pitch radius trade-off, at the 5 V stall torque</caption>
               <thead>
                 <tr>
-                  <th scope="col">Radius</th>
+                  <th scope="col">Pitch radius</th>
                   <th scope="col">Rotation for 80 mm</th>
                   <th scope="col">Ideal force</th>
                 </tr>
@@ -183,27 +315,27 @@
                   <tr>
                     <td>15 mm</td>
                     <td>153&deg;</td>
-                    <td>5.9 N</td>
+                    <td>6.1 N</td>
                   </tr>
                   <tr>
                     <td>20 mm</td>
                     <td>115&deg;</td>
-                    <td>4.4 N</td>
+                    <td>4.6 N</td>
                   </tr>
                   <tr>
-                    <td>25 mm (chosen)</td>
-                    <td>92&deg;</td>
-                    <td>3.5 N</td>
+                    <td>25.4 mm (chosen)</td>
+                    <td>90&deg;</td>
+                    <td>3.6 N</td>
                   </tr>
               </tbody>
             </table>
           </div>
-          <p class="calc-note gr-callout">A 25 mm pinion uses half the servo&rsquo;s range for the full stroke; a smaller
-            pinion is the main lever for more grip force in a second version.</p>
+          <p class="calc-note gr-callout">The 25.4 mm pinion uses half the servo&rsquo;s range for the full stroke; a
+            smaller pinion is the main lever for more grip force in a second version.</p>
         </div>
       </section>
 
-      <!-- 5. CONTROLS -->
+      <!-- 6. CONTROLS -->
       <section class="gr-row gr-row--4060">
         <div class="gr-col">
           <span class="block-label">Controls</span>
@@ -281,7 +413,7 @@
         </div>
       </section>
 
-      <!-- 6. TEST PLAN -->
+      <!-- 7. TEST PLAN -->
       <section class="gr-row">
         <span class="block-label">Test Plan</span>
         <h3>Planned Bench Tests</h3>
@@ -346,7 +478,7 @@
         </div>
       </section>
 
-      <!-- 7. NEXT STEPS + TECHNICAL STACK -->
+      <!-- 8. NEXT STEPS + TECHNICAL STACK -->
       <section class="gr-row gr-row--half">
         <div class="gr-col">
           <span class="block-label">Next Steps</span>

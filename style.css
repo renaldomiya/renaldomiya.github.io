@@ -1203,6 +1203,45 @@ p { max-width: 65ch; }
   font-size: 0.8rem;
 }
 
+/* CAD renders: a white card with the caption under a divider, like .video-figure */
+.gr-figure {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.gr-figure img { width: 100%; height: auto; }
+
+.gr-figure figcaption {
+  padding: 0.6rem var(--space-md);
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  border-top: 1px solid var(--color-border);
+}
+
+.gr-hero { margin-bottom: var(--space-lg); }
+
+/* Key specs sit closer to the overview than on the other project pages */
+.gr-page .results-strip { margin-bottom: 2.5rem; }
+
+.gr-exploded { margin-top: var(--space-md); }
+
+/* Measured dimensions beside the bill of materials */
+.gr-cad-tables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+  margin-top: var(--space-lg);
+}
+
+.gr-cad-tables .table-scroll { margin-top: 0; }
+
+/* Short columns, so they fit half the width instead of scrolling */
+.gr-cad-tables .data-table { min-width: 0; }
+
 /* Four calculation steps across one row, all the same height */
 .gr-calc-grid {
   display: grid;
@@ -1268,6 +1307,7 @@ p { max-width: 65ch; }
   .gr-row--half,
   .gr-row--4060,
   .gr-calc-split,
+  .gr-cad-tables,
   .gr-calc-grid { grid-template-columns: minmax(0, 1fr); }
 
   .gr-row { padding-block: var(--space-lg); }
