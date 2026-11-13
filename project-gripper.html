@@ -51,15 +51,14 @@
         </div>
       </div>
 
-      <!-- 2. HERO VIDEO -->
+      <!-- 2. HERO IMAGE -->
       <figure class="gr-figure gr-hero">
-        <video autoplay muted loop playsinline controls preload="metadata"
-               poster="images/gripper/gripper-open-close-poster.webp" width="960" height="400"
-               aria-label="CAD animation, seen from above: the two blue jaws slide together along the steel guide rods until the dark TPU pads meet, then open again, while the pinion turns between the two racks.">
-          <source src="images/gripper/gripper-open-close.mp4" type="video/mp4" />
-          <a href="images/gripper/gripper-open-close.mp4">Download the clip of the jaws opening and closing (MP4)</a>
-        </video>
-        <figcaption>CAD animation: one pinion drives both jaws closed and open.</figcaption>
+        <img src="images/gripper/gripper-hero-1600.webp"
+             srcset="images/gripper/gripper-hero-800.webp 800w, images/gripper/gripper-hero-1600.webp 1600w"
+             sizes="(max-width: 1120px) calc(100vw - 4rem), 1056px"
+             width="1600" height="800" fetchpriority="high"
+             alt="CAD render of the assembled gripper: a light grey housing with two blue jaws standing on steel guide rods, dark TPU pads facing each other, jaws part-way closed." />
+        <figcaption>SolidWorks render: PLA frame and jaws, TPU finger pads, steel guide rods.</figcaption>
       </figure>
 
       <!-- 3. AT A GLANCE -->
@@ -111,36 +110,27 @@
         </ul>
       </section>
 
-      <!-- 5. GALLERY -->
-      <section class="gr-sec" aria-labelledby="gr-gallery">
-        <h2 id="gr-gallery">CAD views</h2>
-        <div class="gr-gallery">
-          <figure class="gr-figure">
-            <img src="images/gripper/gripper-hero-1600.webp"
-                 srcset="images/gripper/gripper-hero-800.webp 800w, images/gripper/gripper-hero-1600.webp 1600w"
-                 sizes="(max-width: 899px) calc(100vw - 4rem), 500px"
-                 width="1600" height="800" loading="lazy"
-                 alt="CAD render of the assembled gripper: a light grey housing with two blue jaws standing on steel guide rods, dark TPU pads facing each other, jaws part-way closed." />
-            <figcaption>Assembled gripper, jaws part-way closed.</figcaption>
+      <!-- 5. MOTION -->
+      <section class="gr-sec" aria-labelledby="gr-motion">
+        <div class="gr-split gr-split--motion">
+          <div>
+            <h2 id="gr-motion">In motion</h2>
+            <ul class="gr-bullets">
+              <li>CAD animation of one full open-close cycle, seen from above.</li>
+              <li>The servo turns the pinion; the opposed racks move the jaws equally.</li>
+              <li>Jaws stay parallel from 80&nbsp;mm open to fully closed.</li>
+            </ul>
+          </div>
+          <figure class="gr-figure gr-video">
+            <video autoplay muted loop playsinline controls preload="metadata"
+                   poster="images/gripper/gripper-open-close-poster.webp" width="960" height="400"
+                   aria-label="CAD animation, seen from above: the two blue jaws slide together along the steel guide rods until the dark TPU pads meet, then open again, while the pinion turns between the two racks.">
+              <source src="images/gripper/gripper-open-close.mp4" type="video/mp4" />
+              <a href="images/gripper/gripper-open-close.mp4">Download the clip of the jaws opening and closing (MP4)</a>
+            </video>
+            <figcaption>CAD animation: one pinion drives both jaws closed and open.</figcaption>
           </figure>
-          <figure class="gr-figure">
-            <img src="images/gripper/gripper-iso-1200.webp"
-                 srcset="images/gripper/gripper-iso-600.webp 600w, images/gripper/gripper-iso-1200.webp 1200w"
-                 sizes="(max-width: 899px) calc(100vw - 4rem), 250px"
-                 width="1200" height="1200" loading="lazy"
-                 alt="Isometric CAD render of the gripper fully open: the jaws sit at the ends of the guide rods, and the pinion is visible between them inside the open-topped housing." />
-            <figcaption>Fully open at 80&nbsp;mm.</figcaption>
-          </figure>
-          <ul class="gr-bullets">
-            <li>Blue jaws and grey housing print in PLA.</li>
-            <li>Dark finger pads print in flexible TPU.</li>
-            <li>Pinion sits between the racks, under the jaws.</li>
-            <li>Rod covers double as the open stop.</li>
-          </ul>
         </div>
-        <!-- Print photos and close-ups go here once they exist: copy one of the two
-             <figure> blocks above, point the <img> at the photo in images/gripper/ and
-             write a one-line caption and alt text. -->
       </section>
 
       <!-- 6. CONTROL SYSTEM -->

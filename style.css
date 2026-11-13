@@ -1202,8 +1202,8 @@ p { max-width: 65ch; }
   border-top: 1px solid var(--color-border);
 }
 
-/* Hero video: the CAD background is white, so the frame matches it */
-.gr-hero video { aspect-ratio: 12 / 5; background: #ffffff; }
+/* The CAD background is white, so the video frame matches it */
+.gr-video video { aspect-ratio: 12 / 5; background: #ffffff; }
 
 /* At-a-glance spec tiles */
 .gr-specs {
@@ -1269,15 +1269,6 @@ p { max-width: 65ch; }
   display: block;
   color: var(--color-text);
   font-size: 0.875rem;
-}
-
-/* Gallery: a 2:1 render beside a square one, so both end up the same height,
-   with their bullets in the last column */
-.gr-gallery {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--space-lg);
-  align-items: center;
 }
 
 /* Block diagram */
@@ -1350,8 +1341,6 @@ p { max-width: 65ch; }
   .gr-control,
   .gr-close { grid-template-columns: minmax(0, 1fr); }
 
-  .gr-gallery { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--space-md); }
-  .gr-gallery .gr-bullets { grid-column: 1 / -1; }
 
   /* Image first once the row stacks */
   .gr-split .gr-figure { order: -1; }
@@ -1362,7 +1351,6 @@ p { max-width: 65ch; }
 }
 
 @media (max-width: 599px) {
-  .gr-gallery,
   .gr-tests { grid-template-columns: minmax(0, 1fr); }
 }
 
