@@ -911,12 +911,28 @@ p { max-width: 65ch; }
    ============================================================ */
 .cs-page { padding-block: 2.5rem; }
 
-/* Headline row: text beside the hero image on wide screens */
+/* Headline row: text beside the hero image on wide screens.
+   Three rows: title above, lead paragraph, meta and tags below. The two
+   outer rows are 1fr, so they always match in height and the lead sits at
+   the exact vertical middle; the hero spans all three and centres on it. */
 .cs-intro {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
-  gap: var(--space-lg);
-  align-items: center;
+  grid-template-rows: 1fr auto 1fr;
+  column-gap: var(--space-lg);
+}
+
+.cs-intro__top    { grid-column: 1; grid-row: 1; align-self: end; }
+.cs-lead          { grid-column: 1; grid-row: 2; }
+.cs-intro__bottom { grid-column: 1; grid-row: 3; align-self: start; }
+
+/* margin-top equals the one-line caption height, so the image itself,
+   not image plus caption, is what centres on the lead paragraph */
+.cs-intro .cs-fig--hero {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  align-self: center;
+  margin-top: 2.2rem;
 }
 
 .cs-intro h1 {
@@ -1049,7 +1065,7 @@ a.cs-fig__media:focus-visible { outline: 3px solid var(--color-accent); outline-
   margin: 0;
 }
 
-.cs-page .cs-fig--hero .cs-fig__title { font-size: 1rem; }
+.cs-page .cs-fig--hero .cs-fig__title { font-size: 1rem; margin: 0; }
 
 .cs-fig__note {
   margin-top: 0.3rem;
@@ -1231,14 +1247,11 @@ a.cs-fig__media:focus-visible { outline: 3px solid var(--color-accent); outline-
   .cs-split { grid-template-columns: minmax(0, 1fr); }
 
   /* Phone/tablet headline order: title, result, hero image, then meta */
-  .cs-intro { display: flex; flex-direction: column; gap: 0; }
-  .cs-intro__text { display: contents; }
-  .cs-intro .back-link { align-self: flex-start; }
-  .cs-intro h1 { order: 1; }
+  .cs-intro { display: flex; flex-direction: column; }
+  .cs-intro__top { order: 1; }
   .cs-lead { order: 2; }
-  .cs-fig--hero { order: 3; margin-block: 1.25rem 0.25rem; }
-  .cs-meta { order: 4; }
-  .cs-intro .skill-tags { order: 5; }
+  .cs-intro .cs-fig--hero { order: 3; margin-block: 1.25rem 0.25rem; }
+  .cs-intro__bottom { order: 4; }
 
   .cs-fig--portrait { max-width: 360px; }
 }
