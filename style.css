@@ -1105,105 +1105,81 @@ p { max-width: 65ch; }
 
 /* ============================================================
    GRIPPER PAGE LAYOUT
-   Page-scoped: .project-block is left alone so the manifold and
-   PDU pages keep their alternating layout.
+   Media-first page: big media, short bullets. Page-scoped, so
+   the manifold and PDU pages keep their alternating layout.
    ============================================================ */
-.gr-page .project-detail__header { margin-bottom: var(--space-lg); }
+.gr-page { padding-block: 2.5rem; }
 
-.gr-row {
-  padding-block: 2.5rem;            /* about two thirds of the old block padding */
+.gr-page .project-detail__header {
+  margin-bottom: var(--space-lg);
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 
-.gr-row:first-of-type { padding-top: 0; }
-
-/* One thin divider between rows */
-.gr-row + .gr-row { border-top: 1px solid var(--color-border); }
-
-.gr-row--half,
-.gr-row--4060 {
-  display: grid;
-  gap: var(--space-xl);
-  align-items: start;
-}
-
-.gr-row--half { grid-template-columns: 1fr 1fr; }
-.gr-row--4060 { grid-template-columns: 40fr 60fr; align-items: center; }
-
-/* Paragraphs fill their column instead of stopping at the global 65ch */
-.gr-col p,
-.gr-row > p { max-width: none; }
-
-.gr-col h3,
-.gr-row > h3 {
-  font-size: 1.25rem;
-  margin-bottom: var(--space-sm);
-}
-
-.gr-col > p + p { margin-top: var(--space-md); }
-
-/* Two paragraphs side by side under a shared heading */
-.gr-two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: start;
-  margin-top: var(--space-sm);
-}
-
-.gr-two-col p { max-width: none; }
-
-/* Design targets as a grid of tiles */
-.gr-spec-grid {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-md);
-  margin-top: var(--space-md);
-  align-items: stretch;
-}
-
-.gr-spec {
-  height: 100%;
-  padding: var(--space-md);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-}
-
-.gr-spec__name {
-  max-width: none;
-  margin-bottom: 0.2rem;
-  font-size: 0.78rem;
-  font-weight: 700;
+.gr-pitch {
+  max-width: 78ch;
+  font-size: 1.05rem;
+  line-height: 1.55;
   color: var(--color-text);
 }
 
-.gr-spec__value {
-  max-width: none;
-  color: var(--color-text-muted);
+.gr-meta {
+  margin-top: 0.35rem;
   font-size: 0.875rem;
-  line-height: 1.6;
+  color: var(--color-text-muted);
 }
 
-/* Media column */
-.gr-media {
+.gr-page .skill-tags { margin-top: 0.85rem; }
+
+/* Sections */
+.gr-sec { padding-block: 1.5rem; }
+.gr-sec + .gr-sec { border-top: 1px solid var(--color-border); }
+
+.gr-page h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.gr-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.gr-head h2 { margin-bottom: 0; }
+
+/* "Planned, not yet run" label on the test plan */
+.gr-flag {
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  color: #92400e;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* Short bullets */
+.gr-bullets {
+  list-style: disc;
+  padding-left: 1.15rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: 0.45rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
-.gr-media .media-pending { margin-top: 0; }
+.gr-bullets li::marker { color: var(--color-accent); }
 
-.gr-clip { display: block; }
-
-.gr-caption {
-  margin-top: 0.4rem;
+.gr-note {
   color: var(--color-text-muted);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
 }
 
-/* CAD renders: a white card with the caption under a divider, like .video-figure */
+/* Media cards: white frame, one-line caption under a divider */
 .gr-figure {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -1211,111 +1187,189 @@ p { max-width: 65ch; }
   overflow: hidden;
 }
 
-.gr-figure img { width: 100%; height: auto; }
+.gr-figure img,
+.gr-figure video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
 .gr-figure figcaption {
-  padding: 0.6rem var(--space-md);
+  padding: 0.55rem var(--space-md);
   color: var(--color-text-muted);
   font-size: 0.82rem;
   line-height: 1.5;
   border-top: 1px solid var(--color-border);
 }
 
-.gr-hero { margin-bottom: var(--space-lg); }
+/* Hero video: the CAD background is white, so the frame matches it */
+.gr-hero video { aspect-ratio: 12 / 5; background: #ffffff; }
 
-/* Key specs sit closer to the overview than on the other project pages */
-.gr-page .results-strip { margin-bottom: 2.5rem; }
-
-.gr-exploded { margin-top: var(--space-md); }
-
-/* Measured dimensions beside the bill of materials */
-.gr-cad-tables {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-lg);
-  align-items: start;
-  margin-top: var(--space-lg);
-}
-
-.gr-cad-tables .table-scroll { margin-top: 0; }
-
-/* Short columns, so they fit half the width instead of scrolling */
-.gr-cad-tables .data-table { min-width: 0; }
-
-/* Four calculation steps across one row, all the same height */
-.gr-calc-grid {
+/* At-a-glance spec tiles */
+.gr-specs {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-md);
-  align-items: stretch;
+  gap: 0.75rem;
 }
 
-.gr-calc-grid li { height: 100%; }
+.gr-specs li {
+  padding: 0.75rem var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-md);
+}
 
-/* Trade-off table beside its note */
-.gr-calc-split {
+.gr-specs .is-wide { grid-column: span 2; }
+
+.gr-specs strong {
+  display: block;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  color: var(--color-accent);
+}
+
+.gr-specs span {
+  display: block;
+  margin-top: 2px;
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+/* Bullets beside a large image */
+.gr-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   gap: var(--space-lg);
   align-items: center;
 }
 
-.gr-calc-split .table-scroll { margin-top: 0; }
+/* Key components called out under the exploded view */
+.gr-parts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: var(--space-md);
+}
 
-/* Three short columns, so it fits its half-width column instead of
-   hiding the force column behind a scrollbar */
-.gr-calc-split .data-table { min-width: 0; }
+.gr-parts li,
+.gr-tests li {
+  padding: 0.6rem 0.85rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
 
-.gr-callout {
-  margin: 0;
-  padding: var(--space-md);
-  border-left: 3px solid var(--color-accent);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  background: var(--color-accent-light);
+.gr-parts strong,
+.gr-tests strong {
+  display: block;
   color: var(--color-text);
-  font-style: normal;
-  font-size: 0.9rem;
-  line-height: 1.7;
+  font-size: 0.875rem;
 }
 
-/* Block diagram, centred in its column and scaled to it */
-.gr-diagram-col { align-self: center; }
-
-.gr-diagram-col .loop-diagram { margin-top: 0; overflow: visible; }
-
-.gr-diagram-col .loop-diagram svg { min-width: 0; }
-
-/* Tighter table rows on this page */
-.gr-page .data-table th,
-.gr-page .data-table td { padding: 0.43rem 0.85rem; }
-
-@media (max-width: 999px) {
-  .gr-calc-grid,
-  .gr-spec-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-  .gr-row--half,
-  .gr-row--4060 { gap: var(--space-lg); }
+/* Gallery: a 2:1 render beside a square one, so both end up the same height,
+   with their bullets in the last column */
+.gr-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: center;
 }
 
-@media (max-width: 479px) {
-  .gr-spec-grid { grid-template-columns: minmax(0, 1fr); }
+/* Block diagram */
+.gr-control {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: center;
 }
 
-@media (max-width: 767px) {
-  /* Every row stacks in source order */
-  .gr-two-col,
-  .gr-row--half,
-  .gr-row--4060,
-  .gr-calc-split,
-  .gr-cad-tables,
-  .gr-calc-grid { grid-template-columns: minmax(0, 1fr); }
+.gr-diagram {
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
 
-  .gr-row { padding-block: var(--space-lg); }
+.gr-diagram svg { display: block; width: 100%; height: auto; min-width: 640px; }
 
+/* Planned tests, three across */
+.gr-tests {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem 0.75rem;
+}
 
-  /* The diagram keeps its legible size and scrolls inside its own box */
-  .gr-diagram-col .loop-diagram { overflow-x: auto; }
-  .gr-diagram-col .loop-diagram svg { min-width: 460px; }
+/* Test plan with the next steps beside it */
+.gr-close {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+/* Next steps, numbered */
+.gr-steps {
+  display: grid;
+  gap: 0.85rem;
+  counter-reset: grstep;
+}
+
+.gr-steps li {
+  counter-increment: grstep;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.gr-steps li::before {
+  content: counter(grstep);
+  flex-shrink: 0;
+  width: 1.7rem;
+  height: 1.7rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-accent-light);
+  color: var(--color-accent-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.gr-page .detail-bottom-nav { padding-top: var(--space-lg); }
+
+@media (max-width: 899px) {
+  .gr-split,
+  .gr-control,
+  .gr-close { grid-template-columns: minmax(0, 1fr); }
+
+  .gr-gallery { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--space-md); }
+  .gr-gallery .gr-bullets { grid-column: 1 / -1; }
+
+  /* Image first once the row stacks */
+  .gr-split .gr-figure { order: -1; }
+
+  .gr-specs,
+  .gr-parts,
+  .gr-tests { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 599px) {
+  .gr-gallery,
+  .gr-tests { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 379px) {
+  .gr-specs,
+  .gr-parts { grid-template-columns: minmax(0, 1fr); }
+  .gr-specs .is-wide { grid-column: auto; }
 }
 
 /* ============================================================

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A two-finger, servo-actuated rack-and-pinion gripper with closed-loop grip force control, designed in SolidWorks for FDM printing." />
+  <meta name="description" content="A two-finger servo-driven rack-and-pinion gripper that closes to a target grip force instead of a fixed position." />
   <title>Force-Feedback Robotic Gripper — Renaldo Miya</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,495 +30,219 @@
   <main>
     <div class="container project-detail gr-page">
 
-      <!-- HEADER -->
+      <!-- 1. HEADER -->
       <div class="project-detail__header">
         <a href="projects.html" class="back-link">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           Back to Projects
         </a>
         <h1>Force-Feedback Robotic Gripper</h1>
-        <p class="text-muted">Personal project &middot; Fall 2026 &ndash; present</p>
-        <p class="status-badge">In progress: prototype printing, November 2026</p>
+        <p class="gr-pitch">Two-finger servo-driven rack-and-pinion gripper that closes to a target grip force instead of a fixed position, so one gripper handles fragile and rigid objects without retuning.</p>
+        <p class="gr-meta">Personal project &middot; Fall 2026 &ndash; present</p>
+        <div class="skill-tags">
+          <span class="skill-tag">SolidWorks</span>
+          <span class="skill-tag">Arduino Uno (C++)</span>
+          <span class="skill-tag">MG90S servo</span>
+          <span class="skill-tag">FSR 402</span>
+          <span class="skill-tag">Closed-loop control</span>
+          <span class="skill-tag">FDM printing</span>
+          <span class="skill-tag">PLA / TPU</span>
+          <span class="skill-tag">Gear design</span>
+        </div>
       </div>
 
-      <!-- HERO RENDER -->
+      <!-- 2. HERO VIDEO -->
       <figure class="gr-figure gr-hero">
-        <img src="images/gripper/gripper-hero-1600.webp"
-             srcset="images/gripper/gripper-hero-800.webp 800w, images/gripper/gripper-hero-1600.webp 1600w"
-             sizes="(max-width: 1120px) calc(100vw - 4rem), 1056px"
-             width="1600" height="800"
-             alt="CAD render of the gripper: a light grey housing with two blue PLA jaws on steel guide rods, dark grey TPU pads facing each other, jaws part-way closed." />
-        <figcaption>CAD render of the SolidWorks assembly with the jaws part-way closed. Not a photo of the prototype.</figcaption>
+        <video autoplay muted loop playsinline controls preload="metadata"
+               poster="images/gripper/gripper-open-close-poster.webp" width="960" height="400"
+               aria-label="CAD animation, seen from above: the two blue jaws slide together along the steel guide rods until the dark TPU pads meet, then open again, while the pinion turns between the two racks.">
+          <source src="images/gripper/gripper-open-close.mp4" type="video/mp4" />
+          <a href="images/gripper/gripper-open-close.mp4">Download the clip of the jaws opening and closing (MP4)</a>
+        </video>
+        <figcaption>CAD animation: one pinion drives both jaws closed and open.</figcaption>
       </figure>
 
-      <!-- KEY SPECS -->
-      <div class="results-strip">
-        <div class="result-stat">
-          <p class="result-stat__value">80&nbsp;mm</p>
-          <p class="result-stat__label">Max jaw opening, pad to pad &middot; measured in CAD</p>
+      <!-- 3. AT A GLANCE -->
+      <section class="gr-sec" aria-labelledby="gr-glance">
+        <div class="gr-head">
+          <h2 id="gr-glance">At a glance</h2>
+          <span class="gr-note">Calculated from the datasheet and geometry; to be verified on the prototype.</span>
         </div>
-        <div class="result-stat">
-          <p class="result-stat__value">25.4&nbsp;mm</p>
-          <p class="result-stat__label">Pinion pitch radius, 48 teeth at 24 DP &middot; measured in CAD</p>
-        </div>
-        <div class="result-stat">
-          <p class="result-stat__value">3.6&nbsp;N</p>
-          <p class="result-stat__label">Ideal grip force per jaw at 5&nbsp;V servo stall &middot; calculated</p>
-        </div>
-        <div class="result-stat">
-          <p class="result-stat__value">90&deg;</p>
-          <p class="result-stat__label">Servo rotation for the full 80&nbsp;mm stroke &middot; calculated</p>
-        </div>
-      </div>
-
-      <!-- 1. OVERVIEW -->
-      <section class="gr-row">
-        <span class="block-label">Overview</span>
-        <h3>Project Overview</h3>
-        <div class="gr-two-col">
-          <p>A two-finger, servo-actuated rack-and-pinion gripper with closed-loop grip force control, designed
-            in SolidWorks for FDM printing. The frame prints in PLA, and the finger pads print in flexible TPU so
-            the contact surface gives slightly against whatever is being held.</p>
-          <p>The point of the build is the force loop: rather than driving the servo to a fixed position, the
-            gripper measures how hard it is squeezing and closes only until it reaches a target force &mdash; so the
-            same gripper can handle a fragile object and a rigid one without being re-tuned for each.</p>
-        </div>
-      </section>
-
-      <!-- 2. DESIGN TARGETS -->
-      <section class="gr-row">
-        <span class="block-label">Requirements</span>
-        <h3>Design Targets</h3>
-        <p>Targets are calculated from the servo datasheet and the gripper's geometry, and will be verified on
-            the printed prototype.</p>
-        <ul class="gr-spec-grid" role="list">
-            <li class="gr-spec">
-              <p class="gr-spec__name">Max jaw opening</p>
-              <p class="gr-spec__value">80 mm (about 75 mm usable object width)</p>
-            </li>
-            <li class="gr-spec">
-              <p class="gr-spec__name">Object size range</p>
-              <p class="gr-spec__value">10 to 75 mm</p>
-            </li>
-            <li class="gr-spec">
-              <p class="gr-spec__name">Finger height</p>
-              <p class="gr-spec__value">110 mm above the housing (100 &times; 55 mm pad face)</p>
-            </li>
-            <li class="gr-spec">
-              <p class="gr-spec__name">Design grip force</p>
-              <p class="gr-spec__value">2 N (2.2 to 2.5 N available after drivetrain losses)</p>
-            </li>
-            <li class="gr-spec">
-              <p class="gr-spec__name">Payload</p>
-              <p class="gr-spec__value">about 100 g (friction 0.5, safety factor 2)</p>
-            </li>
-            <li class="gr-spec">
-              <p class="gr-spec__name">Full-stroke time</p>
-              <p class="gr-spec__value">about 0.15 s with no load</p>
-            </li>
-            <li class="gr-spec">
-              <p class="gr-spec__name">Actuator</p>
-              <p class="gr-spec__value">MG90S metal-gear servo driving the pinion directly</p>
-            </li>
-            <li class="gr-spec">
-              <p class="gr-spec__name">Example objects</p>
-              <p class="gr-spec__value">egg, ping pong ball, small rocks, household items</p>
-            </li>
+        <ul class="gr-specs" role="list">
+          <li><strong>80 mm</strong><span>Jaw opening, for objects 10 to 75 mm</span></li>
+          <li><strong>60 mm</strong><span>Finger height</span></li>
+          <li><strong>2 N</strong><span>Design grip force (3.7 N ideal at stall)</span></li>
+          <li><strong>~100 g</strong><span>Payload</span></li>
+          <li><strong>~0.15 s</strong><span>Full stroke, unloaded</span></li>
+          <li><strong>MG90S</strong><span>Metal-gear servo, ~92&deg; for full stroke</span></li>
+          <li class="is-wide"><strong>Egg, ping pong ball, small rocks</strong><span>Test objects</span></li>
         </ul>
       </section>
 
-      <!-- 3. MECHANICAL DESIGN + MEDIA -->
-      <section class="gr-row gr-row--half">
-        <div class="gr-col">
-          <span class="block-label">Mechanical Design</span>
-          <h3>Rack-and-Pinion Layout</h3>
-          <p>A single servo turns a central pinion that drives two opposed racks, so both fingers move together
-            and stay parallel through the full stroke. Driving both jaws from one pinion keeps the part count
-            down and means there is only one drivetrain to characterise.</p>
-
-          <p>Each jaw slides on two 5 mm steel guide rods spaced 34 mm apart. Two rods stop the jaw rotating
-            about the rod axis, and at under 4 N of grip force the steel rods are effectively rigid, so any
-            compliance sits in the printed PLA jaws, where the rods run through bores in the jaw itself.</p>
-          <p>Gear module and tooth profile were calculated to minimise backlash through the mesh. Backlash
-            matters more here than in a position-only gripper: lost motion between the servo and the fingers
-            shows up directly as error in the force loop, because the controller commands servo position while
-            the thing being regulated is contact force at the pads.</p>
-          <p>The parts are designed around FDM constraints &mdash; the frame prints in PLA, and the finger pads print
-            separately in TPU so the compliant contact surface can be swapped without reprinting the structure.</p>
+      <!-- 4. MECHANICAL DESIGN + EXPLODED VIEW -->
+      <section class="gr-sec" aria-labelledby="gr-mech">
+        <div class="gr-split">
+          <div>
+            <h2 id="gr-mech">Mechanical design</h2>
+            <ul class="gr-bullets">
+              <li>One servo, one 25&nbsp;mm-radius pinion, two opposed racks: fingers stay parallel.</li>
+              <li>Each jaw rides on two 5&nbsp;mm steel guide rods, 34&nbsp;mm apart.</li>
+              <li>Gear profile chosen to minimize backlash; lost motion becomes force error.</li>
+              <li>PLA frame, flexible TPU pads; pads swap without reprinting the frame.</li>
+              <li>v2 lever: smaller pinion = more force, less stroke headroom.</li>
+            </ul>
+          </div>
+          <figure class="gr-figure">
+            <a href="images/gripper/gripper-exploded-labelled-1600.webp">
+              <img src="images/gripper/gripper-exploded-labelled-1600.webp"
+                   srcset="images/gripper/gripper-exploded-labelled-800.webp 800w, images/gripper/gripper-exploded-labelled-1600.webp 1600w"
+                   sizes="(max-width: 899px) calc(100vw - 4rem), 690px"
+                   width="1600" height="993" loading="lazy"
+                   alt="Exploded CAD view with labelled parts: two blue jaws with dark TPU finger pads and FSR 402 force sensors behind them, a rack under each jaw, two steel guide rods, rod covers with M3 screws, the housing, a 48-tooth pinion, the MG90S servo and the back housing." />
+            </a>
+            <figcaption>Exploded view of the full assembly. Select the image to open it full size.</figcaption>
+          </figure>
         </div>
-        <div class="gr-col gr-media">
+        <ul class="gr-parts" role="list">
+          <li><strong>Pinion</strong>48 teeth, driven by the servo</li>
+          <li><strong>Racks</strong>One per jaw, opposed</li>
+          <li><strong>Guide rods</strong>&Oslash;5 &times; 150&nbsp;mm steel</li>
+          <li><strong>FSR pocket + TPU pad</strong>One force sensor behind each pad</li>
+        </ul>
+      </section>
+
+      <!-- 5. GALLERY -->
+      <section class="gr-sec" aria-labelledby="gr-gallery">
+        <h2 id="gr-gallery">CAD views</h2>
+        <div class="gr-gallery">
+          <figure class="gr-figure">
+            <img src="images/gripper/gripper-hero-1600.webp"
+                 srcset="images/gripper/gripper-hero-800.webp 800w, images/gripper/gripper-hero-1600.webp 1600w"
+                 sizes="(max-width: 899px) calc(100vw - 4rem), 500px"
+                 width="1600" height="800" loading="lazy"
+                 alt="CAD render of the assembled gripper: a light grey housing with two blue jaws standing on steel guide rods, dark TPU pads facing each other, jaws part-way closed." />
+            <figcaption>Assembled gripper, jaws part-way closed.</figcaption>
+          </figure>
           <figure class="gr-figure">
             <img src="images/gripper/gripper-iso-1200.webp"
                  srcset="images/gripper/gripper-iso-600.webp 600w, images/gripper/gripper-iso-1200.webp 1200w"
-                 sizes="(max-width: 767px) calc(100vw - 4rem), 500px"
+                 sizes="(max-width: 899px) calc(100vw - 4rem), 250px"
                  width="1200" height="1200" loading="lazy"
-                 alt="Isometric CAD render of the gripper fully open: the two jaws sit at the ends of the guide rods, with the pinion visible between them inside the open-topped housing." />
-            <figcaption>Isometric CAD render, jaws fully open at 80&nbsp;mm. The pinion sits between the two racks, under the jaws.</figcaption>
+                 alt="Isometric CAD render of the gripper fully open: the jaws sit at the ends of the guide rods, and the pinion is visible between them inside the open-topped housing." />
+            <figcaption>Fully open at 80&nbsp;mm.</figcaption>
           </figure>
-
-          <figure class="gr-clip">
-            <!-- TODO: add the clips from images/gripper/ here. Template (keep the attributes as written:
-                 muted + loop + playsinline makes it autoplay-safe inline, and controls keeps it usable):
-            <figure class="video-figure">
-              <video muted loop playsinline controls preload="metadata" poster="images/gripper/POSTER.jpg" width="1280" height="720">
-                <source src="images/gripper/CLIP.mp4" type="video/mp4" />
-                <p>Your browser cannot play this clip. <a href="images/gripper/CLIP.mp4">Download the MP4</a>.</p>
-              </video>
-              <figcaption>CAPTION</figcaption>
-            </figure>
-            Then delete the .media-pending paragraph below. -->
-            <p class="media-pending">Clips of the jaws actuating are being added.</p>
-            <figcaption class="gr-caption">Gripper in motion: clips being added</figcaption>
-          </figure>
+          <ul class="gr-bullets">
+            <li>Blue jaws and grey housing print in PLA.</li>
+            <li>Dark finger pads print in flexible TPU.</li>
+            <li>Pinion sits between the racks, under the jaws.</li>
+            <li>Rod covers double as the open stop.</li>
+          </ul>
         </div>
+        <!-- Print photos and close-ups go here once they exist: copy one of the two
+             <figure> blocks above, point the <img> at the photo in images/gripper/ and
+             write a one-line caption and alt text. -->
       </section>
 
-      <!-- 4. DESIGN FROM CAD -->
-      <section class="gr-row">
-        <span class="block-label">Design from CAD</span>
-        <h3>Measured from the SolidWorks Assembly</h3>
-        <p>Every dimension in this section is measured from the STEP export of the assembly, not from printed
-          parts.</p>
-
-        <figure class="gr-figure gr-exploded">
-          <a href="images/gripper/gripper-exploded-labelled-1600.webp">
-            <img src="images/gripper/gripper-exploded-labelled-1600.webp"
-                 srcset="images/gripper/gripper-exploded-labelled-800.webp 800w, images/gripper/gripper-exploded-labelled-1600.webp 1600w"
-                 sizes="(max-width: 1120px) calc(100vw - 4rem), 1056px"
-                 width="1600" height="993" loading="lazy"
-                 alt="Exploded CAD view with labelled parts: jaws, TPU finger pads, FSR 402 force sensors, racks, steel guide rods, rod covers with M3 button-head screws, housing, 48-tooth pinion, MG90S servo and back housing." />
-          </a>
-          <figcaption>Exploded CAD render. The jaws slide off the guide rods along the rack axis, the pads and
-            sensors come off the fingers, and the pinion, servo and back housing drop out below. Select the image
-            to open it full size.</figcaption>
-        </figure>
-
-        <div class="gr-cad-tables">
-          <div class="table-scroll">
-            <table class="data-table">
-              <caption>Measured dimensions (CAD)</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Feature</th>
-                  <th scope="col">Measured</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                    <td>Max jaw opening</td>
-                    <td>80.0 mm pad to pad; the jaws stop against the rod covers</td>
-                  </tr>
-                  <tr>
-                    <td>Jaw travel</td>
-                    <td>40 mm per jaw, equal and opposite</td>
-                  </tr>
-                  <tr>
-                    <td>Pinion</td>
-                    <td>48 teeth, 24 diametral pitch (module 1.06 mm), 14.5&deg; pressure angle</td>
-                  </tr>
-                  <tr>
-                    <td>Pinion diameters</td>
-                    <td>50.8 mm pitch (25.4 mm radius), 52.9 mm outside</td>
-                  </tr>
-                  <tr>
-                    <td>Racks</td>
-                    <td>78 mm long, 3.33 mm tooth pitch, 7.4 mm face width in mesh</td>
-                  </tr>
-                  <tr>
-                    <td>Guide rods</td>
-                    <td>&Oslash;5 &times; 150 mm, 34 mm centre to centre</td>
-                  </tr>
-                  <tr>
-                    <td>Fingers</td>
-                    <td>110 mm above the housing; 100 &times; 55 mm TPU pad face</td>
-                  </tr>
-                  <tr>
-                    <td>Sensor seat</td>
-                    <td>&Oslash;19 &times; 0.5 mm pocket behind each pad for the &Oslash;18.3 mm FSR 402 head</td>
-                  </tr>
-                  <tr>
-                    <td>Overall envelope</td>
-                    <td>199 &times; 84 &times; 200 mm</td>
-                  </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="table-scroll">
-            <table class="data-table">
-              <caption>Bill of materials, from the STEP assembly</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Part</th>
-                  <th scope="col">Material</th>
-                  <th scope="col">Qty</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <tr><td>Housing</td><td>PLA</td><td>1</td></tr>
-                  <tr><td>Back housing (servo enclosure)</td><td>PLA</td><td>1</td></tr>
-                  <tr><td>Rod cover and open stop</td><td>PLA</td><td>2</td></tr>
-                  <tr><td>Jaw</td><td>PLA</td><td>2</td></tr>
-                  <tr><td>Rack</td><td>PLA</td><td>2</td></tr>
-                  <tr><td>Pinion, 48 T, 24 DP</td><td>PLA</td><td>1</td></tr>
-                  <tr><td>Finger pad</td><td>TPU</td><td>2</td></tr>
-                  <tr><td>Guide rod, &Oslash;5 &times; 150 mm</td><td>Steel</td><td>2</td></tr>
-                  <tr><td>FSR 402 force sensor</td><td>Purchased</td><td>2</td></tr>
-                  <tr><td>MG90S servo</td><td>Purchased</td><td>1</td></tr>
-                  <tr><td>M3 &times; 12 button-head screw</td><td>Stainless steel</td><td>6</td></tr>
-                  <tr><td>M3 &times; 10 socket-head screw and nut</td><td>Black-oxide / zinc-plated steel</td><td>4 + 4</td></tr>
-                  <tr><td>M2 &times; 8 screw, nut and washer (servo mount)</td><td>Stainless / zinc-plated steel</td><td>2 each</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5. DESIGN CALCULATIONS -->
-      <section class="gr-row">
-        <span class="block-label">Analysis</span>
-        <h3>Design Calculations</h3>
-        <p>Every number below is calculated from the servo datasheet and the gripper&rsquo;s geometry. None of
-          it has been measured on hardware yet.</p>
-
-        <ol class="calc-list gr-calc-grid">
-          <li>
-            <p class="calc-step__name">Grip force</p>
-            <p class="calc-step__body">At 5 V the MG90S stall torque is about 1.87 kg&middot;cm (0.183 N&middot;m), interpolated between its 4.8 V and 6 V ratings. One pinion with a 25.4 mm pitch radius drives both racks, so force per jaw = 0.183 / (2 &times; 0.0254) = 3.6 N ideal, about 2.2 to 2.5 N after 60 to 70% drivetrain efficiency.</p>
-          </li>
-          <li>
-            <p class="calc-step__name">Stroke</p>
-            <p class="calc-step__body">An 80 mm gap needs 0.080 / (2 &times; 0.0254) = 1.57 rad, about 90&deg; of the servo&rsquo;s 180&deg;.</p>
-          </li>
-          <li>
-            <p class="calc-step__name">Payload</p>
-            <p class="calc-step__body">A friction grip needs 2&mu;F &ge; m&middot;g&middot;SF. At F = 2 N, &mu; = 0.5, SF = 2, that gives m &asymp; 100 g. An egg (about 60 g) needs 1.2 N.</p>
-          </li>
-          <li>
-            <p class="calc-step__name">Resolution</p>
-            <p class="calc-step__body">1&deg; of servo rotation changes the gap by 0.89 mm, so the controller uses writeMicroseconds() for finer steps, and the TPU pads spread each step into a smaller force change.</p>
-          </li>
-        </ol>
-
-        <div class="gr-calc-split">
-          <div class="table-scroll">
-            <table class="data-table">
-              <caption>Pinion pitch radius trade-off, at the 5 V stall torque</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Pitch radius</th>
-                  <th scope="col">Rotation for 80 mm</th>
-                  <th scope="col">Ideal force</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                    <td>15 mm</td>
-                    <td>153&deg;</td>
-                    <td>6.1 N</td>
-                  </tr>
-                  <tr>
-                    <td>20 mm</td>
-                    <td>115&deg;</td>
-                    <td>4.6 N</td>
-                  </tr>
-                  <tr>
-                    <td>25.4 mm (chosen)</td>
-                    <td>90&deg;</td>
-                    <td>3.6 N</td>
-                  </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="calc-note gr-callout">The 25.4 mm pinion uses half the servo&rsquo;s range for the full stroke; a
-            smaller pinion is the main lever for more grip force in a second version.</p>
-        </div>
-      </section>
-
-      <!-- 6. CONTROLS -->
-      <section class="gr-row gr-row--4060">
-        <div class="gr-col">
-          <span class="block-label">Controls</span>
-          <h3>Closed-Loop Grip Force &mdash; In Development</h3>
-          <p>FSR 402 force-sensing resistors sit behind the finger pads and are read by an Arduino Uno over its
-            analog inputs. A proportional controller written in C++ compares the measured force against the
-            target and adjusts the MG90S servo&rsquo;s position to close the gap, holding the commanded grip force
-            instead of a commanded jaw position.</p>
-          <p>This part is still in development: the loop is written and the hardware is specified, but the gains
-            and force thresholds have not been calibrated against a printed prototype yet.</p>
-
-          <p><strong>Power and sensing.</strong> The servo runs from a dedicated 5 V, 3 A supply with a common
-            ground to the Arduino, so current spikes near stall can&rsquo;t brown out the controller. Each finger
-            has one FSR 402 seated in a pocket in the PLA claw, with the TPU contact pad resting on top. Because
-            an FSR only measures force through its 14.7 mm active area, the pad is designed to carry the grip
-            load through the sensor, and each finger is calibrated fully assembled against known weights.</p>
-        </div>
-        <div class="gr-diagram-col">
-          <div class="loop-diagram">
-            <svg viewBox="0 0 720 200" role="img" aria-labelledby="loopTitle loopDesc">
+      <!-- 6. CONTROL SYSTEM -->
+      <section class="gr-sec" aria-labelledby="gr-control">
+        <h2 id="gr-control">Control system</h2>
+        <div class="gr-control">
+          <div class="gr-diagram">
+            <svg viewBox="0 0 800 186" role="img" aria-labelledby="loopTitle loopDesc" font-family="inherit">
               <title id="loopTitle">Closed-loop grip force control</title>
-              <desc id="loopDesc">A target grip force is compared against the force measured by the FSR 402
-                sensors, one per finger. The difference drives a proportional controller on an Arduino Uno, which commands the
-                servo, which drives the rack-and-pinion fingers onto the object. The measured force is fed back
-                to the comparison.</desc>
+              <desc id="loopDesc">The target force enters a summing junction, where the measured force is subtracted from it. The error goes to a proportional controller on the Arduino Uno, which commands the servo, which drives the rack-and-pinion fingers and TPU pads to produce grip force on the object. FSR 402 sensors measure that force and feed it back to the summing junction.</desc>
 
               <defs>
-                <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="var(--color-accent)"/>
+                <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/>
                 </marker>
               </defs>
 
-              <g fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="1.5">
-                <rect x="6"   y="26"  width="116" height="52" rx="6"/>
-                <rect x="186" y="26"  width="146" height="52" rx="6"/>
-                <rect x="366" y="26"  width="92"  height="52" rx="6"/>
-                <rect x="492" y="26"  width="136" height="52" rx="6"/>
-                <rect x="330" y="130" width="176" height="46" rx="6"/>
-                <circle cx="152" cy="52" r="16"/>
+              <g fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5">
+                <rect x="6"   y="30" width="76"  height="56" rx="8"/>
+                <rect x="154" y="30" width="104" height="56" rx="8"/>
+                <rect x="282" y="30" width="104" height="56" rx="8"/>
+                <rect x="410" y="30" width="70"  height="56" rx="8"/>
+                <rect x="504" y="30" width="150" height="56" rx="8"/>
+              </g>
+              <rect x="410" y="126" width="170" height="50" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+              <circle cx="118" cy="58" r="15" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5"/>
+
+              <g font-size="13" font-weight="600" fill="#1e293b" text-anchor="middle">
+                <text x="44"  y="54">Target</text>
+                <text x="44"  y="71">force</text>
+                <text x="206" y="54">P controller</text>
+                <text x="206" y="71" font-weight="400" fill="#64748b">C++</text>
+                <text x="334" y="63">Arduino Uno</text>
+                <text x="445" y="63">Servo</text>
+                <text x="579" y="54">Rack-and-pinion</text>
+                <text x="579" y="71">fingers + TPU pads</text>
+                <text x="495" y="148">FSR 402 sensors</text>
+                <text x="495" y="165" font-weight="400" fill="#64748b">one per finger</text>
+                <text x="118" y="63" font-size="15">&#931;</text>
               </g>
 
-              <g font-size="11" font-weight="600" fill="var(--color-text)" text-anchor="middle">
-                <text x="64" y="47">Target grip</text>
-                <text x="64" y="62">force</text>
-                <text x="259" y="47">Proportional controller</text>
-                <text x="259" y="62">Arduino Uno (C++)</text>
-                <text x="412" y="57">Servo</text>
-                <text x="560" y="47">Rack-and-pinion</text>
-                <text x="560" y="62">fingers + TPU pads</text>
-                <text x="418" y="150">FSR 402 force sensors</text>
-                <text x="418" y="165">(one per finger)</text>
-                <text x="152" y="57" font-size="13">&#931;</text>
+              <g stroke="#1d4ed8" stroke-width="1.75" fill="none" marker-end="url(#arrow)">
+                <path d="M82,58 L102,58"/>
+                <path d="M133,58 L153,58"/>
+                <path d="M258,58 L281,58"/>
+                <path d="M386,58 L409,58"/>
+                <path d="M480,58 L503,58"/>
+                <path d="M654,58 L794,58"/>
+                <path d="M724,58 L724,151 L581,151"/>
+                <path d="M410,151 L118,151 L118,74"/>
               </g>
+              <circle cx="724" cy="58" r="3.5" fill="#1d4ed8"/>
 
-              <g stroke="var(--color-accent)" stroke-width="1.75" fill="none" marker-end="url(#arrow)">
-                <path d="M122,52 L130,52"/>
-                <path d="M168,52 L180,52"/>
-                <path d="M332,52 L360,52"/>
-                <path d="M458,52 L486,52"/>
-                <path d="M628,52 L694,52"/>
-                <path d="M560,78 L560,153 L512,153"/>
-                <path d="M330,153 L152,153 L152,74"/>
+              <g font-size="12" fill="#64748b" text-anchor="middle">
+                <text x="726" y="44">grip force on object</text>
+                <text x="264" y="143">measured force</text>
               </g>
-
-              <g font-size="10" fill="var(--color-text-muted)" text-anchor="middle">
-                <text x="661" y="42">grip force on object</text>
-                <text x="240" y="144">measured force</text>
-              </g>
-              <g font-size="11" font-weight="700" fill="var(--color-text-muted)">
-                <text x="130" y="38">+</text>
-                <text x="131" y="80">&#8722;</text>
+              <g font-size="14" font-weight="700" fill="#64748b" text-anchor="middle">
+                <text x="92"  y="48">+</text>
+                <text x="104" y="92">&#8722;</text>
               </g>
             </svg>
           </div>
+          <ul class="gr-bullets">
+            <li>One FSR 402 force sensor per finger, in a pocket under the TPU pad.</li>
+            <li>Arduino Uno runs a proportional controller in C++.</li>
+            <li>Dedicated 5&nbsp;V / 3&nbsp;A servo supply, common ground: no brownouts at stall.</li>
+            <li>Loop is written; gains and thresholds not yet calibrated.</li>
+          </ul>
         </div>
       </section>
 
       <!-- 7. TEST PLAN -->
-      <section class="gr-row">
-        <span class="block-label">Test Plan</span>
-        <h3>Planned Bench Tests</h3>
-        <div class="table-scroll">
-          <table class="data-table">
-            <caption>Targets are calculated from the design; no test has been run yet.</caption>
-            <thead>
-              <tr>
-                <th scope="col">Test</th>
-                <th scope="col">Target</th>
-                <th scope="col">Result</th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr>
-                  <td>Grip force held against the commanded setpoint</td>
-                  <td>Within &plusmn;0.3 N at 0.5, 1 and 2 N</td>
-                  <td class="is-pending">Pending</td>
-                </tr>
-                <tr>
-                  <td>Jaw stroke, fully open to fully closed</td>
-                  <td>0 to 80 mm gap, measured with calipers</td>
-                  <td class="is-pending">Pending</td>
-                </tr>
-                <tr>
-                  <td>Object size range gripped without reconfiguring</td>
-                  <td>10 to 75 mm wide without reconfiguring</td>
-                  <td class="is-pending">Pending</td>
-                </tr>
-                <tr>
-                  <td>Fragile object grasp &mdash; crush check</td>
-                  <td>Ping pong ball, 10 lifts at 0.5 N, no visible dent</td>
-                  <td class="is-pending">Pending</td>
-                </tr>
-                <tr>
-                  <td>Rigid object grasp &mdash; slip check</td>
-                  <td>100 g rock, 10 lifts held 10 s at 2 N, no slip</td>
-                  <td class="is-pending">Pending</td>
-                </tr>
-                <tr>
-                  <td>Egg grasp</td>
-                  <td>10 lifts held 10 s at 1.5 N or less, no slip</td>
-                  <td class="is-pending">Pending</td>
-                </tr>
-                <tr>
-                  <td>Backlash at the rack-and-pinion interface</td>
-                  <td>Less than 1 mm of free play at the fingertip</td>
-                  <td class="is-pending">Pending</td>
-                </tr>
-                <tr>
-                  <td>FSR 402 repeatability and drift across a session</td>
-                  <td>Within &plusmn;10% on a known weight over 30 min</td>
-                  <td class="is-pending">Pending</td>
-                </tr>
-                <tr>
-                  <td>Cycle endurance of the printed PLA frame</td>
-                  <td>500 open-close cycles, no cracks or lost stroke</td>
-                  <td class="is-pending">Pending</td>
-                </tr>
-            </tbody>
-          </table>
+      <div class="gr-sec gr-close">
+      <section aria-labelledby="gr-tests">
+        <div class="gr-head">
+          <h2 id="gr-tests">Bench test plan</h2>
+          <span class="gr-flag">Planned, not yet run</span>
         </div>
+        <ul class="gr-tests" role="list">
+          <li><strong>Grip force vs. setpoint</strong>Within &plusmn;0.3 N at 0.5, 1 and 2 N</li>
+          <li><strong>Stroke</strong>0 to 80 mm, measured with calipers</li>
+          <li><strong>Size range</strong>10 to 75 mm without reconfiguring</li>
+          <li><strong>Ping pong ball</strong>10 lifts at 0.5 N, no dent</li>
+          <li><strong>100 g rock</strong>10 lifts held 10 s at 2 N, no slip</li>
+          <li><strong>Egg</strong>10 lifts held 10 s at 1.5 N or less, no slip</li>
+          <li><strong>Backlash</strong>Under 1 mm at the fingertip</li>
+          <li><strong>FSR drift</strong>Within &plusmn;10% over 30 min</li>
+          <li><strong>Endurance</strong>500 open-close cycles, no cracks</li>
+        </ul>
       </section>
 
-      <!-- 8. NEXT STEPS + TECHNICAL STACK -->
-      <section class="gr-row gr-row--half">
-        <div class="gr-col">
-          <span class="block-label">Next Steps</span>
-          <h3>What Comes Next</h3>
-          <ul class="plain-list">
-            <li>Assemble the printed prototype.</li>
-            <li>Calibrate the force thresholds against the FSR 402 readings.</li>
-            <li>Run grasp trials on fragile and rigid objects.</li>
-          </ul>
-        </div>
-        <div class="gr-col">
-          <span class="block-label">Tools &amp; Skills</span>
-          <h3>Technical Stack</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">SolidWorks</span>
-            <span class="skill-tag">Arduino Uno (C++)</span>
-            <span class="skill-tag">MG90S</span>
-            <span class="skill-tag">FSR 402</span>
-            <span class="skill-tag">Closed-Loop Control</span>
-            <span class="skill-tag">FDM Printing</span>
-            <span class="skill-tag">PLA / TPU</span>
-            <span class="skill-tag">Gear Design</span>
-            <span class="skill-tag">Steel Guide Rods</span>
-            <span class="skill-tag">5 V Supply</span>
-          </div>
-        </div>
+      <!-- 8. NEXT STEPS (beside the test plan on desktop) -->
+      <section aria-labelledby="gr-next">
+        <h2 id="gr-next">Next steps</h2>
+        <ol class="gr-steps" role="list">
+          <li>Assemble the printed prototype.</li>
+          <li>Calibrate force thresholds against FSR readings.</li>
+          <li>Run grasp trials on fragile and rigid objects.</li>
+        </ol>
       </section>
-
-      <!-- TODO: Build photos &mdash; uncomment this block once the assembly photos are in images/gripper/
-      <div class="project-block text-only">
-        <div class="block-text">
-          <span class="block-label">Build</span>
-          <h3>Build Photos</h3>
-          <figure>
-            <img src="images/gripper/FILENAME.jpg" alt="DESCRIPTIVE ALT TEXT" loading="lazy" />
-            <figcaption>CAPTION</figcaption>
-          </figure>
-        </div>
       </div>
-      -->
 
       <div class="detail-bottom-nav">
         <a href="projects.html" class="back-link">
