@@ -662,53 +662,6 @@ p { max-width: 65ch; }
   .exp-card__meta { flex-direction: column; }
 }
 
-/* ---- Home: one line per role above the projects ---- */
-.exp-strip { padding-top: var(--space-lg); }
-
-.exp-strip__head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: var(--space-sm) var(--space-md);
-  margin-bottom: var(--space-md);
-}
-
-.exp-strip__head h2 { font-size: 1.35rem; }
-.exp-strip__link { font-size: 0.95rem; font-weight: 600; }
-
-.exp-strip__list {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-}
-
-.exp-strip__row {
-  display: grid;
-  grid-template-columns: 8rem minmax(0, 1fr) auto;
-  align-items: baseline;
-  gap: 0.25rem var(--space-md);
-  padding: 0.7rem var(--space-lg);
-  font-size: 0.95rem;
-}
-
-.exp-strip__row + .exp-strip__row { border-top: 1px solid var(--color-border); }
-
-.exp-strip__company { font-weight: 700; }
-.exp-strip__role,
-.exp-strip__dates { color: var(--color-text-muted); }
-.exp-strip__dates { font-size: 0.875rem; white-space: nowrap; }
-
-@media (max-width: 640px) {
-  /* Company and dates on one line, the title under them */
-  .exp-strip__row {
-    grid-template-columns: minmax(0, 1fr) auto;
-    padding: 0.6rem var(--space-md);
-  }
-  .exp-strip__role { grid-column: 1 / -1; grid-row: 2; }
-}
-
 /* ============================================================
    CONTACT PAGE
    ============================================================ */
