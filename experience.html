@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="This page has moved to about.html." />
+  <meta name="description" content="Co-op experience of Renaldo Miya — connector design at Amphenol, accelerator lab hardware at TRIUMF, and hydroelectric construction at BC Hydro, with measured results from each role." />
   <title>Experience — Renaldo Miya</title>
-  <meta http-equiv="refresh" content="0; url=about.html" />
-  <link rel="canonical" href="about.html" />
-  <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -22,6 +19,7 @@
       <nav aria-label="Main">
         <ul class="nav-links" role="list">
           <li><a href="projects.html">Projects</a></li>
+          <li><a href="experience.html" class="active" aria-current="page">Experience</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="assets/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -31,13 +29,109 @@
   </header>
 
   <main>
-    <div class="container">
-      <div class="redirect-page">
-        <h1>Page moved</h1>
-        <p>The experience list now lives on the About page. If you are not redirected automatically, use the link below.</p>
-        <p><a href="about.html" class="btn btn-primary">Continue</a></p>
-      </div>
+
+    <div class="container" style="padding-top: var(--space-xl); padding-bottom: 0;">
+      <h1>Experience</h1>
+      <p class="text-muted mt-sm">Co-op work terms in connector design, accelerator lab hardware, and large-scale hydroelectric construction.</p>
     </div>
+
+    <section class="section" aria-label="Roles, newest first">
+      <div class="container exp">
+
+        <ol class="exp-list" role="list">
+
+          <!-- Amphenol -->
+          <li>
+            <article class="exp-card" id="amphenol" aria-labelledby="exp-amphenol">
+              <header class="exp-card__head">
+                <h2 class="exp-card__title" id="exp-amphenol">Design Engineering Intern <span class="exp-card__company">Amphenol</span></h2>
+                <p class="exp-card__meta">
+                  <span><time datetime="2026-09">Sep 2026</time> &ndash; <time datetime="2026-12">Dec 2026</time></span>
+                  <span>Markham, ON</span>
+                </p>
+              </header>
+              <p class="exp-card__context">Connector design for RJ45 and power product lines</p>
+              <ul class="cs-bullets exp-card__bullets">
+                <li>Redesigned an RJ45 housing snap-fit latch to exceed a competitor&rsquo;s retention force, reworking beam geometry to cut peak root stress <strong>25%</strong>; validated hand calcs against SolidWorks Simulation FEA and released to production</li>
+                <li>Designed an IEC 60999-1 test fixture to measure plug contact resistance under dynamic motion as a lower-cost alternative to a <strong>$2K</strong> commercial rig; secured management approval and coordinated fabrication</li>
+                <li>Released GD&amp;T detail and manufacturing drawings for <strong>10+</strong> connector and receptacle part numbers</li>
+                <li>Built SolidWorks drawing templates that cut update time <strong>~30%</strong> across 5 product lines</li>
+              </ul>
+              <p class="project-card__tags exp-card__tags">
+                <span class="project-card__tag">SolidWorks</span>
+                <span class="project-card__tag">SolidWorks Simulation (FEA)</span>
+                <span class="project-card__tag">GD&amp;T</span>
+                <span class="project-card__tag">Fixture Design</span>
+                <span class="project-card__tag">DFM</span>
+              </p>
+            </article>
+          </li>
+
+          <!-- TRIUMF -->
+          <li>
+            <article class="exp-card" id="triumf" aria-labelledby="exp-triumf">
+              <header class="exp-card__head">
+                <h2 class="exp-card__title" id="exp-triumf">Mechanical Engineering Assistant <span class="exp-card__company">TRIUMF</span></h2>
+                <p class="exp-card__meta">
+                  <span><time datetime="2026-01">Jan 2026</time> &ndash; <time datetime="2026-04">Apr 2026</time></span>
+                  <span>Vancouver, BC</span>
+                </p>
+              </header>
+              <p class="exp-card__context">Canada&rsquo;s national particle accelerator laboratory &mdash; ARIEL facility</p>
+              <ul class="cs-bullets exp-card__bullets">
+                <li>Owned the design of a wall-mounted aluminium support frame for ARIEL&rsquo;s radioactive-gas pumping manifold, from load and radiation-area requirements to fabrication-ready drawings</li>
+                <li>Iterated clamp placement in ANSYS to cut peak manifold deflection <strong>83%</strong> (6.5 &rarr; 1.13&nbsp;mm) and peak tubing stress <strong>54%</strong> (107 &rarr; 49.6&nbsp;MPa), raising the yield safety factor from <strong>1.6 to 3.4</strong>; validated against hand calcs</li>
+                <li>Placed Unistrut posts at the FEA clamp locations, reducing part count <strong>25%</strong> from the first design to shorten install time and dose exposure</li>
+                <li>Released ASME Y14.5 GD&amp;T drawings and managed BOMs and revisions in SolidWorks PDM; revised beamline shielding components through design reviews with senior engineers</li>
+              </ul>
+              <a href="project-manifold.html" class="exp-card__project">See project: Pumping Manifold Support Structure &rarr;</a>
+              <p class="project-card__tags exp-card__tags">
+                <span class="project-card__tag">SolidWorks</span>
+                <span class="project-card__tag">ANSYS Mechanical</span>
+                <span class="project-card__tag">GD&amp;T (ASME Y14.5)</span>
+                <span class="project-card__tag">SolidWorks PDM</span>
+                <span class="project-card__tag">Hand Calcs</span>
+              </p>
+            </article>
+          </li>
+
+          <!-- BC Hydro -->
+          <li>
+            <article class="exp-card" id="bc-hydro" aria-labelledby="exp-bchydro">
+              <header class="exp-card__head">
+                <h2 class="exp-card__title" id="exp-bchydro">Mechanical Engineering Co-op <span class="exp-card__company">BC Hydro</span></h2>
+                <p class="exp-card__meta">
+                  <span><time datetime="2024-05">May 2024</time> &ndash; <time datetime="2024-08">Aug 2024</time></span>
+                  <span>Fort St. John, BC</span>
+                </p>
+              </header>
+              <p class="exp-card__context">Site C Clean Energy Project &mdash; hydroelectric dam and generating station</p>
+              <ul class="cs-bullets exp-card__bullets">
+                <li>Reviewed and redlined P&amp;IDs and mechanical layouts against applicable codes and standards, flagging constructability issues and issuing modifications adopted into the build</li>
+                <li>Conducted on-site field inspections to verify installation accuracy and code compliance, documenting discrepancies and driving corrective design changes that reduced rework</li>
+              </ul>
+              <p class="project-card__tags exp-card__tags">
+                <span class="project-card__tag">P&amp;ID Review</span>
+                <span class="project-card__tag">Codes &amp; Standards</span>
+                <span class="project-card__tag">Field Inspection</span>
+                <span class="project-card__tag">AutoCAD</span>
+              </p>
+            </article>
+          </li>
+
+        </ol>
+
+        <div class="projects-cta exp-cta">
+          <p class="projects-cta__line">Interested in working together?</p>
+          <div class="exp-cta__actions">
+            <a href="assets/resume.pdf" class="exp-cta__resume" target="_blank" rel="noopener noreferrer">View resume (PDF)</a>
+            <a href="contact.html" class="btn btn-primary">Contact me</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <!-- FOOTER -->

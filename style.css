@@ -184,15 +184,16 @@ p { max-width: 65ch; }
 }
 
 /* The nav needs no JavaScript: the links stay inline, and on small phones
-   they wrap onto a second row rather than overflowing the viewport. */
-@media (max-width: 560px) {
+   they wrap onto a second row rather than overflowing the viewport.
+   Breakpoints are sized for five links. */
+@media (max-width: 640px) {
   .nav-inner { gap: var(--space-sm); }
   .nav-logo  { font-size: 1rem; }
   .nav-links { gap: 0; }
   .nav-links a { padding: 0.4rem 0.5rem; font-size: 0.85rem; }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 560px) {
   .site-header { height: auto; }
 
   .nav-inner {
@@ -204,10 +205,15 @@ p { max-width: 65ch; }
 
   .nav-links {
     width: 100%;
+    flex-wrap: wrap;
     justify-content: space-between;
   }
 
-  .nav-links a { padding: 0.35rem 0.4rem; }
+  .nav-links a { padding: 0.35rem 0.25rem; }
+}
+
+@media (max-width: 400px) {
+  .nav-links a { font-size: 0.8rem; }
 }
 
 /* ============================================================
@@ -533,6 +539,174 @@ p { max-width: 65ch; }
     width: 180px;
     aspect-ratio: 1;
   }
+}
+
+/* ============================================================
+   EXPERIENCE PAGE
+   One card per role. Bullets reuse .cs-bullets, tags reuse the
+   project-card tags, and the closing row reuses .projects-cta.
+   A thin rail on the left joins the cards on wider screens.
+   ============================================================ */
+.exp { --exp-rail: 1.75rem; --exp-pad: var(--space-lg); }
+
+.exp-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding-left: var(--exp-rail);
+}
+
+.exp-list::before {
+  content: '';
+  position: absolute;
+  left: 0.4rem;
+  top: 0.75rem;
+  bottom: 0.75rem;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.exp-card {
+  position: relative;
+  padding: var(--exp-pad);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Dot on the rail, level with the role title */
+.exp-card::before {
+  content: '';
+  position: absolute;
+  left: calc(0.4rem + 1px - 6px - var(--exp-rail) - 1px);
+  top: calc(var(--exp-pad) + 0.4rem);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-accent);
+}
+
+/* Title left, dates and location right; wraps under the title when narrow */
+.exp-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.25rem var(--space-lg);
+}
+
+.exp-card__title { font-size: 1.2rem; line-height: 1.35; }
+.exp-card__company { color: var(--color-accent-dark); white-space: nowrap; }
+.exp-card__company::before { content: '\00b7'; margin-right: 0.35rem; }
+
+.exp-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.exp-card__meta span { white-space: nowrap; }
+.exp-card__meta span + span::before { content: '\00b7'; margin-right: 0.5rem; }
+
+.exp-card__context {
+  margin-top: 0.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  max-width: none;
+}
+
+.exp-card__bullets {
+  margin-top: var(--space-md);
+  max-width: 85ch;
+  font-size: 0.95rem;
+}
+
+.exp-card__project {
+  display: inline-block;
+  margin-top: var(--space-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.exp-card .exp-card__tags { margin-top: var(--space-md); max-width: none; }
+
+/* Closing row lines up with the cards, not the rail */
+.exp-cta { margin-left: var(--exp-rail); }
+
+.exp-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.exp-cta__resume { font-size: 0.95rem; font-weight: 600; }
+
+@media (max-width: 640px) {
+  /* No rail on phones: the width goes to the text instead */
+  .exp { --exp-rail: 0rem; --exp-pad: var(--space-md); }
+  .exp-list::before,
+  .exp-card::before { display: none; }
+
+  .exp-card__head { flex-direction: column; }
+
+  /* Company and location each get their own line instead of a stray dot */
+  .exp-card__company { display: block; }
+  .exp-card__company::before,
+  .exp-card__meta span + span::before { content: none; }
+  .exp-card__meta { flex-direction: column; }
+}
+
+/* ---- Home: one line per role above the projects ---- */
+.exp-strip { padding-top: var(--space-lg); }
+
+.exp-strip__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.exp-strip__head h2 { font-size: 1.35rem; }
+.exp-strip__link { font-size: 0.95rem; font-weight: 600; }
+
+.exp-strip__list {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.exp-strip__row {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.25rem var(--space-md);
+  padding: 0.7rem var(--space-lg);
+  font-size: 0.95rem;
+}
+
+.exp-strip__row + .exp-strip__row { border-top: 1px solid var(--color-border); }
+
+.exp-strip__company { font-weight: 700; }
+.exp-strip__role,
+.exp-strip__dates { color: var(--color-text-muted); }
+.exp-strip__dates { font-size: 0.875rem; white-space: nowrap; }
+
+@media (max-width: 640px) {
+  /* Company and dates on one line, the title under them */
+  .exp-strip__row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 0.6rem var(--space-md);
+  }
+  .exp-strip__role { grid-column: 1 / -1; grid-row: 2; }
 }
 
 /* ============================================================
